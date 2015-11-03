@@ -10,5 +10,26 @@ package project.hr;
  * @author Anton
  */
 public class Employee {
+    /**/
+    private boolean loggedIn = false;
+    private String firstName;
+
+    public boolean getLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+    
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    
     
 }

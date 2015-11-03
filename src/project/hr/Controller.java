@@ -4,20 +4,24 @@
  * and open the template in the editor.
  */
 package project.hr;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  *
  * @author Anton
  */
-public class Controller /* implements PropertyChangeListener */ {
+public class Controller implements PropertyChangeListener  {
     
     Model model;
     MainView view;
     public Controller(MainView v) {
         model = new Model();
+        model.addPropertyChangeListener(this);
         view = v;
     }
     
+    /*Call from view when attempting sign in*/
     public void attemptSignIn(/*username pw*/) {
         /* View calls this as sign in was pressed -> Model method call? */
         /*some input validation goes here first, then call model's method*/
@@ -34,8 +38,12 @@ public class Controller /* implements PropertyChangeListener */ {
     
     /* this one is general property change listener: 
     model updated some employee data*/
-    public void propertyChange(/*PropertyChangeEvent evt*/) {
-        /*inform view about whether sign in succeeded or not */
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getPropertyName().equals("login")) {
+            Employee emp = (Employee)evt.getNewValue();
+            view.logIn(/*emp.getLoggedIn(),emp.getFirstName()*/);
+        }
     }
     
 }
