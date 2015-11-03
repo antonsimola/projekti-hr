@@ -5,13 +5,20 @@
  */
 package project.hr;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -22,9 +29,27 @@ public class MainView implements Initializable {
     Controller controller;
     
     @FXML
-    private Button button_signin;
-    @FXML
     private Label label;
+    @FXML
+    private MenuItem logoutMenuitem;
+    @FXML
+    private MenuItem exitMenuitem;
+    @FXML
+    private MenuItem helpMenuitem;
+    @FXML
+    private Button showallButton;
+    @FXML
+    private TextField namesearchField;
+    @FXML
+    private ListView<?> namelist;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private Button removeselectedButton;
+    @FXML
+    private Pane container;
+    @FXML
+    private Button addButton;
     
     
     @Override
@@ -34,7 +59,6 @@ public class MainView implements Initializable {
 
     /* Example action routine (Did I get this right) -Anton
     Routine starts here*/
-    @FXML
     private void signInButtonActionPerformed(ActionEvent event) {
         /* Button pressed -> Call controller's method here*/
         controller.attemptSignIn(/*username,pw*/);
@@ -43,6 +67,18 @@ public class MainView implements Initializable {
     /*controller calls this to tell whether login succeeded or not*/
     public void logIn(/*boolean*/) {
         /*update view (switch from login screen to main view, or login failed)*/
+    }
+
+    @FXML
+    private void showAddContent(ActionEvent event) throws IOException {
+        container.getChildren().clear();
+        container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentAdd.fxml")));
+    }
+
+    @FXML
+    private void showSearchContent(ActionEvent event) throws IOException {
+        container.getChildren().clear();
+        container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentSearch.fxml")));
     }
     
 }
