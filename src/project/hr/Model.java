@@ -14,26 +14,18 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Anton
+ * @author Samuli
  */
 public class Model {
     private PropertyChangeSupport propertyChangeSupport;
     private String signedInUsername;
-    
-    /* Employee Search Results -view allows hiding of employee
-     * employment details (+ printing)
-     * --> Search results differ from Employee 
-     * class as they must include visibility information (model must know what
-     * is visible to quarantee desired printing format)
-     * --> need for a new class (EmployeeSearchResult)?
-    */
-    private ArrayList<EmployeeSearchResult> employeeSearchResults;
+ 
+    //private ArrayList<EmployeeSearchResult> employeeSearchResults;
     
     public Model () {
         propertyChangeSupport = new PropertyChangeSupport(this);
     }
     
-    // Logic concerning property change begins ...
     public void addPropertyChangeListener(PropertyChangeListener 
             propertyChangeListener) {
         propertyChangeSupport.addPropertyChangeListener(propertyChangeListener);
@@ -45,71 +37,71 @@ public class Model {
                 propertyChangeListener);
     }
     
-    /* Required? Yes: model must be able to transfer altered search results.
-     * -Needs more work.
-    */
-    private void firePropertyChange(String propertyName, Object oldValue, 
+    private void fireModelActionResult(String propertyName, Object oldValue,
             Object newValue) {
+        
         propertyChangeSupport.firePropertyChange(propertyName, oldValue, 
                 newValue);
+        
+    }
+  
+    public void signIn(String username, String password) {
+        String passwordHASH = generatePasswordHASH(password);
+        
+        // SELECT * FROM CREDENTIALS WHERE username=username AND password_hash=passwordHASH; 
+        
+        // Check query results
+        
+        // If valid username + password:
+        signedInUsername = username;
+        Employee employee = new Employee(/*username, success*/);
+        fireModelActionResult("login", null, (Object)employee);
     }
     
-    /* Method fires events for database operations.
-     * 'results' and 'isSuccessfull' -parameters are partly overlapping but
-     * dividing the this doesn't seem to make sense at this implementation
-     * scale.
-     *
-     * -Could be altered to fit all signal cases: operation, results, success?
-    */
-    private void fireDatabaseOperationResult(String operation, Object results,
-            boolean isSuccessful) {
-        propertyChangeSupport.firePropertyChange(operation, results, 
-                isSuccessful);
+    // Needed?
+    public void signOut() {
+        signedInUsername = null;
     }
-    // ...logic concerning property change ends
+    
+    private String generatePasswordHASH(String password) {
+        
+        return "";
+    }
     
     public void addEmployee(Employee employee) {
-        // Call a method for input parametrization.
+        // INSERT INTO EMPLOYMENT () VALUES ();
+        // Get inserted EMPLOYMENT ID --> use int EMPLOYEE INSERT
+        // INSERT INTO EMPLOYEE () VALUES();
+    
+        fireModelActionResult("add", null, (Object)employee);
+    }
+    
+    public void editEmployee(String socialSecurityNumber) {
+        // UPDATE EMPLOYMENT and / or EMPLOYEE
+    
+        //fireModelActionResult("edit", null, (Object)employee);
+    }
+    
+    public void removeEmployee(String socialSecurityNumber) {
+        // DELETE EMPLOYMENT and EMPLOYEE records
         
-        // Insert into database (separate method?)
-        
-        // Signal database operation result (call a method for event firing)
+        //fireModelActionResult("delete", null, (Object)employee);
     }
     
-    public void editEmployee() {
-    
-    }
-    
-    public void removeEmployee() {
-    
-    }
-    
+    // Searching will have multiple overloaded methods with different parameters
     public void searchEmployee() {
+        
+    }
     
+    public Employee searchEmployee(String username, String password) {
+        // SELECT * FROM CREDENTIALS WHERE username=username...
+        
+        Employee employee = new Employee();
+        
+        return employee;
     }
     
     public void alterEmployeeSearchResultFormatting() {
     
     }
-    
-    public void someSignInMethod(/*username, pw*/) {
-        /*try to match username and pw in database*/
-        /*fire event with true or false bundled in event?*/
-    }
-    
-    public void signOut() {
-
-    }
-    
-    /* Load all employees to an instance variable that can be 'get' when the 
-     * program is initializing, and when the UI listing of all employess is
-     * subject to change (database insert, update or delete has taken place)
-    */
-    private void loadAllEmployees() {
-    
-    }
-    
-    // Add a method for database input parametrization
-    
-    // Add methods for database interaction
 }
