@@ -45,16 +45,18 @@ public class Model {
         
     }
   
-    public void signIn(String username, String password) {
-        String passwordHASH = generatePasswordHASH(password);
+    public void signIn(String firstname, String password) {
+        //String passwordHASH = generatePasswordHASH(password);
         
         // SELECT * FROM CREDENTIALS WHERE username=username AND password_hash=passwordHASH; 
         
         // Check query results
         
         // If valid username + password:
-        signedInUsername = username;
-        Employee employee = new Employee(/*username, success*/);
+        signedInUsername = firstname;
+        Employee employee = new Employee();
+        employee.setLoggedIn(true);
+        employee.setFirstName("aaa");
         fireModelActionResult("login", null, (Object)employee);
     }
     

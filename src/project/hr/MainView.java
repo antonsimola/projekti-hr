@@ -65,8 +65,9 @@ public class MainView implements Initializable {
     }
     
     /*controller calls this to tell whether login succeeded or not*/
-    public void logIn(/*boolean*/) {
+    public void logIn(Employee employee) {
         /*update view (switch from login screen to main view, or login failed)*/
+        namesearchField.setText(employee.getFirstName());
     }
 
     @FXML

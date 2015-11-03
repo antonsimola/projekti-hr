@@ -25,7 +25,7 @@ public class Controller implements PropertyChangeListener  {
     public void attemptSignIn(/*username pw*/) {
         /* View calls this as sign in was pressed -> Model method call? */
         /*some input validation goes here first, then call model's method*/
-        model.someSignInMethod(/*username, pw*/);
+        model.signIn("a", "b");
         /* after this we need to catch event in listener below*/
     }
     
@@ -33,7 +33,7 @@ public class Controller implements PropertyChangeListener  {
     /*temp name*/
     public void signInListener(/*Event e*/) {
         /*inform view about whether sign in succeeded or not (tempname)*/
-        view.logIn(/*true or false*/);
+        //view.logIn(/*true or false*/);
     }
     
     /* this one is general property change listener: 
@@ -42,7 +42,7 @@ public class Controller implements PropertyChangeListener  {
     public void propertyChange(PropertyChangeEvent evt) {
         if(evt.getPropertyName().equals("login")) {
             Employee emp = (Employee)evt.getNewValue();
-            view.logIn(/*emp.getLoggedIn(),emp.getFirstName()*/);
+            view.logIn(emp);
         }
     }
     
