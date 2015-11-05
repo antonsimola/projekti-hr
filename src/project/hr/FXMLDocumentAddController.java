@@ -42,17 +42,25 @@ public class FXMLDocumentAddController implements Initializable {
     @FXML
     private Button addButton;
     @FXML
-    private TextField dobField;
+    private TextField ageField1;
     @FXML
-    private TextField ssnumField;
+    private TextField ageField2;
     @FXML
-    private TextField wageField;
+    private TextField wageField1;
     @FXML
-    private TextField hoursField;
+    private TextField wageField2;
     @FXML
-    private TextField startdateField;
+    private TextField hoursField2;
     @FXML
-    private TextField enddateField;
+    private TextField hoursField1;
+    @FXML
+    private TextField startdateField1;
+    @FXML
+    private TextField startdateField2;
+    @FXML
+    private TextField enddateField1;
+    @FXML
+    private TextField enddateField2;
 
     /**
      * Initializes the controller class.

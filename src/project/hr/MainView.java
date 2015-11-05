@@ -29,7 +29,7 @@ public class MainView implements Initializable {
     Controller controller;
     
     @FXML
-    private Label label;
+    private Pane container;
     @FXML
     private MenuItem logoutMenuitem;
     @FXML
@@ -46,8 +46,6 @@ public class MainView implements Initializable {
     private Button searchButton;
     @FXML
     private Button removeselectedButton;
-    @FXML
-    private Pane container;
     @FXML
     private Button addButton;
     
