@@ -57,17 +57,14 @@ public class MainView implements Initializable {
         controller = new Controller(this);
     }    
 
-    /* Example action routine (Did I get this right) -Anton
-    Routine starts here*/
-    private void signInButtonActionPerformed(ActionEvent event) {
-        /* Button pressed -> Call controller's method here*/
-        controller.attemptSignIn(/*username,pw*/);
-    }
-    
     /*controller calls this to tell whether login succeeded or not*/
     public void logIn(Employee employee) {
-        /*update view (switch from login screen to main view, or login failed)*/
-        namesearchField.setText(employee.getFirstName());
+        
+        if(employee.getLoggedIn()) {
+            /*SHOW MAINVIEW*/
+        } else {
+            /*VÄÄRÄ SALASANA ERROR VIESTI*/
+        }
     }
 
     @FXML
@@ -80,6 +77,11 @@ public class MainView implements Initializable {
     private void showSearchContent(ActionEvent event) throws IOException {
         container.getChildren().clear();
         container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentSearch.fxml")));
+    }
+
+    @FXML
+    private void showAllButtonPressed(ActionEvent event) {
+        controller.attemptSignIn(/*textUser.getText(),textPassword.getText()*/);
     }
     
 }

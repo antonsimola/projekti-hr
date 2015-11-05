@@ -57,7 +57,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="showallButton" mnemonicParsing="false" text="Palauta" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button fx:id="showallButton" mnemonicParsing="false" onAction="#showAllButtonPressed" text="Palauta" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                               <TextField fx:id="namesearchField" promptText="Nimihaku" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
