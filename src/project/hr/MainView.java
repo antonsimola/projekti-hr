@@ -47,12 +47,13 @@ public class MainView implements Initializable {
     @FXML
     private Button removeselectedButton;
     @FXML
-    private Button addButton;
+    private Button addnewButton;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        controller = new Controller(this);
+        controller = Controller.getInstance();
+        controller.registerView(this);
     }    
 
     /*controller calls this to tell whether login succeeded or not*/

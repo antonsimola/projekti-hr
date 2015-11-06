@@ -25,6 +25,7 @@ import javafx.stage.Stage;
  * @author Hannes
  */
 public class LoginWindow implements Initializable {
+    Controller controller;
     @FXML
     private TextField usernameField;
     @FXML
@@ -37,6 +38,8 @@ public class LoginWindow implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        controller = Controller.getInstance();
+        controller.registerView(this);
         // TODO
     }    
 

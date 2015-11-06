@@ -73,7 +73,7 @@
                            <children>
                               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#showSearchContent" text="Hae" GridPane.halignment="CENTER" />
                               <Button fx:id="removeselectedButton" mnemonicParsing="false" text="Poista valitut" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#showAddContent" text="Lisää uusi" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button fx:id="addnewButton" mnemonicParsing="false" onAction="#showAddContent" text="Lisää uusi" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
                      </children>

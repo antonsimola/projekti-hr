@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.hr.FXMLDocumentAddController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.hr.FXMLDocumentAddView">
    <children>
       <GridPane layoutX="10.0" layoutY="10.0" prefHeight="571.0" prefWidth="704.0">
          <children>
@@ -49,7 +49,7 @@
             </GridPane>
             <GridPane GridPane.rowIndex="2">
                <children>
-                  <Label text="Etunimi">
+                  <Label text="Etunimi*">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -57,7 +57,7 @@
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Sukunimi" GridPane.columnIndex="1">
+                  <Label text="Sukunimi*" GridPane.columnIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -76,7 +76,7 @@
             </GridPane>
             <GridPane GridPane.rowIndex="4">
                <children>
-                  <Label text="Syntymäaika">
+                  <Label text="Syntymäaika*">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -84,7 +84,7 @@
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="HETU" GridPane.columnIndex="1">
+                  <Label text="HETU*" GridPane.columnIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -164,7 +164,7 @@
             </GridPane>
             <GridPane GridPane.rowIndex="9">
                <children>
-                  <TextField fx:id="cityFIeld">
+                  <TextField fx:id="cityField">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
@@ -274,7 +274,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Tehtävänimike" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="Tehtävänimike*" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -289,7 +289,7 @@
             </TextField>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <Label text="Tuntipalkka">
+                  <Label text="Tuntipalkka*">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -297,7 +297,7 @@
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Työtunnit / vko" GridPane.columnIndex="1">
+                  <Label text="Työtunnit / vko*" GridPane.columnIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -337,7 +337,7 @@
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <Label text="Aloituspäivä">
+                  <Label text="Aloituspäivä*">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -363,18 +363,6 @@
                </rowConstraints>
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="7">
-               <children>
-                  <TextField fx:id="startdateField">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="enddateField" GridPane.columnIndex="1">
-                     <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </GridPane.margin>
-                  </TextField>
-               </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -382,11 +370,23 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
+               <children>
+                  <TextField fx:id="startdateField" promptText="YYYY-MM-DD">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="enddateField" promptText="YYYY-MM-DD" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="9">
                <children>
                   <Button fx:id="cancelButton" mnemonicParsing="false" text="Peruuta" GridPane.halignment="CENTER" />
-                  <Button fx:id="addButton" mnemonicParsing="false" text="Lisää" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveEmployeeAction" text="Tallenna" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -396,6 +396,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
+            <Label text="* = vaadittu kenttä" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
