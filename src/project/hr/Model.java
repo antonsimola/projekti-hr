@@ -6,6 +6,7 @@
  * "Java SE Application Design With MVC", March 2007
  * http://www.oracle.com/technetwork/articles/javase/index-142890.html
  */
+
 package project.hr;
 
 import java.beans.PropertyChangeListener;
@@ -45,19 +46,21 @@ public class Model {
         
     }
   
-    public void signIn(String firstname, String password) {
-        //String passwordHASH = generatePasswordHASH(password);
+    public void signIn(String firstname, String password) { 
+        // Database query
         
-        // SELECT * FROM CREDENTIALS WHERE username=username AND password_hash=passwordHASH; 
-        
-        // Check query results
+        // Check query results: was anything returned?
         
         // If valid username + password:
         signedInUsername = firstname;
-        Employee employee = new Employee();
-        employee.setLoggedIn(true);
-        employee.setFirstName("aaa");
-        fireModelActionResult("login", null, (Object)employee);
+        
+        // For testing
+        //Employee employee = new Employee();
+        //employee.setLoggedIn(true);
+        //employee.setFirstName("aaa");
+        
+        // Send query result (Employee instance) to listeners
+        //fireModelActionResult("login", null, (Object)employee);
     }
     
     // Needed?
@@ -65,38 +68,30 @@ public class Model {
         signedInUsername = null;
     }
     
-    private String generatePasswordHASH(String password) {
-        
-        return "";
-    }
-    
     public void addEmployee(Employee employee) {
-        // INSERT INTO EMPLOYMENT () VALUES ();
-        // Get inserted EMPLOYMENT ID --> use int EMPLOYEE INSERT
-        // INSERT INTO EMPLOYEE () VALUES();
+        // Perform database insert, check thrown exceptions
     
-        fireModelActionResult("add", null, (Object)employee);
+        //fireModelActionResult("add", null, (Object)employee / [false/ true]);
     }
     
     public void editEmployee(String socialSecurityNumber) {
-        // UPDATE EMPLOYMENT and / or EMPLOYEE
+        // Perform databse update, check thrown exceptions
     
         //fireModelActionResult("edit", null, (Object)employee);
     }
     
     public void removeEmployee(String socialSecurityNumber) {
-        // DELETE EMPLOYMENT and EMPLOYEE records
+        // Perform database delete, check thrown exceptions
         
-        //fireModelActionResult("delete", null, (Object)employee);
+        //fireModelActionResult("delete", null, true/false);
     }
     
-    // Searching will have multiple overloaded methods with different parameters
     public void searchEmployee() {
-        
+        // Call a variant of a database search method (load all?)
     }
     
     public Employee searchEmployee(String username, String password) {
-        // SELECT * FROM CREDENTIALS WHERE username=username...
+        // Call a variant of a database search method
         
         Employee employee = new Employee();
         
@@ -104,6 +99,6 @@ public class Model {
     }
     
     public void alterEmployeeSearchResultFormatting() {
-    
+        // Alter returned database search results and send them forward with event propagation
     }
 }
