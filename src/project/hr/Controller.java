@@ -21,6 +21,7 @@ public class Controller implements PropertyChangeListener  {
         view = v;
     }
     
+    
     /*Call from view when attempting sign in*/
     public void attemptSignIn(/*username pw*/) {
         /* View calls this as sign in was pressed -> Model method call? */
@@ -28,6 +29,24 @@ public class Controller implements PropertyChangeListener  {
         model.signIn("a", "b");
         /* after this we need to catch event in listener below*/
     }
+    
+    public boolean attemptAddEmployee(String fn,
+            String ln,
+            String bd,
+            String ssn,
+            String addr,
+            String p,
+            String c,
+            String phone,
+            String email,
+            String fav,
+            String title,
+            String start,
+            String end,
+            String hours) {
+     
+        return true;  
+    };
     
     /*model is ready with response:  catch the event which model fired */
     /*temp name*/
