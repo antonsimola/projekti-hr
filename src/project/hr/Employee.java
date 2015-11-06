@@ -30,15 +30,19 @@ public class Employee {
     private double weeklyHours;
     private boolean loggedIn = false;
     
+    public Employee () {
+    
+    }
+    
     public Employee(String fn,
             String ln,
             String bd,
-            String ssn,
+            String s,
             String addr,
             String p,
             String c,
             String phone,
-            String email,
+            String e,
             String fav,
             String title,
             double wage,
@@ -48,11 +52,11 @@ public class Employee {
         firstName = fn;
         lastName = ln;
         birthDay = bd;
-        this.ssn = ssn;
+        ssn = s;
         address = addr;
         postal = p;
         city = c;
-        this.email = email;
+        email = e;
         favoriteDrink = fav;
         jobTitle = title;
         jobWage = wage;

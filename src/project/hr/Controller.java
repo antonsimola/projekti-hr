@@ -48,6 +48,10 @@ public class Controller implements PropertyChangeListener  {
         /* after this we need to catch event in listener below*/
     }
     
+    public void getAllEmployees () {
+        model.getAllEmployees();
+    }
+    
     public boolean attemptAddEmployee(String fn,
             String ln,
             String bd,
@@ -79,9 +83,14 @@ public class Controller implements PropertyChangeListener  {
     model updated some employee data*/
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getPropertyName().equals("login")) {
-            Employee emp = (Employee)evt.getNewValue();
-            view.logIn(emp);
+        switch (evt.getPropertyName()) {
+            case "login":
+                Employee emp = (Employee)evt.getNewValue();
+                view.logIn(emp);
+                break;
+            case "all_employees":
+                view.updateEmployeeList(evt.getNewValue());
+                break;
         }
     }
     
