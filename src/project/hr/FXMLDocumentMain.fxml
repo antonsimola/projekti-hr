@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -26,15 +27,18 @@
                   </items>
                 </Menu>
               </menus>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </MenuBar>
             <GridPane prefHeight="666.0" prefWidth="954.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" maxWidth="470.0" minWidth="10.0" prefWidth="250.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="470.0" minWidth="250.0" prefWidth="250.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="805.0" minWidth="10.0" prefWidth="704.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="620.0" minHeight="10.0" prefHeight="604.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="306.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
               </rowConstraints>
                <children>
                   <GridPane>
@@ -42,9 +46,9 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="189.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" vgrow="NEVER" />
                       <RowConstraints maxHeight="499.0" minHeight="10.0" prefHeight="486.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="77.0" minHeight="77.0" prefHeight="77.0" vgrow="NEVER" />
                     </rowConstraints>
                      <children>
                         <GridPane>

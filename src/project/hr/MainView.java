@@ -7,6 +7,7 @@ package project.hr;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,7 +42,7 @@ public class MainView implements Initializable {
     @FXML
     private TextField namesearchField;
     @FXML
-    private ListView<?> namelist;
+    private ListView<Employee> namelist;
     @FXML
     private Button searchButton;
     @FXML
@@ -54,8 +55,13 @@ public class MainView implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         controller = Controller.getInstance();
         controller.registerView(this);
+        controller.getAllEmployees();
     }    
-
+    public void updateEmployeeList(ArrayList <Employee> emplist) {
+        for(Employee e: emplist) {
+            namelist.getItems().add(e);
+        }
+    }
     /*controller calls this to tell whether login succeeded or not*/
     public void logIn(Employee employee) {
         

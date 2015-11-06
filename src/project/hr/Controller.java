@@ -16,9 +16,9 @@ public class Controller implements PropertyChangeListener  {
     private static Controller instance = null;
     private Model model;
     private ArrayList<Object> views = new ArrayList();
-    private MainView view;
     
     private Controller() {
+        model = new Model();
     }
     
     public static Controller getInstance() {
@@ -29,7 +29,11 @@ public class Controller implements PropertyChangeListener  {
     }
     public void registerView (Object view) {
         /*convert TO RIGHT CLASS FIRST*/
-        views.add(view);
+        if(view instanceof MainView) {
+           views.add((MainView) view);
+        } else if (view instanceof LoginWindow) {
+            views.add((LoginWindow) view); 
+        }
     }
     private boolean isEmpty(String[] list) {
         for (String str:list) {
@@ -86,10 +90,13 @@ public class Controller implements PropertyChangeListener  {
         switch (evt.getPropertyName()) {
             case "login":
                 Employee emp = (Employee)evt.getNewValue();
-                view.logIn(emp);
+                
+                LoginWindow lw = (LoginWindow) views.get(0);
+                lw.logIn();
                 break;
             case "all_employees":
-                view.updateEmployeeList(evt.getNewValue());
+                MainView mv = (MainView) views.get(1);
+                mv.updateEmployeeList((ArrayList<Employee>)evt.getNewValue());
                 break;
         }
     }
