@@ -57,7 +57,7 @@ public class DatabaseHandler {
         while(resultSet.next()) {
             Employee employee = new Employee(
                                         resultSet.getString("FIRST_NAME"),
-                                        resultSet.getString("LAST_NAME"),
+                                        resultSet.getString("SECOND_NAME"),
                                         resultSet.getString("BIRTHDAY"),
                                         resultSet.getString("SSN"),
                                         resultSet.getString("ADDRESS"),
