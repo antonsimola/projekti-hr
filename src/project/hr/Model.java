@@ -81,7 +81,7 @@ public class Model {
         try {
             employeeList = databaseHandler.selectEmployee();
         } catch(Exception e) {
-        
+            e.printStackTrace();
         }
         
         fireModelActionResult("all_employees", null, employeeList);
