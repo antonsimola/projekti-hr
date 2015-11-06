@@ -19,12 +19,19 @@ import java.util.ArrayList;
  */
 public class Model {
     private PropertyChangeSupport propertyChangeSupport;
+    private DatabaseHandler databaseHandler;
     private String signedInUsername;
  
     //private ArrayList<EmployeeSearchResult> employeeSearchResults;
     
     public Model () {
         propertyChangeSupport = new PropertyChangeSupport(this);
+        try {
+        databaseHandler = new DatabaseHandler();
+        }
+        catch(Exception e) {
+        
+        }
     }
     
     public void addPropertyChangeListener(PropertyChangeListener 
@@ -68,6 +75,18 @@ public class Model {
         signedInUsername = null;
     }
     
+    public void getAllEmployees() {
+        ArrayList<Employee> employeeList = null;
+        
+        try {
+            employeeList = databaseHandler.selectEmployee();
+        } catch(Exception e) {
+        
+        }
+        
+        fireModelActionResult("all_employees", null, employeeList);
+    }
+    
     public void addEmployee(Employee employee) {
         // Perform database insert, check thrown exceptions
     
@@ -90,13 +109,13 @@ public class Model {
         // Call a variant of a database search method (load all?)
     }
     
-    public Employee searchEmployee(String username, String password) {
-        // Call a variant of a database search method
-        
-        Employee employee = new Employee();
-        
-        return employee;
-    }
+//    public Employee searchEmployee(String username, String password) {
+//        // Call a variant of a database search method
+//        
+//        Employee employee = new Employee();
+//        
+//        return employee;
+//    }
     
     public void alterEmployeeSearchResultFormatting() {
         // Alter returned database search results and send them forward with event propagation
