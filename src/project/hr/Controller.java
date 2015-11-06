@@ -6,21 +6,34 @@
 package project.hr;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 /**
  *
  * @author Anton
  */
 public class Controller implements PropertyChangeListener  {
+    private static Controller instance = null;
+    private Model model;
+    private ArrayList<Object> views;
+    private MainView view;
     
-    Model model;
-    MainView view;
-    public Controller(MainView v) {
-        model = new Model();
-        model.addPropertyChangeListener(this);
-        view = v;
+    private Controller() {
     }
     
+    public static Controller getInstance() {
+        if (instance == null) {
+            instance = new Controller();
+        }
+        return instance;
+    }
+    public void registerView (Object view) {
+        /*convert TO RIGHT CLASS FIRST*/
+        views.add(view);
+    }
+    private boolean isEmpty(String[] list) {
+        return true;
+    }
     
     /*Call from view when attempting sign in*/
     public void attemptSignIn(/*username pw*/) {
@@ -44,8 +57,8 @@ public class Controller implements PropertyChangeListener  {
             String start,
             String end,
             String hours) {
-     
-        return true;  
+        String[] required = {fn,ln,bd,ssn,title,start,hours};
+        return !isEmpty(required);  
     };
     
     /*model is ready with response:  catch the event which model fired */
