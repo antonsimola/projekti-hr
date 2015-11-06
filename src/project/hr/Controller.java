@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Controller implements PropertyChangeListener  {
     private static Controller instance = null;
     private Model model;
-    private ArrayList<Object> views;
+    private ArrayList<Object> views = new ArrayList();
     private MainView view;
     
     private Controller() {
@@ -32,7 +32,12 @@ public class Controller implements PropertyChangeListener  {
         views.add(view);
     }
     private boolean isEmpty(String[] list) {
-        return true;
+        for (String str:list) {
+            if (str.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /*Call from view when attempting sign in*/
@@ -54,10 +59,12 @@ public class Controller implements PropertyChangeListener  {
             String email,
             String fav,
             String title,
+            String wage,
             String start,
             String end,
             String hours) {
-        String[] required = {fn,ln,bd,ssn,title,start,hours};
+        String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
+        /*return false, if not OK, else return true*/
         return !isEmpty(required);  
     };
     
