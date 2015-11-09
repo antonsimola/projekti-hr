@@ -15,10 +15,11 @@ import java.util.ArrayList;
 public class Controller implements PropertyChangeListener  {
     private static Controller instance = null;
     private Model model;
-    private ArrayList<Object> views = new ArrayList();
+    private ArrayList<Object> views;
     
     private Controller() {
         model = new Model();
+        views = new ArrayList();
     }
     
     public static Controller getInstance() {
@@ -76,27 +77,27 @@ public class Controller implements PropertyChangeListener  {
         return !isEmpty(required);  
     };
     
-    /*model is ready with response:  catch the event which model fired */
-    /*temp name*/
-    public void signInListener(/*Event e*/) {
-        /*inform view about whether sign in succeeded or not (tempname)*/
-        //view.logIn(/*true or false*/);
-    }
-    
-    /* this one is general property change listener: 
-    model updated some employee data*/
+    /*listens for updates in the model*/
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case "login":
                 Employee emp = (Employee)evt.getNewValue();
-                
-                LoginWindow lw = (LoginWindow) views.get(0);
-                lw.logIn();
+                for (Object view:views) {
+                    if (view instanceof LoginWindow) {
+                        LoginWindow lw = (LoginWindow) view;
+                        lw.logIn();
+                    }
+                }
+            
                 break;
             case "all_employees":
-                MainView mv = (MainView) views.get(1);
-                mv.updateEmployeeList((ArrayList<Employee>)evt.getNewValue());
+                for (Object view:views) {
+                    if (view instanceof MainView) {
+                        MainView mv = (MainView) view;
+                        mv.updateEmployeeList((ArrayList<Employee>)evt.getNewValue());
+                    }
+                }
                 break;
         }
     }
