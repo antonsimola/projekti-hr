@@ -84,7 +84,7 @@ public class Model {
         ArrayList<Employee> employeeList = null;
         
         try {
-            employeeList = databaseHandler.selectEmployee();
+            employeeList = databaseHandler.selectAllEmployees();
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -110,7 +110,7 @@ public class Model {
         //fireModelActionResult("delete", null, true/false);
     }
     
-     public void alterEmployeeSearchResultFormatting() {
+     public void alterEmployeeSearchResultFormatting(/*Formatting options*/) {
         // Alter returned database search results and send them forward with event propagation
         // (employeeSearchResults)
     }
