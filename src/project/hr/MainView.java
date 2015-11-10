@@ -42,7 +42,7 @@ public class MainView implements Initializable {
     @FXML
     private TextField namesearchField;
     @FXML
-    private ListView<Employee> namelist;
+    private ListView<String> namelist;
     @FXML
     private Button searchButton;
     @FXML
@@ -55,11 +55,12 @@ public class MainView implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         controller = Controller.getInstance();
         controller.registerView(this);
+        System.out.println("Haetaan hlöt");
         controller.getAllEmployees();
     }    
     public void updateEmployeeList(ArrayList <Employee> emplist) {
         for(Employee e: emplist) {
-            namelist.getItems().add(e);
+            namelist.getItems().add(e.getFirstName()+" "+e.getStartDate());
         }
     }
     /*controller calls this to tell whether login succeeded or not*/

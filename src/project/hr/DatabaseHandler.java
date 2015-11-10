@@ -59,11 +59,14 @@ public class DatabaseHandler {
                                         resultSet.getString("FAVORITE_DRINK"),
                                         resultSet.getString("JOB_TITLE"),
                                         resultSet.getDouble("HOURLY_WAGE"),
-                                        resultSet.getDate("START_DATE"),
-                                        resultSet.getDate("END_DATE"),
+                                        /*resultSet.getDate("START_DATE"),
+                                        resultSet.getDate("END_DATE"),*/
+                                        resultSet.getString("START_DATE"),
+                                        resultSet.getString("END_DATE"),
                                         resultSet.getDouble("WEEKLY_WORKHOURS")
                                         );
-        
+            
+            System.out.println(employee.getFirstName());
             employeeList.add(employee);
         }
         
@@ -85,8 +88,8 @@ public class DatabaseHandler {
                                         resultSet.getString("FAVORITE_DRINK"),
                                         resultSet.getString("JOB_TITLE"),
                                         resultSet.getDouble("HOURLY_WAGE"),
-                                        resultSet.getDate("START_DATE"),
-                                        resultSet.getDate("END_DATE"),
+                                        resultSet.getString("START_DATE"),
+                                        resultSet.getString("END_DATE"),
                                         resultSet.getDouble("WEEKLY_WORKHOURS")
                                         );
         

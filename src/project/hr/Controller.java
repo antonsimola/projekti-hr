@@ -7,6 +7,8 @@ package project.hr;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -19,6 +21,7 @@ public class Controller implements PropertyChangeListener  {
     
     private Controller() {
         model = new Model();
+        model.addPropertyChangeListener(this);
         views = new ArrayList();
     }
     
@@ -45,6 +48,12 @@ public class Controller implements PropertyChangeListener  {
         return false;
     }
     
+    private boolean isValidEmail(String email) {
+        Pattern p = Pattern.compile(".+\\@.+\\..+");
+        Matcher m  = p.matcher(email);
+        return m.matches();
+    }
+    
     /*Call from view when attempting sign in*/
     public void attemptSignIn(/*username pw*/) {
         /* View calls this as sign in was pressed -> Model method call? */
@@ -53,7 +62,8 @@ public class Controller implements PropertyChangeListener  {
         /* after this we need to catch event in listener below*/
     }
     
-    public void getAllEmployees () {
+    public void getAllEmployees() {
+        System.out.println("Haetaan hlöt");
         model.getAllEmployees();
     }
     
@@ -82,6 +92,7 @@ public class Controller implements PropertyChangeListener  {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (evt.getPropertyName()) {
             case "login":
+                System.out.println("login event");
                 Employee emp = (Employee)evt.getNewValue();
                 for (Object view:views) {
                     if (view instanceof LoginWindow) {
@@ -92,12 +103,24 @@ public class Controller implements PropertyChangeListener  {
             
                 break;
             case "all_employees":
+                System.out.println("Tuli hlöt");
                 for (Object view:views) {
                     if (view instanceof MainView) {
+                        System.out.println("Tuli hlöitä");
                         MainView mv = (MainView) view;
+                        Object o = evt.getOldValue();
+                        ArrayList<Employee> array = (ArrayList<Employee>) o;
+                        
+                        /*for (Employee e:array) {
+                            System.out.println(e.getFirstName());
+                        }*/
+                        
                         mv.updateEmployeeList((ArrayList<Employee>)evt.getNewValue());
                     }
                 }
+                break;
+            default:
+                System.out.println("default");
                 break;
         }
     }

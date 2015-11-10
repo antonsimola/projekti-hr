@@ -6,6 +6,7 @@
 package project.hr;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -25,8 +26,10 @@ public class Employee {
     private String favoriteDrink;
     private String jobTitle;
     private double jobWage;
-    private Date startDate;
-    private Date endDate;
+    /*private Date startDate;
+    private Date endDate;*/
+    private String startDate;
+    private String endDate;
     private double weeklyHours;
     private boolean loggedIn = false;
     
@@ -46,8 +49,8 @@ public class Employee {
             String fav,
             String title,
             double wage,
-            Date start,
-            Date end,
+            String start,
+            String end,
             double hours) {
         firstName = fn;
         lastName = ln;
@@ -161,21 +164,23 @@ public class Employee {
         this.jobWage = jobWage;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+
+    
 
     public double getWeeklyHours() {
         return weeklyHours;
