@@ -334,13 +334,17 @@ public class DatabaseHandler {
                 +   "VALUES ");
         
         sqlInsert.append("(");
-        
-        sqlInsert.append(employee.getJobTitle()).append(", ");
+        sqlInsert.append("'");
+        sqlInsert.append(employee.getJobTitle()).append("', ");
         sqlInsert.append(employee.getJobWage()).append(", ");
-        sqlInsert.append(employee.getStartDate()).append(", ");
+        sqlInsert.append("'");
+        sqlInsert.append(employee.getStartDate()).append("', ");
         
-        if(employee.getEndDate() != null)
-            sqlInsert.append(employee.getEndDate()).append(", ");
+        if(employee.getEndDate() != null) {
+              sqlInsert.append("'");
+            sqlInsert.append(employee.getEndDate()).append("', ");
+        }
+            
         else
             sqlInsert.append("NULL, ");
         
@@ -369,50 +373,54 @@ public class DatabaseHandler {
                 +   "CITY, "
                 +   "PHONE_NUMBER, "
                 +   "EMAIL_ADDRESS, "
-                +   "FAVORITE_DRINK, "
+                +   "FAVORITE_DRINK"
                 +   ")"
                 +   "VALUES ");
         
         sqlInsert.append("(");
         
         sqlInsert.append("last_insert_rowid(), ");
-        sqlInsert.append(employee.getFirstName()).append(", ");
-        sqlInsert.append(employee.getLastName()).append(", ");
-        sqlInsert.append(employee.getBirthDay()).append(", ");
-        sqlInsert.append(employee.getSsn()).append(", ");
+        sqlInsert.append("'");
+        sqlInsert.append(employee.getFirstName()).append("', ");
+        sqlInsert.append("'");
+        sqlInsert.append(employee.getLastName()).append("', ");
+        sqlInsert.append("'");        
+        sqlInsert.append(employee.getBirthDay()).append("', ");
+        sqlInsert.append("'");        
+        sqlInsert.append(employee.getSsn()).append("', ");
         
-        if(employee.getAddress() != null)
-            sqlInsert.append(employee.getAddress()).append(", ");
-        else
-            sqlInsert.append("NULL");
-        
-        if(employee.getPostal() != null)
-            sqlInsert.append(employee.getPostal()).append(", ");
-        else
-            sqlInsert.append("NULL");
-        
-        if(employee.getCity() != null)
-            sqlInsert.append(employee.getCity()).append(", ");
-        else
-            sqlInsert.append("NULL");
-        
-        if(employee.getPhone() != null)
-            sqlInsert.append(employee.getPhone()).append(", ");
-        else
-            sqlInsert.append("NULL");
-        
-        if(employee.getEmail() != null)
-            sqlInsert.append(employee.getEmail()).append(", ");
-        else
-            sqlInsert.append("NULL");
-        
-        if(employee.getFavoriteDrink() != null)
-            sqlInsert.append(employee.getFavoriteDrink()).append(", ");
-        else
-            sqlInsert.append("NULL");
-        
+//        if(employee.getAddress() != null)
+//            sqlInsert.append(employee.getAddress()).append(", ");
+//        else
+//            sqlInsert.append("NULL");
+//        
+//        if(employee.getPostal() != null)
+//            sqlInsert.append(employee.getPostal()).append(", ");
+//        else
+//            sqlInsert.append("NULL");
+//        
+//        if(employee.getCity() != null)
+//            sqlInsert.append(employee.getCity()).append(", ");
+//        else
+//            sqlInsert.append("NULL");
+//        
+//        if(employee.getPhone() != null)
+//            sqlInsert.append(employee.getPhone()).append(", ");
+//        else
+//            sqlInsert.append("NULL");
+//        
+//        if(employee.getEmail() != null)
+//            sqlInsert.append(employee.getEmail()).append(", ");
+//        else
+//            sqlInsert.append("NULL");
+//        
+//        if(employee.getFavoriteDrink() != null)
+//            sqlInsert.append(employee.getFavoriteDrink()).append(", ");
+//        else
+//            sqlInsert.append("NULL");
+        sqlInsert.append("NULL, NULL, NULL, NULL, NULL, NULL");
         sqlInsert.append(");");
-
+        System.out.println(sqlInsert.toString());
         statement.executeUpdate(sqlInsert.toString());
         
         statement.close();

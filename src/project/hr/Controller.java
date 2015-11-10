@@ -84,16 +84,37 @@ public class Controller implements PropertyChangeListener  {
             String hours) {
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
         /*return false, if not OK, else return true*/
-        return !isEmpty(required);  
+        if (isEmpty(required) == true) {
+            return false;
+        } else {
+            Employee emp = new Employee(fn,
+            ln,
+            bd,
+            ssn,
+            addr,
+            p,
+            c,
+            phone,
+            email,
+            fav,
+            title,
+            Double.parseDouble(wage),
+            start,
+            end,
+            Double.parseDouble(hours));
+            model.addEmployee(emp);
+            return true;
+        }
     };
     
     /*listens for updates in the model*/
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        Employee emp;
         switch (evt.getPropertyName()) {
             case "login":
                 System.out.println("login event");
-                Employee emp = (Employee)evt.getNewValue();
+                emp = (Employee)evt.getNewValue();
                 for (Object view:views) {
                     if (view instanceof LoginWindow) {
                         LoginWindow lw = (LoginWindow) view;
@@ -119,6 +140,12 @@ public class Controller implements PropertyChangeListener  {
                     }
                 }
                 break;
+            case "add":
+                for (Object view:views) {
+                    if (view instanceof MainView) {
+                        getAllEmployees();
+                    }
+                }
             default:
                 System.out.println("default");
                 break;
