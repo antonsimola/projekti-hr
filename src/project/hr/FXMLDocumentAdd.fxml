@@ -5,8 +5,9 @@
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="740.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.hr.FXMLDocumentAddView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="740.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.hr.FXMLDocumentAddView">
    <children>
       <GridPane layoutX="10.0" layoutY="10.0" prefHeight="571.0" prefWidth="704.0">
          <children>
@@ -429,4 +430,7 @@
          </rowConstraints>
       </GridPane>
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+   </stylesheets>
 </Pane>
