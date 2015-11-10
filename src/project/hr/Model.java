@@ -95,16 +95,17 @@ public class Model {
     }
     
     public void addEmployee(Employee employee) {
+        boolean isSuccessfull = true;
         
         try {
             databaseHandler.insertEmployee(employee);
     
         } catch (Exception ex) {
             ex.printStackTrace();
-            employee = null;
+            isSuccessfull = false;
         }
         
-        fireModelActionResult("add", null, employee);
+        fireModelActionResult("add", null, isSuccessfull);
     }
     
     public void editEmployee(String socialSecurityNumber, Employee employee) {
