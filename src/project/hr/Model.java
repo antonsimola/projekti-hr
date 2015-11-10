@@ -21,16 +21,18 @@ public class Model {
     private PropertyChangeSupport propertyChangeSupport;
     private DatabaseHandler databaseHandler;
     private String signedInUsername;
- 
-    //private ArrayList<EmployeeSearchResult> employeeSearchResults;
+    
+    private ArrayList<Employee> employeeSearchResults;
     
     public Model () {
         propertyChangeSupport = new PropertyChangeSupport(this);
+        employeeSearchResults = null;
+        
         try {
-        databaseHandler = new DatabaseHandler();
+            databaseHandler = new DatabaseHandler();
         }
         catch(Exception e) {
-        
+            // Log error, send quit/error event
         }
     }
     
@@ -54,6 +56,8 @@ public class Model {
     }
   
     public void signIn(String firstname, String password) { 
+        // Form password HASH
+        
         // Database query
         
         // Check query results: was anything returned?
@@ -61,18 +65,19 @@ public class Model {
         // If valid username + password:
         signedInUsername = firstname;
         
-        // For testing
-        //Employee employee = new Employee();
-        //employee.setLoggedIn(true);
-        //employee.setFirstName("aaa");
-        
         // Send query result (Employee instance) to listeners
-        //fireModelActionResult("login", null, (Object)employee);
     }
     
-    // Needed?
     public void signOut() {
         signedInUsername = null;
+    }
+    
+    private Employee searchEmployee(String username, String password) {
+        // Call a variant of database search method
+        
+        Employee employee = new Employee();
+        
+        return employee;
     }
     
     public void getAllEmployees() {
@@ -93,7 +98,7 @@ public class Model {
         //fireModelActionResult("add", null, (Object)employee / [false/ true]);
     }
     
-    public void editEmployee(String socialSecurityNumber) {
+    public void editEmployee(String socialSecurityNumber, Employee employee) {
         // Perform databse update, check thrown exceptions
     
         //fireModelActionResult("edit", null, (Object)employee);
@@ -105,19 +110,17 @@ public class Model {
         //fireModelActionResult("delete", null, true/false);
     }
     
-    public void searchEmployee() {
-        // Call a variant of a database search method (load all?)
-    }
-    
-//    public Employee searchEmployee(String username, String password) {
-//        // Call a variant of a database search method
-//        
-//        Employee employee = new Employee();
-//        
-//        return employee;
-//    }
-    
-    public void alterEmployeeSearchResultFormatting() {
+     public void alterEmployeeSearchResultFormatting() {
         // Alter returned database search results and send them forward with event propagation
+        // (employeeSearchResults)
     }
+    
+    // Should store search results in case the user wants to alter them
+    // (calls alterEmployeeSearchResultFormatting on an instance variable)
+    public ArrayList<Employee> searchEmployee(Employee employee) {
+        employeeSearchResults = new ArrayList();
+        
+        return new ArrayList(); // Placeholder ()
+    }
+    
 }

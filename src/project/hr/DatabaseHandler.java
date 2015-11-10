@@ -22,35 +22,26 @@ import java.util.ArrayList;
 public class DatabaseHandler {
     
     private Connection connection = null;
-    private static final String databaseName = "HR_Database.sqlite";;
+    private final String databaseName = "HR_Database.sqlite";;
     
     public DatabaseHandler() throws Exception{
         
-        try {
-            // Attempt sqlite initialization and connect to database.
-            Class.forName("org.sqlite.JDBC"); 
-            connection = DriverManager.getConnection(
-                        "jdbc:sqlite:" + databaseName);
-        }
-        catch(Exception e) {
-            /* Failed to initialize sqlite OR more likely could not find any
-             * database that matches the given name (check that the database 
-             * resides in project root)
-             */
-            
-            Exception ex = new Exception("Database handler error: " + 
-                    e.getMessage());
-           
-            throw ex;
-        }
+        // Attempt sqlite initialization and connect to database.
+        Class.forName("org.sqlite.JDBC"); 
+        connection = DriverManager.getConnection(
+                    "jdbc:sqlite:" + databaseName);
+    }
+    
+    public String getDatabaseName() {
+        return databaseName;
     }
     
     /* Contents of a given result set are copied into Employee instances that
      * are placed into an ArrayList (that will be returned). This method does
      * not look for admin information (ADMINISTATOR table in the database).
     */
-    private ArrayList<Employee> populateEmployeeList(ResultSet resultSet) 
-            throws Exception{
+    private ArrayList<Employee> populateOrdinaryEmployeeList(
+            ResultSet resultSet) throws Exception{
         
         ArrayList<Employee> employeeList = new ArrayList();
         
@@ -79,6 +70,42 @@ public class DatabaseHandler {
         return employeeList;
     }
     
+    /* Contents of a given result set (contains human resources employees) are
+     * returned in an array list.
+    */
+    private ArrayList<Employee> populateHumanResourcesEmployeeList(
+            ResultSet resultSet) throws Exception{
+        
+        ArrayList<Employee> employeeList = new ArrayList();
+        
+        while(resultSet.next()) {
+            Employee employee = new Employee(
+                                        resultSet.getString("FIRST_NAME"),
+                                        resultSet.getString("SECOND_NAME"),
+                                        resultSet.getString("BIRTHDAY"),
+                                        resultSet.getString("SSN"),
+                                        resultSet.getString("ADDRESS"),
+                                        resultSet.getString("POSTAL_CODE"),
+                                        resultSet.getString("CITY"),
+                                        resultSet.getString("PHONE_NUMBER"),
+                                        resultSet.getString("EMAIL_ADDRESS"),
+                                        resultSet.getString("FAVORITE_DRINK"),
+                                        resultSet.getString("JOB_TITLE"),
+                                        resultSet.getDouble("HOURLY_WAGE"),
+                                        resultSet.getDate("START_DATE"),
+                                        resultSet.getDate("END_DATE"),
+                                        resultSet.getDouble("WEEKLY_WORKHOURS"),
+                                        resultSet.getBoolean("ACTIVE")                    
+                                        );
+        
+            employeeList.add(employee);
+        }
+        
+        return employeeList;
+    }
+    
+    
+    
     /* Variant of selectEmployee that takes in no parameters. Returns all
      * employees in ArrayList data structure.
      */
@@ -101,7 +128,7 @@ public class DatabaseHandler {
         /* Populate ArrayList with result employees.
          * May result in a result set iteration failure exception.
         */
-        employeeList = populateEmployeeList(resultSet);
+        employeeList = populateOrdinaryEmployeeList(resultSet);
         
         return employeeList;
     }
@@ -134,49 +161,50 @@ public class DatabaseHandler {
         /* Populate ArrayList with result employees.
          * May result in a result set iteration failure exception.
         */
-        employeeList = populateEmployeeList(resultSet);
+        employeeList = populateOrdinaryEmployeeList(resultSet);
         
         return employeeList;
     }
     
-//    /*
-//     * PARAMETRIZATION NOT IMPLEMENTED
-//    */
-//    public ArrayList<Employee> selectEmployeeByCredentials(String username /*First name?*/, 
-//            String password) throws Exception {
-//        
-//        ArrayList<Employee> employeeList;
-//        String passwordHASH = generateHASH(password);
-//        
-//        String selectQuery = 
-//                    "SELECT "
-//                +       "* "
-//                +   "FROM "
-//                +       "ADMINISTRATOR "
-//                +       "INNER JOIN "
-//                +       "EMPLOYEE "
-//                +   "ON "
-//                +       "EMPLOYEE.ID=ADMINISTRATOR.EMPLOYEE_ID "
-//                +       "INNER JOIN "
-//                +       "EMPLOYMENT "
-//                +   "ON"
-//                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID "
-//                +   "WHERE "
-//                +       "EMPLOYEE.FIRST_NAME=" + username + " "
-//                +       "AND "
-//                +       "ADMINISTRATOR.PASSWORD_HASH=" + passwordHASH + ";";
-//        
-//        // May result in a database operation failure exception.
-//        Statement statement = connection.createStatement(); 
-//        ResultSet resultSet = statement.executeQuery(selectQuery);
-//        
-//        /* Populate ArrayList with result employees.
-//         * May result in a result set iteration failure exception.
-//        */
-//        employeeList = populateEmployeeList(resultSet);
-//        
-//        return employeeList;
-//    }
+    /* Select by username and password.
+     *
+     * PARAMETRIZATION NOT IMPLEMENTED
+    */
+    public ArrayList<Employee> selectEmployeeByCredentials(String username /*First name?*/, 
+            String passwordHASH) throws Exception {
+        
+        ArrayList<Employee> employeeList;
+        //String passwordHASH = generateHASH(password); Generate hash (+salt?) in model
+        
+        String selectQuery = 
+                    "SELECT "
+                +       "* "
+                +   "FROM "
+                +       "ADMINISTRATOR "
+                +       "INNER JOIN "
+                +       "EMPLOYEE "
+                +   "ON "
+                +       "EMPLOYEE.ID=ADMINISTRATOR.EMPLOYEE_ID "
+                +       "INNER JOIN "
+                +       "EMPLOYMENT "
+                +   "ON"
+                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID "
+                +   "WHERE "
+                +       "EMPLOYEE.FIRST_NAME=" + username + " "
+                +       "AND "
+                +       "ADMINISTRATOR.PASSWORD_HASH=" + passwordHASH + ";";
+        
+        // May result in a database operation failure exception.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+        
+        /* Populate ArrayList with result employees.
+         * May result in a result set iteration failure exception.
+        */
+        employeeList = populateEmployeeList(resultSet);
+        
+        return employeeList;
+    }
     
 //    /* Load employees based on the instance variables of a given employee
 //     * instance. Does not yet allow search by range.
