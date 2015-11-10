@@ -318,106 +318,108 @@ public class DatabaseHandler {
 //        }
 //    }
     
-//    /* INSERT EMPLOYMENT and EMPLOYEE details of one employee 
-//     * (Employee instance).
-//     *
-//    */
-//    public void insertEmployee(Employee employee) throws Exception {
-//        int lastEmploymentInsertID;
-//        connection.setAutoCommit(false);
-//        Statement statement = connection.createStatement();
-//        
-//        // EMPLOYEMENT INSERT
-//        StringBuilder sqlInsert = new StringBuilder(
-//                    "INSERT INTO EMPLOYMENT "
-//                +   "(JOB_TITLE, HOURLY_WAGE, START_DATE, END_DATE, WEEKLY_WORKHOURS) "
-//                +   "VALUES ");
-//        
-//        sqlInsert.append("(");
-//        
-//        sqlInsert.append(employee.getJobTitle()).append(", ");
-//        sqlInsert.append(employee.getHourlyWage()).append(", ");
-//        sqlInsert.append(employee.getStartDate()).append(", ");
-//        
-//        if(employee.getEndDate() != null)
-//            sqlInsert.append(employee.getEndDate()).append(", ");
-//        else
-//            sqlInsert.append("NULL, ");
-//        
-//        sqlInsert.append(employee.getWeeklyWorkhours());
-//        
-//        sqlInsert.append(");");
-//
-//        statement.executeUpdate(sqlInsert.toString());
-//        
-//        lastEmploymentInsertID = last_insert_rowid(connection);
-//        
-//        statement.close();
-//        statement = connection.createStatement();
-//        
-//        // GET EMPLOYEMENT_ID FROM EMPLOYEE HERE
-//        
-//        
-//        // EMPLOYEE INSERT
-//        sqlInsert = new StringBuilder(
-//                    "INSERT INTO EMPLOYEE "
-//                +   "("
-//                +   "FIRST_NAME, "
-//                +   "SECOND_NAME, "
-//                +   "BIRTHDAY, "
-//                +   "SSN, "
-//                +   "ADDRESS, "
-//                +   "POSTAL_CODE, "
-//                +   "CITY, "
-//                +   "PHONE_NUMBER, "
-//                +   "EMAIL_ADDRESS, "
-//                +   "FAVORITE_DRINK, "
-//                +   ")"
-//                +   "VALUES ");
-//        
-//        sqlInsert.append("(");
-//        
-//        sqlInsert.append(employee.getFirstName).append(", ");
-//        sqlInsert.append(employee.getSecondName()).append(", ");
-//        sqlInsert.append(employee.getBirthDay()).append(", ");
-//        sqlInsert.append(employee.getSSN).append(", ");
-//        
-//        if(employee.getAddress() != null)
-//            sqlInsert.append(employee.getAddress()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getPostalCode() != null)
-//            sqlInsert.append(employee.getPostalCode()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getCity() != null)
-//            sqlInsert.append(employee.getCity()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getPhoneNumber() != null)
-//            sqlInsert.append(employee.getPhoneNumber()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getEmailAddress() != null)
-//            sqlInsert.append(employee.getEmailAddress()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getFavoriteDrink() != null)
-//            sqlInsert.append(employee.getFavoriteDrink()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        sqlInsert.append(");");
-//
-//        statement.executeUpdate(sqlInsert.toString());
-//      
-//        
-//    }
+    /* INSERT EMPLOYMENT and EMPLOYEE details of one employee 
+     * (Employee instance).
+     *
+    */
+    public void insertEmployee(Employee employee) throws Exception {
+
+        connection.setAutoCommit(false);
+        Statement statement = connection.createStatement();
+        
+        // EMPLOYEMENT INSERT
+        StringBuilder sqlInsert = new StringBuilder(
+                    "INSERT INTO EMPLOYMENT "
+                +   "(JOB_TITLE, HOURLY_WAGE, START_DATE, END_DATE, WEEKLY_WORKHOURS) "
+                +   "VALUES ");
+        
+        sqlInsert.append("(");
+        
+        sqlInsert.append(employee.getJobTitle()).append(", ");
+        sqlInsert.append(employee.getJobWage()).append(", ");
+        sqlInsert.append(employee.getStartDate()).append(", ");
+        
+        if(employee.getEndDate() != null)
+            sqlInsert.append(employee.getEndDate()).append(", ");
+        else
+            sqlInsert.append("NULL, ");
+        
+        sqlInsert.append(employee.getWeeklyHours());
+        
+        sqlInsert.append(");");
+
+        statement.executeUpdate(sqlInsert.toString());
+        
+        statement.close();
+        connection.commit();
+        
+        statement = connection.createStatement();
+
+        // EMPLOYEE INSERT
+        sqlInsert = new StringBuilder(
+                    "INSERT INTO EMPLOYEE "
+                +   "("
+                +   "EMPLOYMENT_ID, "
+                +   "FIRST_NAME, "
+                +   "SECOND_NAME, "
+                +   "BIRTHDAY, "
+                +   "SSN, "
+                +   "ADDRESS, "
+                +   "POSTAL_CODE, "
+                +   "CITY, "
+                +   "PHONE_NUMBER, "
+                +   "EMAIL_ADDRESS, "
+                +   "FAVORITE_DRINK, "
+                +   ")"
+                +   "VALUES ");
+        
+        sqlInsert.append("(");
+        
+        sqlInsert.append("last_insert_rowid(), ");
+        sqlInsert.append(employee.getFirstName()).append(", ");
+        sqlInsert.append(employee.getLastName()).append(", ");
+        sqlInsert.append(employee.getBirthDay()).append(", ");
+        sqlInsert.append(employee.getSsn()).append(", ");
+        
+        if(employee.getAddress() != null)
+            sqlInsert.append(employee.getAddress()).append(", ");
+        else
+            sqlInsert.append("NULL");
+        
+        if(employee.getPostal() != null)
+            sqlInsert.append(employee.getPostal()).append(", ");
+        else
+            sqlInsert.append("NULL");
+        
+        if(employee.getCity() != null)
+            sqlInsert.append(employee.getCity()).append(", ");
+        else
+            sqlInsert.append("NULL");
+        
+        if(employee.getPhone() != null)
+            sqlInsert.append(employee.getPhone()).append(", ");
+        else
+            sqlInsert.append("NULL");
+        
+        if(employee.getEmail() != null)
+            sqlInsert.append(employee.getEmail()).append(", ");
+        else
+            sqlInsert.append("NULL");
+        
+        if(employee.getFavoriteDrink() != null)
+            sqlInsert.append(employee.getFavoriteDrink()).append(", ");
+        else
+            sqlInsert.append("NULL");
+        
+        sqlInsert.append(");");
+
+        statement.executeUpdate(sqlInsert.toString());
+        
+        statement.close();
+        connection.commit();
+      
+        connection.setAutoCommit(true);
+    }
     
     public void updateEmployee(Employee employee) {
     

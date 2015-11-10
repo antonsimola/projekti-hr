@@ -12,6 +12,8 @@ package project.hr;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -93,9 +95,16 @@ public class Model {
     }
     
     public void addEmployee(Employee employee) {
-        // Perform database insert, check thrown exceptions
+        
+        try {
+            databaseHandler.insertEmployee(employee);
     
-        //fireModelActionResult("add", null, (Object)employee / [false/ true]);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            employee = null;
+        }
+        
+        fireModelActionResult("add", null, employee);
     }
     
     public void editEmployee(String socialSecurityNumber, Employee employee) {
