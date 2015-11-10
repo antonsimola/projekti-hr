@@ -8,7 +8,6 @@ package project.hr;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,21 +18,19 @@ import javafx.scene.control.TextField;
  *
  * @author g0403053
  */
-public class FXMLDocumentAddView implements Initializable {
-    Controller controller;
-    
+public class FXMLDocumentSearchView implements Initializable {
     @FXML
     private TextField firstnameField;
     @FXML
     private TextField lastnameField;
     @FXML
-    private TextField dobField;
+    private TextField ageField1;
     @FXML
-    private TextField ssnumField;
+    private TextField ageField2;
     @FXML
     private TextField addressField;
     @FXML
-    private TextField cityField;
+    private TextField cityFIeld;
     @FXML
     private TextField postalcodeField;
     @FXML
@@ -45,18 +42,25 @@ public class FXMLDocumentAddView implements Initializable {
     @FXML
     private TextField jobField;
     @FXML
-    private TextField wageField;
+    private TextField wageField1;
     @FXML
-    private TextField hoursField;
+    private TextField wageField2;
     @FXML
-    private TextField startdateField;
+    private TextField hoursField2;
     @FXML
-    private TextField enddateField;
+    private TextField hoursField1;
+    @FXML
+    private TextField startdateField1;
+    @FXML
+    private TextField startdateField2;
+    @FXML
+    private TextField enddateField1;
+    @FXML
+    private TextField enddateField2;
     @FXML
     private Button cancelButton;
     @FXML
-    private Button saveButton;
-
+    private Button addButton;
 
     /**
      * Initializes the controller class.
@@ -64,20 +68,6 @@ public class FXMLDocumentAddView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        controller = Controller.getInstance();
-        controller.registerView(this);
     }    
-
-    @FXML
-    private void saveEmployeeAction(ActionEvent event) {
-        controller.attemptAddEmployee(firstnameField.getText(),
-            lastnameField.getText(), dobField.getText(), ssnumField.getText(),
-            addressField.getText(), postalcodeField.getText(),
-            cityField.getText(), phonenumField.getText(), emailField.getText(),
-            drinkField.getText(), jobField.getText(),  wageField.getText(), 
-            startdateField.getText(), enddateField.getText(), 
-            hoursField.getText());
-    }
-
-
+    
 }

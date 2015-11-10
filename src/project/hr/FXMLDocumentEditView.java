@@ -8,7 +8,6 @@ package project.hr;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,9 +18,7 @@ import javafx.scene.control.TextField;
  *
  * @author g0403053
  */
-public class FXMLDocumentAddView implements Initializable {
-    Controller controller;
-    
+public class FXMLDocumentEditView implements Initializable {
     @FXML
     private TextField firstnameField;
     @FXML
@@ -33,7 +30,7 @@ public class FXMLDocumentAddView implements Initializable {
     @FXML
     private TextField addressField;
     @FXML
-    private TextField cityField;
+    private TextField cityFIeld;
     @FXML
     private TextField postalcodeField;
     @FXML
@@ -57,27 +54,12 @@ public class FXMLDocumentAddView implements Initializable {
     @FXML
     private Button saveButton;
 
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        controller = Controller.getInstance();
-        controller.registerView(this);
     }    
-
-    @FXML
-    private void saveEmployeeAction(ActionEvent event) {
-        controller.attemptAddEmployee(firstnameField.getText(),
-            lastnameField.getText(), dobField.getText(), ssnumField.getText(),
-            addressField.getText(), postalcodeField.getText(),
-            cityField.getText(), phonenumField.getText(), emailField.getText(),
-            drinkField.getText(), jobField.getText(),  wageField.getText(), 
-            startdateField.getText(), enddateField.getText(), 
-            hoursField.getText());
-    }
-
-
+    
 }
