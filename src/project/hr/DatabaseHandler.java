@@ -88,6 +88,7 @@ public class DatabaseHandler {
             throws Exception{
         
         Employee employee = new Employee(
+                                        resultSet.getInt("EMPLOYEE_ID"),
                                         resultSet.getString("FIRST_NAME"),
                                         resultSet.getString("SECOND_NAME"),
                                         resultSet.getString("BIRTHDAY"),
@@ -103,7 +104,7 @@ public class DatabaseHandler {
                                         resultSet.getString("START_DATE"),
                                         resultSet.getString("END_DATE"),
                                         resultSet.getDouble("WEEKLY_WORKHOURS"),
-                                        resultSet.getString("PASSWORD_HASH")
+                                        resultSet.getString("PASSWORD_HASH_SALT")
                                         );
         
         return employee;
@@ -265,7 +266,7 @@ public class DatabaseHandler {
                 +       "INNER JOIN "
                 +       "EMPLOYMENT "
                 +   "ON"
-                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID "
+                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.EMPLOYMENT_ID "
                 +   "WHERE "
                 +       "EMPLOYEE.EMAIL_ADDRESS=" + emailAddress + ";";
         
@@ -510,7 +511,7 @@ public class DatabaseHandler {
                     "INSERT INTO ADMINISTRATOR "
                 +   "("
                 +   "EMPLOYEE_ID, "
-                +   "PASSWORD_HASH, "
+                +   "PASSWORD_HASH_SALT "
                 +   ")"
                 +   "VALUES ");
         
