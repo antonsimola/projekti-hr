@@ -22,6 +22,24 @@ public class Controller implements PropertyChangeListener  {
     private Controller() {
         model = new Model();
         model.addPropertyChangeListener(this);
+        model.registerEmployee(new Employee(
+                "Jouni",
+                "Sampo",
+                "2002-21-12",
+                "12213123-2213",
+                "funktiokatu",
+                "12312",
+                "LPR",
+                "040314123123",
+                "jouni@sampo",
+                "ES",
+                "matikkagod",
+                12,
+                "1000-12-12",
+                "1001-12-12",
+                40,
+                null),
+                "trigonometria"); //uusisalasana
         views = new ArrayList();
     }
     
@@ -101,7 +119,9 @@ public class Controller implements PropertyChangeListener  {
             Double.parseDouble(wage),
             start,
             end,
-            Double.parseDouble(hours));
+            Double.parseDouble(hours),
+            null
+            );
             model.addEmployee(emp);
             return true;
         }
