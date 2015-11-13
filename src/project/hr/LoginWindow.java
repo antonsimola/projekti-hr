@@ -37,6 +37,7 @@ public class LoginWindow implements Initializable {
     private Button loginButton;
     @FXML
     private Label loginerrorLabel;
+    private ActionEvent tempEvent;
 
     /**
      * Initializes the controller class.
@@ -50,7 +51,7 @@ public class LoginWindow implements Initializable {
     
     public void logIn(Boolean success) {
         if (success == true) {
-            loginAction(new ActionEvent());
+            loginAction();
         }
         else {
             loginerrorLabel.setText("Käyttäjätunnus ja salasana on virheellinen!");
@@ -58,7 +59,7 @@ public class LoginWindow implements Initializable {
     }
 
     
-    private void loginAction(ActionEvent event) {
+    private void loginAction() {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("FXMLDocumentMain.fxml"));
@@ -70,12 +71,14 @@ public class LoginWindow implements Initializable {
         }
         
         //hide current window
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-
+        ((Node)(tempEvent.getSource())).getScene().getWindow().hide();
+        tempEvent = null;
     }
 
     @FXML
     private void loginbuttonPressed(ActionEvent event) {
+        tempEvent = event;
+        System.out.println(usernameField.getText()+" "+ passwordField.getText());
         controller.attemptSignIn(usernameField.getText(), passwordField.getText());
     }
     

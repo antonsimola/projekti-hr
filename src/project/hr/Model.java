@@ -41,6 +41,10 @@ public class Model {
             // Log error, send quit/error event
         }
     }
+
+    public Employee getSignedInEmployee() {
+        return signedInEmployee;
+    }
     
     public void addPropertyChangeListener(PropertyChangeListener 
             propertyChangeListener) {
@@ -63,7 +67,7 @@ public class Model {
     
     public void registerEmployee(Employee employee, String password) {
         try {
-            employee.setPasswordHashAndSalt(
+            employee.setPassword(
                     passwordSecurity.generateHashedSaltedPassword(password));
             databaseHandler.insertEmployee(employee);
         }
@@ -73,34 +77,36 @@ public class Model {
         
         System.out.println("Registered new employee:");
         System.out.println("\tUsername:\t " + employee.getEmail());
-        System.out.println("\t<hash>.<salt>:\t " + employee.getPasswordHashAndSalt());
+        System.out.println("\t<hash>.<salt>:\t " + employee.getPassword());
     }
         
   
-    private Employee searchHumanResourcesEmployeeByEmail(String emailAddress) {
+    private Employee searchEmployeeByEmail(String emailAddress) {
         Employee employee = null;
         
         try {
-            employee = databaseHandler.selectHumanResourcesEmployeeByEmail(
+            employee = databaseHandler.selectEmployeeByEmailAddress(
                             emailAddress);
         } 
         catch(Exception ex) {
             // Write loh
+            ex.printStackTrace();
         }
    
         return employee;
     }
     
     public void signIn(String emailAddress, String password) {
-        Employee employee = searchHumanResourcesEmployeeByEmail(emailAddress);
-        
+        Employee employee = searchEmployeeByEmail(emailAddress);
+        System.out.println("model signin hash "+employee.getPassword());
         if(employee != null && passwordSecurity.isPasswordValid(password, 
-                        employee.getPasswordHashAndSalt())) {
+                        employee.getPassword())) {
         
             signedInEmployee = employee;
             fireModelActionResult("sign_in", null, employee);
         }
         else {
+            System.out.println("Model false");
             fireModelActionResult("sign_in", null, null);
         }
     }
@@ -112,8 +118,11 @@ public class Model {
     
     public void addEmployee(Employee employee) {
         boolean isSuccessfull = true;
-        
+       
         try {
+            employee.setPassword(
+                    passwordSecurity.generateHashedSaltedPassword(
+                            employee.getPassword()));
             databaseHandler.insertEmployee(employee);
     
         } catch (Exception ex) {

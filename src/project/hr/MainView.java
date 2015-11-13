@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -47,7 +48,7 @@ public class MainView implements Initializable {
     @FXML
     private TextField namesearchField;
     @FXML
-    private ListView<String> namelist;
+    private ListView<Employee> namelist;
     @FXML
     private Button searchButton;
     @FXML
@@ -60,21 +61,16 @@ public class MainView implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         controller = Controller.getInstance();
         controller.registerView(this);
-        System.out.println("Haetaan hlöt");
         controller.getAllEmployees();
+        Employee signedEmp = controller.getSignedUser();
+        if (signedEmp.getRights() == 1) {
+            addnewButton.setDisable(true);
+            removeselectedButton.setDisable(true);
+        }
     }    
     public void updateEmployeeList(ArrayList <Employee> emplist) {
         for(Employee e: emplist) {
-            namelist.getItems().add(e.getFirstName()+" "+e.getStartDate());
-        }
-    }
-    /*controller calls this to tell whether login succeeded or not*/
-    public void logIn(Employee employee) {
-        
-        if(employee.getLoggedIn()) {
-            /*SHOW MAINVIEW*/
-        } else {
-            /*VÄÄRÄ SALASANA ERROR VIESTI*/
+            namelist.getItems().add(e);
         }
     }
 
@@ -121,6 +117,19 @@ public class MainView implements Initializable {
     @FXML
     private void helpAction(ActionEvent event) {
         // OPEN HELP WINDOW
+    }
+
+    @FXML
+    private void employeeSelected(MouseEvent event) {
+        
+        try {
+            controller.setCurrentlySelectedEmployee(
+                    namelist.getSelectionModel().getSelectedItem());
+            container.getChildren().clear();
+            container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentEdit.fxml")));
+        } catch (IOException ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

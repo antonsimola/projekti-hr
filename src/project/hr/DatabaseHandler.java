@@ -104,7 +104,8 @@ public class DatabaseHandler {
                                         resultSet.getString("START_DATE"),
                                         resultSet.getString("END_DATE"),
                                         resultSet.getDouble("WEEKLY_WORKHOURS"),
-                                        resultSet.getString("PASSWORD_HASH_SALT")
+                                        resultSet.getString("PASSWORD_HASH_SALT"),
+                                        resultSet.getInt("RIGHTS")
                                         );
         
         return employee;
@@ -159,7 +160,7 @@ public class DatabaseHandler {
                 +       "INNER JOIN "
                 +       "EMPLOYMENT "
                 +   "ON " +
-                        "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYEE_ID;";
+                        "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID;";
         
         // May result in a database operation failure.
         Statement statement = connection.createStatement(); 
@@ -169,6 +170,7 @@ public class DatabaseHandler {
             employeeList = populateEmployeeList(resultSet);
         }
         catch(Exception ex) {
+            ex.printStackTrace();
             employeeList = null;
         }
         
@@ -226,12 +228,13 @@ public class DatabaseHandler {
                 +       "EMPLOYEE "
                 +       "INNER JOIN "
                 +       "EMPLOYMENT "
-                +   "ON"
+                +   "ON "
                 +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
                 +   "WHERE "
-                +       "EMPLOYEE.EMAIL_ADDRESS=" + emailAddress + ";";
+                +       "EMPLOYEE.EMAIL_ADDRESS='" + emailAddress + "';";
         
         // May result in a database operation failure.
+        System.out.println(selectQuery);
         Statement statement = connection.createStatement(); 
         ResultSet resultSet = statement.executeQuery(selectQuery);
         
@@ -245,44 +248,46 @@ public class DatabaseHandler {
         return employee;
     }
     
-    /* Select by emailAddress.
-     *
-     * PARAMETRIZATION NOT IMPLEMENTED
-    */
-    public Employee selectHumanResourcesEmployeeByEmail(String emailAddress) 
-            throws Exception {
-        
-        Employee employee;
-        
-        String selectQuery = 
-                    "SELECT "
-                +       "* "
-                +   "FROM "
-                +       "ADMINISTRATOR "
-                +       "INNER JOIN "
-                +       "EMPLOYEE "
-                +   "ON "
-                +       "EMPLOYEE.EMPLOYEE_ID=ADMINISTRATOR.EMPLOYEE_ID_FK "
-                +       "INNER JOIN "
-                +       "EMPLOYMENT "
-                +   "ON"
-                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.EMPLOYMENT_ID "
-                +   "WHERE "
-                +       "EMPLOYEE.EMAIL_ADDRESS=" + emailAddress + ";";
-        
-        // May result in a database operation failure.
-        Statement statement = connection.createStatement(); 
-        ResultSet resultSet = statement.executeQuery(selectQuery);
-        
-        try {
-            employee = generateEmployee(resultSet);
-        }
-        catch(Exception ex) {
-            employee = null;
-        }
-        
-        return employee;
-    }
+//    /* Select by emailAddress.
+//     *
+//     * PARAMETRIZATION NOT IMPLEMENTED
+//    */
+//    public Employee selectHumanResourcesEmployeeByEmail(String emailAddress) 
+//            throws Exception {
+//        
+//        Employee employee;
+//        
+//        String selectQuery = 
+//                    "SELECT "
+//                +       "* "
+//                +   "FROM "
+//                +       "ADMINISTRATOR "
+//                +       "INNER JOIN "
+//                +       "EMPLOYEE "
+//                +   "ON "
+//                +       "EMPLOYEE.EMPLOYEE_ID=ADMINISTRATOR.EMPLOYEE_ID_FK "
+//                +       "INNER JOIN "
+//                +       "EMPLOYMENT "
+//                +   "ON "
+//                +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
+//                +   "WHERE "
+//                +       "EMPLOYEE.EMAIL_ADDRESS='" + emailAddress + "';";
+//        
+//        // May result in a database operation failure.
+//        System.out.println(selectQuery);
+//        Statement statement = connection.createStatement(); 
+//        ResultSet resultSet = statement.executeQuery(selectQuery);
+//        
+//        try {
+//            employee = generateEmployee(resultSet);
+//        }
+//        catch(Exception ex) {
+//            employee = null;
+//            ex.printStackTrace();
+//        }
+//        
+//        return employee;
+//    }
     
 //    /* Load employees based on the instance variables of a given employee
 //     * instance. Does not yet allow search by range.
@@ -421,11 +426,12 @@ public class DatabaseHandler {
         sqlInsert = new StringBuilder(
                     "INSERT INTO EMPLOYEE "
                 +   "("
-                +   "EMPLOYMENT_ID, "
+                +   "EMPLOYMENT_ID_FK, "
                 +   "FIRST_NAME, "
                 +   "SECOND_NAME, "
                 +   "BIRTHDAY, "
                 +   "SSN, "
+                +   "PASSWORD_HASH_SALT, "
                 +   "ADDRESS, "
                 +   "POSTAL_CODE, "
                 +   "CITY, "
@@ -450,6 +456,9 @@ public class DatabaseHandler {
         
         sqlInsert.append("'");        
         sqlInsert.append(employee.getSsn()).append("', ");
+        
+        sqlInsert.append("'");        
+        sqlInsert.append(employee.getPassword()).append("', ");
         
         //
         
@@ -506,30 +515,6 @@ public class DatabaseHandler {
         
         statement = connection.createStatement();
 
-        // EMPLOYEE INSERT portion begins
-        sqlInsert = new StringBuilder(
-                    "INSERT INTO ADMINISTRATOR "
-                +   "("
-                +   "EMPLOYEE_ID, "
-                +   "PASSWORD_HASH_SALT "
-                +   ")"
-                +   "VALUES ");
-        
-        sqlInsert.append("(");
-        
-        sqlInsert.append("last_insert_rowid(), ");
-        
-        sqlInsert.append("'");
-        sqlInsert.append(employee.getPasswordHashAndSalt()).append("'");
-        
-        sqlInsert.append(");");
-        
-        System.out.println(sqlInsert);
-      
-        statement.executeUpdate(sqlInsert.toString());
-          
-        connection.commit();
-        statement.close();
         
         connection.setAutoCommit(true);
     }

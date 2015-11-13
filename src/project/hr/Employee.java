@@ -28,7 +28,8 @@ public class Employee {
     private String startDate;
     private String endDate;
     private double weeklyHours;
-    private String passwordHashAndSalt;
+    private String password;
+    private int rights;
     private boolean loggedIn = false;
     
     public Employee () {
@@ -52,7 +53,8 @@ public class Employee {
             String start,
             String end,
             double hours,
-            String pw) {
+            String pw,
+            int r) {
         firstName = fn;
         lastName = ln;
         birthDay = bd;
@@ -67,7 +69,8 @@ public class Employee {
         startDate = start;
         endDate = end;
         weeklyHours = hours;
-        passwordHashAndSalt = pw;
+        password = pw;
+        rights = r;
     }
     
     public Employee(int id,
@@ -86,7 +89,8 @@ public class Employee {
             String start,
             String end,
             double hours,
-            String pw) {
+            String pw,
+            int r) {
         employeeId = id;
         firstName = fn;
         lastName = ln;
@@ -102,7 +106,8 @@ public class Employee {
         startDate = start;
         endDate = end;
         weeklyHours = hours;
-        passwordHashAndSalt = pw;
+        password = pw;
+        rights = r;
     }
 
     public int getEmployeeId() {
@@ -245,11 +250,24 @@ public class Employee {
         this.loggedIn = loggedIn;
     }
 
-    public String getPasswordHashAndSalt() {
-        return passwordHashAndSalt;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHashAndSalt(String passwordHashAndSalt) {
-        this.passwordHashAndSalt = passwordHashAndSalt;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRights() {
+        return rights;
+    }
+
+    public void setRights(int rights) {
+        this.rights = rights;
+    }
+    
+    @Override
+    public String toString() {
+        return firstName+ " " + lastName;
     }
 }

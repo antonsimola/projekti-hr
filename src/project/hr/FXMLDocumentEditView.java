@@ -54,12 +54,19 @@ public class FXMLDocumentEditView implements Initializable {
     @FXML
     private Button saveButton;
 
+    Controller controller;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        controller = Controller.getInstance();
+        Employee emp = controller.getCurrentlySelectedEmployee();
+        firstnameField.setText(emp.getFirstName());
+        lastnameField.setText(emp.getLastName());
+        firstnameField.setText(emp.getFirstName());
+        firstnameField.setText(emp.getFirstName());
+        
     }    
     
 }

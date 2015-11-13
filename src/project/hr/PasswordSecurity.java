@@ -72,8 +72,9 @@ public class PasswordSecurity {
         String encoded = DatatypeConverter.printBase64Binary(message);
         byte[] decoded = DatatypeConverter.parseBase64Binary(encoded);
         */
-        
-        String[] hashAndSaltSplitted = passwordHashAndSalt.split(".");
+        System.out.println("validation given pw: " + passwordHashAndSalt);
+        String[] hashAndSaltSplitted = passwordHashAndSalt.split("\\.");
+        System.out.println("hash"+hashAndSaltSplitted[0]+"salt"+hashAndSaltSplitted[1]);
         String givenHash = hashAndSaltSplitted[0];
         String givenSalt = hashAndSaltSplitted[1];
         
@@ -96,7 +97,8 @@ public class PasswordSecurity {
         
         isValidPassword = Objects.equals(
                 DatatypeConverter.printBase64Binary(hash), givenHash);
-        
+        System.out.println(DatatypeConverter.printBase64Binary(hash) + "." + 
+                DatatypeConverter.printBase64Binary(salt));
         return isValidPassword;
     }
 }

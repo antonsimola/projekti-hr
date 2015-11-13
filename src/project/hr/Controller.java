@@ -18,6 +18,7 @@ public class Controller implements PropertyChangeListener  {
     private static Controller instance = null;
     private Model model;
     private ArrayList<Object> views;
+    private Employee currentlySelectedEmployee;
     
     private Controller() {
         model = new Model();
@@ -38,8 +39,28 @@ public class Controller implements PropertyChangeListener  {
                 "1000-12-12",
                 "1001-12-12",
                 40,
-                null),
-                "trigonometria"); //uusisalasana
+                null,
+                1),
+                "trigonometria");
+                model.registerEmployee(new Employee(
+                "Matti",
+                "Sampo",
+                "2002-21-12",
+                "12213123-2213",
+                "funktiokatu",
+                "12312",
+                "LPR",
+                "040314123123",
+                "jouni@sampo",
+                "ES",
+                "matikkagod",
+                12,
+                "1000-12-12",
+                "1001-12-12",
+                40,
+                null,
+                1),
+                "trigonometria");
         views = new ArrayList();
     }
     
@@ -80,10 +101,26 @@ public class Controller implements PropertyChangeListener  {
         /* after this we need to catch event in listener below*/
     }
     
-    public void getAllEmployees() {
-        System.out.println("Haetaan hlöt");
-        model.getAllEmployees();
+    public Employee getSignedUser() {
+        return model.getSignedInEmployee();
     }
+    
+    public void getAllEmployees() {
+        System.out.println("Haetaan hlöt 1");
+        model.getAllEmployees();
+        
+        
+    }
+
+    public Employee getCurrentlySelectedEmployee() {
+        return currentlySelectedEmployee;
+    }
+
+    public void setCurrentlySelectedEmployee(Employee currentlySelectedEmployee) {
+        this.currentlySelectedEmployee = currentlySelectedEmployee;
+    }
+    
+    
     
     public boolean attemptAddEmployee(String fn,
             String ln,
@@ -121,8 +158,8 @@ public class Controller implements PropertyChangeListener  {
             start,
             end,
             Double.parseDouble(hours),
-            null
-            );
+            "vakio",
+            1);
             model.addEmployee(emp);
             return true;
         }
@@ -132,26 +169,15 @@ public class Controller implements PropertyChangeListener  {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         Employee emp;
-        LoginWindow lw;
         switch (evt.getPropertyName()) {
-            case "login":
-                System.out.println("login event");
-                emp = (Employee)evt.getNewValue();
-                for (Object view:views) {
-                    if (view instanceof LoginWindow) {
-                        lw = (LoginWindow) view;
-                        lw.logIn();
-                    }
-                }
-            
-                break;
+
             case "all_employees":
                 for (Object view:views) {
                     if (view instanceof MainView) {
                         MainView mv = (MainView) view;
-                        Object o = evt.getOldValue();
+                        Object o = evt.getNewValue();
                         ArrayList<Employee> array = (ArrayList<Employee>) o;
-                        mv.updateEmployeeList((ArrayList<Employee>)evt.getNewValue());
+                        mv.updateEmployeeList(array);
                     }
                 }
                 break;
@@ -162,15 +188,26 @@ public class Controller implements PropertyChangeListener  {
                     }
                 }
             case "sign_in":
+                LoginWindow lw;
+                Object foundView = false;
+                boolean isLoginSuccessful = false;
+                boolean foundLoginWindows = false;
                 for (Object view:views) {
                     if (view instanceof LoginWindow) {
+                        foundLoginWindows = true;
                         if(evt.getNewValue() == null) {
-                            lw = (LoginWindow) view;
-                            lw.logIn(false);
+                            foundView = view;
+                            
                         } else {
-                            lw.logIn(true);
+                            foundView = view;
+                            isLoginSuccessful = true;
+                            
                         }
                     }
+                }
+                if(foundLoginWindows) {
+                    lw = (LoginWindow) foundView;
+                    lw.logIn(isLoginSuccessful);
                 }
                 break;
             default:

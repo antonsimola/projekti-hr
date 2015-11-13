@@ -65,7 +65,7 @@
                               <TextField fx:id="namesearchField" promptText="Nimihaku" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
-                        <ListView fx:id="namelist" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                        <ListView fx:id="namelist" onMouseClicked="#employeeSelected" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                         <GridPane GridPane.rowIndex="2">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="113.0" />
