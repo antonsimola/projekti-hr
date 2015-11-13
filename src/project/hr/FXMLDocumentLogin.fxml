@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-
 <AnchorPane id="AnchorPane" prefHeight="421.0" prefWidth="674.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.hr.LoginWindow">
    <children>
       <GridPane layoutX="202.0" layoutY="176.0" prefHeight="421.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -31,7 +30,7 @@
               </rowConstraints>
                <children>
                   <TextField fx:id="usernameField" maxWidth="-Infinity" promptText="Käyttäjätunnus" GridPane.halignment="CENTER" />
-                  <TextField fx:id="passwordField" maxWidth="-Infinity" promptText="Salasana" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <PasswordField fx:id="passwordField" maxWidth="-Infinity" promptText="Salasana" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Kirjaudu sisään" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
