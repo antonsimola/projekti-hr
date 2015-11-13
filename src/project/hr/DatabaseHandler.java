@@ -407,6 +407,8 @@ public class DatabaseHandler {
         
         sqlInsert.append(");");
 
+        
+        
         statement.executeUpdate(sqlInsert.toString());
         
         connection.commit();
@@ -428,8 +430,8 @@ public class DatabaseHandler {
                 +   "CITY, "
                 +   "PHONE_NUMBER, "
                 +   "EMAIL_ADDRESS, "
-                +   "FAVORITE_DRINK, "
-                +   ")"
+                +   "FAVORITE_DRINK "
+                +   ") "
                 +   "VALUES ");
         
         sqlInsert.append("(");
@@ -494,6 +496,8 @@ public class DatabaseHandler {
         
         sqlInsert.append(");");
 
+        System.out.println(sqlInsert);
+        
         statement.executeUpdate(sqlInsert.toString());
           
         connection.commit();

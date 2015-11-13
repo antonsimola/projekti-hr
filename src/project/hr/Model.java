@@ -63,8 +63,8 @@ public class Model {
     
     public void registerEmployee(Employee employee, String password) {
         try {
-            employee.passwordHashAndSalt = 
-                    passwordSecurity.generateHashedSaltedPassword(password);
+            employee.setPasswordHashAndSalt(
+                    passwordSecurity.generateHashedSaltedPassword(password));
             databaseHandler.insertEmployee(employee);
         }
         catch(Exception ex) {
@@ -91,7 +91,7 @@ public class Model {
         Employee employee = searchHumanResourcesEmployeeByEmail(emailAddress);
         
         if(employee != null && passwordSecurity.isPasswordValid(password, 
-                        employee.getPasswordHashAndSalt()) {
+                        employee.getPasswordHashAndSalt())) {
         
             signedInEmployee = employee;
             fireModelActionResult("sign_in", null, employee);
