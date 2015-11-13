@@ -18,13 +18,13 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Tiedosto">
                   <items>
-                    <MenuItem fx:id="logoutMenuitem" mnemonicParsing="false" text="Kirjaudu ulos" />
-                        <MenuItem fx:id="exitMenuitem" mnemonicParsing="false" text="Poistu" />
+                    <MenuItem fx:id="logoutMenuitem" mnemonicParsing="false" onAction="#logoutAction" text="Kirjaudu ulos" />
+                        <MenuItem fx:id="exitMenuitem" mnemonicParsing="false" onAction="#exitAction" text="Poistu" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Ohje">
                   <items>
-                    <MenuItem fx:id="helpMenuitem" mnemonicParsing="false" text="Avaa ohje" />
+                    <MenuItem fx:id="helpMenuitem" mnemonicParsing="false" onAction="#helpAction" text="Avaa ohje" />
                   </items>
                 </Menu>
               </menus>

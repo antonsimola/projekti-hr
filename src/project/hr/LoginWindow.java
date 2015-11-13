@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -34,6 +35,8 @@ public class LoginWindow implements Initializable {
     private TextField passwordField;
     @FXML
     private Button loginButton;
+    @FXML
+    private Label loginerrorLabel;
 
     /**
      * Initializes the controller class.
@@ -45,8 +48,13 @@ public class LoginWindow implements Initializable {
         controller.registerView(this);
     }    
     
-    public void logIn() {
-        loginAction(new ActionEvent());
+    public void logIn(Boolean success) {
+        if (success == true) {
+            loginAction(new ActionEvent());
+        }
+        else {
+            loginerrorLabel.setText("Käyttäjätunnus ja salasana on virheellinen!");
+        }
     }
 
     
@@ -61,8 +69,7 @@ public class LoginWindow implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
+        
         //hide current window
         ((Node)(event.getSource())).getScene().getWindow().hide();
 

@@ -9,17 +9,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -88,6 +93,34 @@ public class MainView implements Initializable {
     @FXML
     private void showAllButtonPressed(ActionEvent event) {
         controller.attemptSignIn(/*textUser.getText(),textPassword.getText()*/);
+    }
+
+    @FXML
+    private void logoutAction(ActionEvent event) {
+        //LOG IN USER
+        
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("FXMLDocumentLogin.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //hide current window
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void exitAction(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    private void helpAction(ActionEvent event) {
+        // OPEN HELP WINDOW
     }
     
 }

@@ -33,7 +33,19 @@
                   <PasswordField fx:id="passwordField" maxWidth="-Infinity" promptText="Salasana" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
-            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Kirjaudu sisään" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <GridPane GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="166.0" minHeight="10.0" prefHeight="166.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Kirjaudu sisään" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Label fx:id="loginerrorLabel" textFill="RED" GridPane.halignment="CENTER" />
+               </children>
+            </GridPane>
          </children>
       </GridPane>
    </children>
