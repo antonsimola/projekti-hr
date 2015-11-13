@@ -58,7 +58,6 @@ public class LoginWindow implements Initializable {
     }
 
     
-    @FXML
     private void loginAction(ActionEvent event) {
         Parent root;
         try {
@@ -73,6 +72,11 @@ public class LoginWindow implements Initializable {
         //hide current window
         ((Node)(event.getSource())).getScene().getWindow().hide();
 
+    }
+
+    @FXML
+    private void loginbuttonPressed(ActionEvent event) {
+        controller.attemptSignIn(usernameField.getText(), passwordField.getText());
     }
     
 }

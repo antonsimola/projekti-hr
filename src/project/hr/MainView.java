@@ -92,7 +92,7 @@ public class MainView implements Initializable {
 
     @FXML
     private void showAllButtonPressed(ActionEvent event) {
-        controller.attemptSignIn(/*textUser.getText(),textPassword.getText()*/);
+        
     }
 
     @FXML
