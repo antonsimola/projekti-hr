@@ -22,7 +22,7 @@ public class Controller implements PropertyChangeListener  {
     private Controller() {
         model = new Model();
         model.addPropertyChangeListener(this);
-        model.registerEmployee(new Employee(
+        model.registerEmployee(new Employee(-1,//tempid
                 "Jouni",
                 "Sampo",
                 "2002-21-12",
@@ -105,7 +105,8 @@ public class Controller implements PropertyChangeListener  {
         if (isEmpty(required) == true) {
             return false;
         } else {
-            Employee emp = new Employee(fn,
+            Employee emp = new Employee(-1, //temp ID
+            fn,
             ln,
             bd,
             ssn,
