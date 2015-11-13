@@ -31,6 +31,7 @@ public class Employee {
     private String startDate;
     private String endDate;
     private double weeklyHours;
+    private String passwordHashAndSalt;
     private boolean loggedIn = false;
     
     public Employee () {
@@ -51,7 +52,8 @@ public class Employee {
             double wage,
             String start,
             String end,
-            double hours) {
+            double hours,
+            String pw) {
         firstName = fn;
         lastName = ln;
         birthDay = bd;
@@ -66,6 +68,7 @@ public class Employee {
         startDate = start;
         endDate = end;
         weeklyHours = hours;
+        passwordHashAndSalt = pw;
     }
     
     public String getFirstName() {
@@ -179,6 +182,7 @@ public class Employee {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+    
 
     
 
@@ -196,5 +200,13 @@ public class Employee {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public String getPasswordHashAndSalt() {
+        return passwordHashAndSalt;
+    }
+
+    public void setPasswordHashAndSalt(String passwordHashAndSalt) {
+        this.passwordHashAndSalt = passwordHashAndSalt;
     }
 }
