@@ -407,7 +407,7 @@ public class DatabaseHandler {
         
         sqlInsert.append(");");
 
-        
+        System.out.println(sqlInsert);
         
         statement.executeUpdate(sqlInsert.toString());
         
@@ -522,7 +522,14 @@ public class DatabaseHandler {
         sqlInsert.append(employee.getPasswordHashAndSalt()).append("'");
         
         sqlInsert.append(");");
+        
+        System.out.println(sqlInsert);
       
+        statement.executeUpdate(sqlInsert.toString());
+          
+        connection.commit();
+        statement.close();
+        
         connection.setAutoCommit(true);
     }
     

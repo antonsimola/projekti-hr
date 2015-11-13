@@ -70,6 +70,10 @@ public class Model {
         catch(Exception ex) {
             ex.printStackTrace();
         }
+        
+        System.out.println("Registered new employee:");
+        System.out.println("\tUsername:\t " + employee.getEmail());
+        System.out.println("\t<hash>.<salt>:\t " + employee.getPasswordHashAndSalt());
     }
         
   
