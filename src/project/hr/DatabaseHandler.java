@@ -158,7 +158,7 @@ public class DatabaseHandler {
                 +       "INNER JOIN "
                 +       "EMPLOYMENT "
                 +   "ON " +
-                        "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID;";
+                        "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYEE_ID;";
         
         // May result in a database operation failure.
         Statement statement = connection.createStatement(); 
@@ -191,7 +191,7 @@ public class DatabaseHandler {
                 +       "INNER JOIN "
                 +       "EMPLOYMENT "
                 +   "ON "
-                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID "
+                +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
                 +   "WHERE "
                 +       "SSN=" + socialSecurityNumber + ";";
         
@@ -226,7 +226,7 @@ public class DatabaseHandler {
                 +       "INNER JOIN "
                 +       "EMPLOYMENT "
                 +   "ON"
-                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID "
+                +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
                 +   "WHERE "
                 +       "EMPLOYEE.EMAIL_ADDRESS=" + emailAddress + ";";
         
@@ -261,7 +261,7 @@ public class DatabaseHandler {
                 +       "INNER JOIN "
                 +       "EMPLOYEE "
                 +   "ON "
-                +       "EMPLOYEE.ID=ADMINISTRATOR.EMPLOYEE_ID "
+                +       "EMPLOYEE.EMPLOYEE_ID=ADMINISTRATOR.EMPLOYEE_ID_FK "
                 +       "INNER JOIN "
                 +       "EMPLOYMENT "
                 +   "ON"
