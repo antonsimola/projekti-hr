@@ -60,6 +60,18 @@ public class Model {
                 newValue);
         
     }
+    
+    public void registerEmployee(Employee employee, String password) {
+        try {
+            employee.passwordHashAndSalt = 
+                    passwordSecurity.generateHashedSaltedPassword(password);
+            databaseHandler.insertEmployee(employee);
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+        
   
     private Employee searchHumanResourcesEmployeeByEmail(String emailAddress) {
         Employee employee = null;

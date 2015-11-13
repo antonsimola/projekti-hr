@@ -47,7 +47,7 @@ public class DatabaseHandler {
      * are placed into an ArrayList (that will be returned). This method does
      * not look for admin information (ADMINISTRATOR table in the database).
     */
-    private ArrayList<Employee> populateOrdinaryEmployeeList(
+    private ArrayList<Employee> populateEmployeeList(
             ResultSet resultSet) throws Exception{
         
         ArrayList<Employee> employeeList = new ArrayList();
@@ -61,30 +61,30 @@ public class DatabaseHandler {
         return employeeList;
     }
     
-    private Employee generateEmployee(ResultSet resultSet) throws Exception{
-        
-        Employee employee = new Employee(
-                                        resultSet.getString("FIRST_NAME"),
-                                        resultSet.getString("SECOND_NAME"),
-                                        resultSet.getString("BIRTHDAY"),
-                                        resultSet.getString("SSN"),
-                                        resultSet.getString("ADDRESS"),
-                                        resultSet.getString("POSTAL_CODE"),
-                                        resultSet.getString("CITY"),
-                                        resultSet.getString("PHONE_NUMBER"),
-                                        resultSet.getString("EMAIL_ADDRESS"),
-                                        resultSet.getString("FAVORITE_DRINK"),
-                                        resultSet.getString("JOB_TITLE"),
-                                        resultSet.getDouble("HOURLY_WAGE"),
-                                        resultSet.getString("START_DATE"),
-                                        resultSet.getString("END_DATE"),
-                                        resultSet.getDouble("WEEKLY_WORKHOURS")
-                                        );
-        
-        return employee;
-    }
+//    private Employee generateEmployee(ResultSet resultSet) throws Exception{
+//        
+//        Employee employee = new Employee(
+//                                        resultSet.getString("FIRST_NAME"),
+//                                        resultSet.getString("SECOND_NAME"),
+//                                        resultSet.getString("BIRTHDAY"),
+//                                        resultSet.getString("SSN"),
+//                                        resultSet.getString("ADDRESS"),
+//                                        resultSet.getString("POSTAL_CODE"),
+//                                        resultSet.getString("CITY"),
+//                                        resultSet.getString("PHONE_NUMBER"),
+//                                        resultSet.getString("EMAIL_ADDRESS"),
+//                                        resultSet.getString("FAVORITE_DRINK"),
+//                                        resultSet.getString("JOB_TITLE"),
+//                                        resultSet.getDouble("HOURLY_WAGE"),
+//                                        resultSet.getString("START_DATE"),
+//                                        resultSet.getString("END_DATE"),
+//                                        resultSet.getDouble("WEEKLY_WORKHOURS")
+//                                        );
+//        
+//        return employee;
+//    }
     
-    private Employee generateHumanResourcesEmployee(ResultSet resultSet) 
+    private Employee generateEmployee(ResultSet resultSet) 
             throws Exception{
         
         Employee employee = new Employee(
@@ -165,7 +165,7 @@ public class DatabaseHandler {
         ResultSet resultSet = statement.executeQuery(selectQuery);
         
         try {
-            employeeList = populateOrdinaryEmployeeList(resultSet);
+            employeeList = populateEmployeeList(resultSet);
         }
         catch(Exception ex) {
             employeeList = null;
@@ -274,7 +274,7 @@ public class DatabaseHandler {
         ResultSet resultSet = statement.executeQuery(selectQuery);
         
         try {
-            employee = generateHumanResourcesEmployee(resultSet);
+            employee = generateEmployee(resultSet);
         }
         catch(Exception ex) {
             employee = null;
@@ -428,7 +428,7 @@ public class DatabaseHandler {
                 +   "CITY, "
                 +   "PHONE_NUMBER, "
                 +   "EMAIL_ADDRESS, "
-                +   "FAVORITE_DRINK"
+                +   "FAVORITE_DRINK, "
                 +   ")"
                 +   "VALUES ");
         
@@ -498,6 +498,26 @@ public class DatabaseHandler {
           
         connection.commit();
         statement.close();
+        
+        statement = connection.createStatement();
+
+        // EMPLOYEE INSERT portion begins
+        sqlInsert = new StringBuilder(
+                    "INSERT INTO ADMINISTRATOR "
+                +   "("
+                +   "EMPLOYEE_ID, "
+                +   "PASSWORD_HASH, "
+                +   ")"
+                +   "VALUES ");
+        
+        sqlInsert.append("(");
+        
+        sqlInsert.append("last_insert_rowid(), ");
+        
+        sqlInsert.append("'");
+        sqlInsert.append(employee.getPasswordHashAndSalt()).append("'");
+        
+        sqlInsert.append(");");
       
         connection.setAutoCommit(true);
     }
