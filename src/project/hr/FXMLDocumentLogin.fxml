@@ -42,7 +42,7 @@
                 <RowConstraints maxHeight="166.0" minHeight="10.0" prefHeight="166.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Kirjaudu sisään" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginbuttonPressed" text="Kirjaudu sisään" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                   <Label fx:id="loginerrorLabel" textFill="RED" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
