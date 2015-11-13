@@ -131,6 +131,7 @@ public class Controller implements PropertyChangeListener  {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         Employee emp;
+        LoginWindow lw;
         switch (evt.getPropertyName()) {
             case "login":
                 System.out.println("login event");
@@ -166,6 +167,18 @@ public class Controller implements PropertyChangeListener  {
                         getAllEmployees();
                     }
                 }
+            case "sign_in":
+                for (Object view:views) {
+                    if (view instanceof LoginWindow) {
+                        if(evt.getNewValue() == null) {
+                            lw = (LoginWindow) view;
+                            lw.logIn(false);
+                        } else {
+                            lw.logIn(true);
+                        }
+                    }
+                }
+                break;
             default:
                 System.out.println("default");
                 break;
