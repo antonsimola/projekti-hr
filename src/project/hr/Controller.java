@@ -105,7 +105,8 @@ public class Controller implements PropertyChangeListener  {
         if (isEmpty(required) == true) {
             return false;
         } else {
-            Employee emp = new Employee(fn,
+            Employee emp = new Employee(
+            fn,
             ln,
             bd,
             ssn,
