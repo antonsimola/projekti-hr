@@ -21,17 +21,21 @@ import java.util.logging.Logger;
  */
 public class Model {
     private PropertyChangeSupport propertyChangeSupport;
+    private PasswordSecurity passwordSecurity;
     private DatabaseHandler databaseHandler;
-    private String signedInUsername;
+    private Employee signedInEmployee;
     
     private ArrayList<Employee> employeeSearchResults;
     
     public Model () {
         propertyChangeSupport = new PropertyChangeSupport(this);
         employeeSearchResults = null;
+        passwordSecurity = new PasswordSecurity();
+        signedInEmployee = null;
         
         try {
             databaseHandler = new DatabaseHandler();
+            databaseHandler.connect();
         }
         catch(Exception e) {
             // Log error, send quit/error event
@@ -57,41 +61,37 @@ public class Model {
         
     }
   
-    public void signIn(String firstname, String password) { 
-        // Form password HASH
+    private Employee searchHumanResourcesEmployeeByEmail(String emailAddress) {
+        Employee employee = null;
         
-        // Database query
-        
-        // Check query results: was anything returned?
-        
-        // If valid username + password:
-        signedInUsername = firstname;
-        
-        // Send query result (Employee instance) to listeners
-    }
-    
-    public void signOut() {
-        signedInUsername = null;
-    }
-    
-    private Employee searchEmployee(String username, String password) {
-        // Call a variant of database search method
-        
-        Employee employee = new Employee();
-        
+        try {
+            employee = databaseHandler.selectHumanResourcesEmployeeByEmail(
+                            emailAddress);
+        } 
+        catch(Exception ex) {
+            // Write loh
+        }
+   
         return employee;
     }
     
-    public void getAllEmployees() {
-        ArrayList<Employee> employeeList = null;
+    public void signIn(String emailAddress, String password) {
+        Employee employee = searchHumanResourcesEmployeeByEmail(emailAddress);
         
-        try {
-            employeeList = databaseHandler.selectAllEmployees();
-        } catch(Exception e) {
-            e.printStackTrace();
+        if(employee != null && passwordSecurity.isPasswordValid(password, 
+                        employee.getPasswordHashAndSalt()) {
+        
+            signedInEmployee = employee;
+            fireModelActionResult("sign_in", null, employee);
         }
-        
-        fireModelActionResult("all_employees", null, employeeList);
+        else {
+            fireModelActionResult("sign_in", null, null);
+        }
+    }
+    
+    public void signOut() {
+        fireModelActionResult("sign_out", signedInEmployee, null);
+        signedInEmployee = null;
     }
     
     public void addEmployee(Employee employee) {
@@ -103,6 +103,7 @@ public class Model {
         } catch (Exception ex) {
             ex.printStackTrace();
             isSuccessfull = false;
+            // Write log
         }
         
         fireModelActionResult("add", null, isSuccessfull);
@@ -133,4 +134,16 @@ public class Model {
         return new ArrayList(); // Placeholder ()
     }
     
+    public void getAllEmployees() {
+        ArrayList<Employee> employeeList = null;
+        
+        try {
+            employeeList = databaseHandler.selectAllEmployees();
+        } catch(Exception e) {
+            e.printStackTrace();
+            // Write log
+        }
+
+        fireModelActionResult("all_employees", null, employeeList);
+    }
 }

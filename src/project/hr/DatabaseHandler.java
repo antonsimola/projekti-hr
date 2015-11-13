@@ -24,12 +24,19 @@ public class DatabaseHandler {
     private Connection connection = null;
     private final String databaseName = "HR_Database.sqlite";;
     
-    public DatabaseHandler() throws Exception{
+    public DatabaseHandler() {
         
+    }
+    
+    public void connect() throws Exception {
         // Attempt sqlite initialization and connect to database.
         Class.forName("org.sqlite.JDBC"); 
         connection = DriverManager.getConnection(
                     "jdbc:sqlite:" + databaseName);
+    }
+    
+    public void disconnect() throws Exception {
+        connection.close();
     }
     
     public String getDatabaseName() {
@@ -38,7 +45,7 @@ public class DatabaseHandler {
     
     /* Contents of a given result set are copied into Employee instances that
      * are placed into an ArrayList (that will be returned). This method does
-     * not look for admin information (ADMINISTATOR table in the database).
+     * not look for admin information (ADMINISTRATOR table in the database).
     */
     private ArrayList<Employee> populateOrdinaryEmployeeList(
             ResultSet resultSet) throws Exception{
@@ -46,27 +53,8 @@ public class DatabaseHandler {
         ArrayList<Employee> employeeList = new ArrayList();
         
         while(resultSet.next()) {
-            Employee employee = new Employee(
-                                        resultSet.getString("FIRST_NAME"),
-                                        resultSet.getString("SECOND_NAME"),
-                                        resultSet.getString("BIRTHDAY"),
-                                        resultSet.getString("SSN"),
-                                        resultSet.getString("ADDRESS"),
-                                        resultSet.getString("POSTAL_CODE"),
-                                        resultSet.getString("CITY"),
-                                        resultSet.getString("PHONE_NUMBER"),
-                                        resultSet.getString("EMAIL_ADDRESS"),
-                                        resultSet.getString("FAVORITE_DRINK"),
-                                        resultSet.getString("JOB_TITLE"),
-                                        resultSet.getDouble("HOURLY_WAGE"),
-                                        /*resultSet.getDate("START_DATE"),
-                                        resultSet.getDate("END_DATE"),*/
-                                        resultSet.getString("START_DATE"),
-                                        resultSet.getString("END_DATE"),
-                                        resultSet.getDouble("WEEKLY_WORKHOURS")
-                                        );
+            Employee employee = generateEmployee(resultSet);
             
-            System.out.println(employee.getFirstName());
             employeeList.add(employee);
         }
         
@@ -91,6 +79,31 @@ public class DatabaseHandler {
                                         resultSet.getString("START_DATE"),
                                         resultSet.getString("END_DATE"),
                                         resultSet.getDouble("WEEKLY_WORKHOURS")
+                                        );
+        
+        return employee;
+    }
+    
+    private Employee generateHumanResourcesEmployee(ResultSet resultSet) 
+            throws Exception{
+        
+        Employee employee = new Employee(
+                                        resultSet.getString("FIRST_NAME"),
+                                        resultSet.getString("SECOND_NAME"),
+                                        resultSet.getString("BIRTHDAY"),
+                                        resultSet.getString("SSN"),
+                                        resultSet.getString("ADDRESS"),
+                                        resultSet.getString("POSTAL_CODE"),
+                                        resultSet.getString("CITY"),
+                                        resultSet.getString("PHONE_NUMBER"),
+                                        resultSet.getString("EMAIL_ADDRESS"),
+                                        resultSet.getString("FAVORITE_DRINK"),
+                                        resultSet.getString("JOB_TITLE"),
+                                        resultSet.getDouble("HOURLY_WAGE"),
+                                        resultSet.getString("START_DATE"),
+                                        resultSet.getString("END_DATE"),
+                                        resultSet.getDouble("WEEKLY_WORKHOURS"),
+                                        resultSet.getString("PASSWORD_HASH")
                                         );
         
         return employee;
@@ -133,7 +146,7 @@ public class DatabaseHandler {
     
     
     /* Variant of selectEmployee that takes in no parameters. Returns all
-     * employees in ArrayList data structure.
+     * employees in an ArrayList.
      */
     public ArrayList<Employee> selectAllEmployees() throws Exception{
         ArrayList<Employee> employeeList;
@@ -147,20 +160,22 @@ public class DatabaseHandler {
                 +   "ON " +
                         "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID;";
         
-        // May result in a database operation failure exception.
+        // May result in a database operation failure.
         Statement statement = connection.createStatement(); 
         ResultSet resultSet = statement.executeQuery(selectQuery);
         
-        /* Populate ArrayList with result employees.
-         * May result in a result set iteration failure exception.
-        */
-        employeeList = populateOrdinaryEmployeeList(resultSet);
+        try {
+            employeeList = populateOrdinaryEmployeeList(resultSet);
+        }
+        catch(Exception ex) {
+            employeeList = null;
+        }
         
         return employeeList;
     }
     
     /* Select by social security number (SSN).
-     * Returns an ArrayList just in case (comforms with default class behavior).
+     * Returns an Employee instance with filled in details.
      * 
      * PARAMETRIZATION NOT IMPLEMENTED
     */
@@ -180,24 +195,63 @@ public class DatabaseHandler {
                 +   "WHERE "
                 +       "SSN=" + socialSecurityNumber + ";";
         
-        // May result in a database operation failure exception.
+        // May result in a database operation failure.
         Statement statement = connection.createStatement(); 
         ResultSet resultSet = statement.executeQuery(selectQuery);
         
-        employee = generateEmployee(resultSet);
+        try {
+            employee = generateEmployee(resultSet);
+        }
+        catch(Exception ex) {
+            employee = null;
+        }
         
         return employee;
     }
     
-    /* Select by username and password.
+    /* Select by emailAddress.
      *
      * PARAMETRIZATION NOT IMPLEMENTED
     */
-    public Employee selectEmployeeByCredentials(String emailAddress, 
-            String passwordHASH) throws Exception {
+    public Employee selectEmployeeByEmailAddress(String emailAddress) 
+            throws Exception {
         
         Employee employee;
-        //String passwordHASH = generateHASH(password); Generate hash (+salt?) in model
+        
+        String selectQuery = 
+                    "SELECT "
+                +       "* "
+                +   "FROM "
+                +       "EMPLOYEE "
+                +       "INNER JOIN "
+                +       "EMPLOYMENT "
+                +   "ON"
+                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID "
+                +   "WHERE "
+                +       "EMPLOYEE.EMAIL_ADDRESS=" + emailAddress + ";";
+        
+        // May result in a database operation failure.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+        
+        try {
+            employee = generateEmployee(resultSet);
+        }
+        catch(Exception ex) {
+            employee = null;
+        }
+        
+        return employee;
+    }
+    
+    /* Select by emailAddress.
+     *
+     * PARAMETRIZATION NOT IMPLEMENTED
+    */
+    public Employee selectHumanResourcesEmployeeByEmail(String emailAddress) 
+            throws Exception {
+        
+        Employee employee;
         
         String selectQuery = 
                     "SELECT "
@@ -213,18 +267,18 @@ public class DatabaseHandler {
                 +   "ON"
                 +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID "
                 +   "WHERE "
-                +       "EMPLOYEE.EMAIL_ADDRESS=" + emailAddress + " "
-                +       "AND "
-                +       "ADMINISTRATOR.PASSWORD_HASH=" + passwordHASH + ";";
+                +       "EMPLOYEE.EMAIL_ADDRESS=" + emailAddress + ";";
         
-        // May result in a database operation failure exception.
+        // May result in a database operation failure.
         Statement statement = connection.createStatement(); 
         ResultSet resultSet = statement.executeQuery(selectQuery);
         
-        /* Populate ArrayList with result employees.
-         * May result in a result set iteration failure exception.
-        */
-        employee = generateEmployee(resultSet);
+        try {
+            employee = generateHumanResourcesEmployee(resultSet);
+        }
+        catch(Exception ex) {
+            employee = null;
+        }
         
         return employee;
     }
@@ -320,31 +374,32 @@ public class DatabaseHandler {
     
     /* INSERT EMPLOYMENT and EMPLOYEE details of one employee 
      * (Employee instance).
-     *
     */
     public void insertEmployee(Employee employee) throws Exception {
 
         connection.setAutoCommit(false);
         Statement statement = connection.createStatement();
         
-        // EMPLOYEMENT INSERT
+        // EMPLOYEMENT INSERT portion begins
         StringBuilder sqlInsert = new StringBuilder(
                     "INSERT INTO EMPLOYMENT "
                 +   "(JOB_TITLE, HOURLY_WAGE, START_DATE, END_DATE, WEEKLY_WORKHOURS) "
                 +   "VALUES ");
         
         sqlInsert.append("(");
+        
         sqlInsert.append("'");
         sqlInsert.append(employee.getJobTitle()).append("', ");
+        
         sqlInsert.append(employee.getJobWage()).append(", ");
+        
         sqlInsert.append("'");
         sqlInsert.append(employee.getStartDate()).append("', ");
         
         if(employee.getEndDate() != null) {
-              sqlInsert.append("'");
+            sqlInsert.append("'");
             sqlInsert.append(employee.getEndDate()).append("', ");
         }
-            
         else
             sqlInsert.append("NULL, ");
         
@@ -354,12 +409,12 @@ public class DatabaseHandler {
 
         statement.executeUpdate(sqlInsert.toString());
         
-        statement.close();
         connection.commit();
+        statement.close();
         
         statement = connection.createStatement();
 
-        // EMPLOYEE INSERT
+        // EMPLOYEE INSERT portion begins
         sqlInsert = new StringBuilder(
                     "INSERT INTO EMPLOYEE "
                 +   "("
@@ -380,56 +435,109 @@ public class DatabaseHandler {
         sqlInsert.append("(");
         
         sqlInsert.append("last_insert_rowid(), ");
+        
         sqlInsert.append("'");
         sqlInsert.append(employee.getFirstName()).append("', ");
+        
         sqlInsert.append("'");
         sqlInsert.append(employee.getLastName()).append("', ");
+        
         sqlInsert.append("'");        
         sqlInsert.append(employee.getBirthDay()).append("', ");
+        
         sqlInsert.append("'");        
         sqlInsert.append(employee.getSsn()).append("', ");
         
-//        if(employee.getAddress() != null)
-//            sqlInsert.append(employee.getAddress()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getPostal() != null)
-//            sqlInsert.append(employee.getPostal()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getCity() != null)
-//            sqlInsert.append(employee.getCity()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getPhone() != null)
-//            sqlInsert.append(employee.getPhone()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getEmail() != null)
-//            sqlInsert.append(employee.getEmail()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-//        
-//        if(employee.getFavoriteDrink() != null)
-//            sqlInsert.append(employee.getFavoriteDrink()).append(", ");
-//        else
-//            sqlInsert.append("NULL");
-        sqlInsert.append("NULL, NULL, NULL, NULL, NULL, NULL");
-        sqlInsert.append(");");
-        System.out.println(sqlInsert.toString());
-        statement.executeUpdate(sqlInsert.toString());
+        //
         
-        statement.close();
+        if(employee.getAddress() != null) {
+            sqlInsert.append("'");
+            sqlInsert.append(employee.getAddress()).append("', ");
+        }
+        else
+            sqlInsert.append("NULL, ");
+        
+        if(employee.getPostal() != null) {
+            sqlInsert.append("'");
+            sqlInsert.append(employee.getPostal()).append("', ");
+        }
+        else
+            sqlInsert.append("NULL, ");
+        
+        if(employee.getCity() != null) {
+            sqlInsert.append("'");
+            sqlInsert.append(employee.getCity()).append("', ");
+        }
+        else
+            sqlInsert.append("NULL, ");
+        
+        if(employee.getPhone() != null) {
+            sqlInsert.append("'");
+            sqlInsert.append(employee.getPhone()).append("', ");
+        }
+        else
+            sqlInsert.append("NULL, ");
+        
+        if(employee.getEmail() != null) {
+            sqlInsert.append("'");
+            sqlInsert.append(employee.getEmail()).append("', ");
+        }
+        else
+            sqlInsert.append("NULL, ");
+        
+        if(employee.getFavoriteDrink() != null) {
+            sqlInsert.append("'");
+            sqlInsert.append(employee.getFavoriteDrink()).append("' ");
+        }
+        else
+            sqlInsert.append("NULL");
+        
+        sqlInsert.append(");");
+
+        statement.executeUpdate(sqlInsert.toString());
+          
         connection.commit();
+        statement.close();
       
         connection.setAutoCommit(true);
     }
     
-    public void updateEmployee(Employee employee) {
+    /* UPDATE EMPLOYEE with new values (sets again old value if no new value
+     * given).
+    */
+    public void updateEmployeeDetails(Employee newEmployee) throws Exception {
+        Employee oldEmployee = selectEmployeeBySSN(newEmployee.getSsn());
+        
+        connection.setAutoCommit(false);
+        Statement statement = connection.createStatement();
+        
+        // EMPLOYEMENT INSERT portion begins
+        StringBuilder sqlInsert = new StringBuilder(
+                    "UPDATE EMPLOYEE "
+                +   "SET ");
+        
+        sqlInsert.append("FIRST_NAME='");
+        if(newEmployee.getFirstName() != null)  
+            sqlInsert.append(newEmployee.getFirstName()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getFirstName()).append("', ");
+        
+        sqlInsert.append("LAST_NAME='");
+        if(newEmployee.getLastName() != null)
+            sqlInsert.append(newEmployee.getLastName()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getLastName()).append("', ");
+        
+        // To be continued
+        
+        statement.executeUpdate(sqlInsert.toString());
+        
+        connection.commit();
+        statement.close();
+        
+    }
+    
+    public void updateEmploymentDetails(Employee employee) {
     
     }
     
