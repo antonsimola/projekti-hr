@@ -5,15 +5,12 @@
  */
 package project.hr;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 /**
  *
  * @author Anton
  */
 public class Employee {
-
+    private int employeeId;
     private String firstName;
     private String lastName;
     private String birthDay;
@@ -38,7 +35,8 @@ public class Employee {
     
     }
     
-    public Employee(String fn,
+    public Employee(int id,
+            String fn,
             String ln,
             String bd,
             String s,
@@ -54,6 +52,7 @@ public class Employee {
             String end,
             double hours,
             String pw) {
+        employeeId = id;
         firstName = fn;
         lastName = ln;
         birthDay = bd;
@@ -70,6 +69,15 @@ public class Employee {
         weeklyHours = hours;
         passwordHashAndSalt = pw;
     }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+    
     
     public String getFirstName() {
         return firstName;

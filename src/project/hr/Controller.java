@@ -73,10 +73,10 @@ public class Controller implements PropertyChangeListener  {
     }
     
     /*Call from view when attempting sign in*/
-    public void attemptSignIn(/*username pw*/) {
+    public void attemptSignIn(String username, String pw) {
         /* View calls this as sign in was pressed -> Model method call? */
         /*some input validation goes here first, then call model's method*/
-        model.signIn("a", "b");
+        model.signIn(username,pw);
         /* after this we need to catch event in listener below*/
     }
     
@@ -138,25 +138,18 @@ public class Controller implements PropertyChangeListener  {
                 emp = (Employee)evt.getNewValue();
                 for (Object view:views) {
                     if (view instanceof LoginWindow) {
-                        LoginWindow lw = (LoginWindow) view;
+                        lw = (LoginWindow) view;
                         lw.logIn();
                     }
                 }
             
                 break;
             case "all_employees":
-                System.out.println("Tuli hlöt");
                 for (Object view:views) {
                     if (view instanceof MainView) {
-                        System.out.println("Tuli hlöitä");
                         MainView mv = (MainView) view;
                         Object o = evt.getOldValue();
                         ArrayList<Employee> array = (ArrayList<Employee>) o;
-                        
-                        /*for (Employee e:array) {
-                            System.out.println(e.getFirstName());
-                        }*/
-                        
                         mv.updateEmployeeList((ArrayList<Employee>)evt.getNewValue());
                     }
                 }
