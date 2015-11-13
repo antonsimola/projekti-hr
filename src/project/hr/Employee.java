@@ -35,6 +35,41 @@ public class Employee {
     
     }
     
+    /*Constructor without id*/
+    public Employee(
+            String fn,
+            String ln,
+            String bd,
+            String s,
+            String addr,
+            String p,
+            String c,
+            String phone,
+            String e,
+            String fav,
+            String title,
+            double wage,
+            String start,
+            String end,
+            double hours,
+            String pw) {
+        firstName = fn;
+        lastName = ln;
+        birthDay = bd;
+        ssn = s;
+        address = addr;
+        postal = p;
+        city = c;
+        email = e;
+        favoriteDrink = fav;
+        jobTitle = title;
+        jobWage = wage;
+        startDate = start;
+        endDate = end;
+        weeklyHours = hours;
+        passwordHashAndSalt = pw;
+    }
+    
     public Employee(int id,
             String fn,
             String ln,
