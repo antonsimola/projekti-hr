@@ -55,6 +55,8 @@ public class MainView implements Initializable {
     private Button removeselectedButton;
     @FXML
     private Button addnewButton;
+    @FXML
+    private Label signedinUserLabel;
     
     
     @Override
@@ -66,6 +68,13 @@ public class MainView implements Initializable {
         if (signedEmp.getRights() == 1) {
             addnewButton.setDisable(true);
             removeselectedButton.setDisable(true);
+            signedinUserLabel.setText("Kirjautuneena: " + 
+                    signedEmp.getFirstName() + " " + signedEmp.getLastName() +
+                    " (Ei muokkausoikeuksia)");
+        }
+        else {
+            signedinUserLabel.setText("Kirjautuneena: " + 
+                    signedEmp.getFirstName() + " " + signedEmp.getLastName());
         }
     }    
     public void updateEmployeeList(ArrayList <Employee> emplist) {
@@ -93,7 +102,7 @@ public class MainView implements Initializable {
 
     @FXML
     private void logoutAction(ActionEvent event) {
-        //LOG IN USER
+        //LOG OUT USER
         
         Parent root;
         try {

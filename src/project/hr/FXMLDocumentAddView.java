@@ -78,6 +78,6 @@ public class FXMLDocumentAddView implements Initializable {
             startdateField.getText(), enddateField.getText(), 
             hoursField.getText());
     }
-
+    
 
 }

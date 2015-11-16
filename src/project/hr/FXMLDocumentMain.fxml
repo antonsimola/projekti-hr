@@ -85,7 +85,7 @@
                   </GridPane>
                   <Label text="Versio 0.00000001" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                   </Label>
-                  <Label text="Kirjautuneena:" GridPane.rowIndex="1">
+                  <Label fx:id="signedinUserLabel" text="Kirjautuneena:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   </Label>
                   <Pane fx:id="container" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <GridPane.margin>

@@ -410,7 +410,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="cancelButton" mnemonicParsing="false" text="Peruuta" GridPane.halignment="CENTER" />
-                  <Button fx:id="addButton" mnemonicParsing="false" text="Lisää" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button fx:id="addButton" mnemonicParsing="false" text="Hae" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
             <Label text="Lopetuspäivä" GridPane.columnIndex="1" GridPane.rowIndex="8">

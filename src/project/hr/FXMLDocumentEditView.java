@@ -8,6 +8,7 @@ package project.hr;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -30,7 +31,7 @@ public class FXMLDocumentEditView implements Initializable {
     @FXML
     private TextField addressField;
     @FXML
-    private TextField cityFIeld;
+    private TextField cityField;
     @FXML
     private TextField postalcodeField;
     @FXML
@@ -61,12 +62,57 @@ public class FXMLDocumentEditView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         controller = Controller.getInstance();
+        controller.registerView(this);
+        controller.getAllEmployees();
+        Employee signedEmp = controller.getSignedUser();
+        if (signedEmp.getRights() == 1) {
+            saveButton.setDisable(true);
+            cancelButton.setDisable(true);
+            firstnameField.setEditable(false);
+            lastnameField.setEditable(false);
+            dobField.setEditable(false);
+            ssnumField.setEditable(false);
+            addressField.setEditable(false);
+            cityField.setEditable(false);
+            postalcodeField.setEditable(false);
+            phonenumField.setEditable(false);
+            emailField.setEditable(false);
+            drinkField.setEditable(false);
+            jobField.setEditable(false);
+            wageField.setEditable(false);
+            hoursField.setEditable(false);
+            startdateField.setEditable(false);
+            enddateField.setEditable(false);
+        }
+        
         Employee emp = controller.getCurrentlySelectedEmployee();
         firstnameField.setText(emp.getFirstName());
         lastnameField.setText(emp.getLastName());
-        firstnameField.setText(emp.getFirstName());
-        firstnameField.setText(emp.getFirstName());
+        dobField.setText(emp.getBirthDay());
+        ssnumField.setText(emp.getSsn());
+        addressField.setText(emp.getAddress());
+        cityField.setText(emp.getCity());
+        postalcodeField.setText(emp.getPostal());
+        phonenumField.setText(emp.getPhone());
+        emailField.setText(emp.getEmail());
+        drinkField.setText(emp.getFavoriteDrink());
+        jobField.setText(emp.getJobTitle());
+        wageField.setText(String.valueOf(emp.getJobWage()));
+        hoursField.setText(String.valueOf(emp.getWeeklyHours()));
+        startdateField.setText(emp.getStartDate());
+        enddateField.setText(emp.getEndDate());
+        
         
     }    
+    
+    @FXML
+    private void saveChanges (ActionEvent event) {
+
+    }
+
+    @FXML
+    private void cancelChanges (ActionEvent event) {
+        
+    }
     
 }
