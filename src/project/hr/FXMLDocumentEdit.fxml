@@ -365,12 +365,12 @@
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="7">
                <children>
-                  <TextField fx:id="startdateField">
+                  <TextField fx:id="startdateField" promptText="YYYY-MM-DD">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="enddateField" GridPane.columnIndex="1">
+                  <TextField fx:id="enddateField" promptText="YYYY-MM-DD" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
@@ -390,6 +390,11 @@
                </GridPane.margin>
             </Label>
             <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveChanges" text="Tallenna" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+            <Label fx:id="errorLabel" GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

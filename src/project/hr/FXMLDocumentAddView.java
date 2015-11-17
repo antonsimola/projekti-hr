@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -53,9 +54,9 @@ public class FXMLDocumentAddView implements Initializable {
     @FXML
     private TextField enddateField;
     @FXML
-    private Button cancelButton;
-    @FXML
     private Button saveButton;
+    @FXML
+    private Label errorLabel;
 
 
     /**

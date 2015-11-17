@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -54,6 +55,8 @@ public class FXMLDocumentEditView implements Initializable {
     private Button saveButton;
 
     Controller controller;
+    @FXML
+    private Label errorLabel;
     /**
      * Initializes the controller class.
      */
@@ -82,22 +85,7 @@ public class FXMLDocumentEditView implements Initializable {
             enddateField.setEditable(false);
         }
         
-        Employee emp = controller.getCurrentlySelectedEmployee();
-        firstnameField.setText(emp.getFirstName());
-        lastnameField.setText(emp.getLastName());
-        dobField.setText(emp.getBirthDay());
-        ssnumField.setText(emp.getSsn());
-        addressField.setText(emp.getAddress());
-        cityField.setText(emp.getCity());
-        postalcodeField.setText(emp.getPostal());
-        phonenumField.setText(emp.getPhone());
-        emailField.setText(emp.getEmail());
-        drinkField.setText(emp.getFavoriteDrink());
-        jobField.setText(emp.getJobTitle());
-        wageField.setText(String.valueOf(emp.getJobWage()));
-        hoursField.setText(String.valueOf(emp.getWeeklyHours()));
-        startdateField.setText(emp.getStartDate());
-        enddateField.setText(emp.getEndDate());
+        
         
         
     }    
@@ -121,4 +109,30 @@ public class FXMLDocumentEditView implements Initializable {
                 enddateField.getText());
     }
     
+    public void updateFields (Employee emp) {
+        firstnameField.setText(emp.getFirstName());
+        lastnameField.setText(emp.getLastName());
+        dobField.setText(emp.getBirthDay());
+        ssnumField.setText(emp.getSsn());
+        addressField.setText(emp.getAddress());
+        cityField.setText(emp.getCity());
+        postalcodeField.setText(emp.getPostal());
+        phonenumField.setText(emp.getPhone());
+        emailField.setText(emp.getEmail());
+        drinkField.setText(emp.getFavoriteDrink());
+        jobField.setText(emp.getJobTitle());
+        wageField.setText(String.valueOf(emp.getJobWage()));
+        hoursField.setText(String.valueOf(emp.getWeeklyHours()));
+        startdateField.setText(emp.getStartDate());
+        enddateField.setText(emp.getEndDate());
+    }
+    
+    public void updateFinished (Boolean success) {
+        if (success == true) {
+            errorLabel.setText("Jokin meni pieleen :(");
+        }
+        else {
+            errorLabel.setText("Tallennus onnistui");
+        }
+    }
 }
