@@ -13,11 +13,14 @@ package project.hr;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -28,6 +31,7 @@ public class Model {
     private PasswordSecurity passwordSecurity;
     private DatabaseHandler databaseHandler;
     private Employee signedInEmployee;
+    private static final Logger logger = Logger.getLogger("hr_log");
     
     private ArrayList<Employee> employeeSearchResults;
     
@@ -35,6 +39,23 @@ public class Model {
         propertyChangeSupport = new PropertyChangeSupport(this);
         passwordSecurity = new PasswordSecurity();
         signedInEmployee = null;
+        
+        // http://stackoverflow.com/questions/15758685/how-to-write-logs-in-text-file-when-using-java-util-logging-logger
+        FileHandler fileHandler = null; 
+        try {
+            fileHandler = new FileHandler("hr_log");
+        } catch (IOException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        logger.addHandler(fileHandler);
+        
+        SimpleFormatter simpleFormatter = new SimpleFormatter();
+        fileHandler.setFormatter(simpleFormatter);
+        
+        logger.setUseParentHandlers(false);
         
         try {
             databaseHandler = new DatabaseHandler();
