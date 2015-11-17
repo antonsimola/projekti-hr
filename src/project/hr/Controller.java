@@ -125,7 +125,7 @@ public class Controller implements PropertyChangeListener  {
     }
 
     public void setCurrentlySelectedEmployee(Employee currentlySelectedEmployee) {
-        model.selectEmployeeById(currentlySelectedEmployee.getEmployeeId());
+        model.searchEmployee(currentlySelectedEmployee.getEmployeeId());
     }
     
     
@@ -195,8 +195,8 @@ public class Controller implements PropertyChangeListener  {
             System.out.println("Tyhjiä kenttiä.");
             return false;
         }
-        if (isValidNumber(wage) && isValidNumber(hours)) {
-            
+        if (!(isValidNumber(wage) && isValidNumber(hours))) {
+            return false;
         }
         else {
             Employee emp = new Employee(
@@ -258,7 +258,8 @@ public class Controller implements PropertyChangeListener  {
                         ev.updateFinished((Boolean)evt.getNewValue());
                         getAllEmployees();
                     }
-                }    
+                }
+                break;
             case "sign_in":
                 LoginWindow lw;
                 Object foundView = false;
