@@ -51,8 +51,6 @@ public class FXMLDocumentEditView implements Initializable {
     @FXML
     private TextField enddateField;
     @FXML
-    private Button cancelButton;
-    @FXML
     private Button saveButton;
 
     Controller controller;
@@ -67,7 +65,6 @@ public class FXMLDocumentEditView implements Initializable {
         Employee signedEmp = controller.getSignedUser();
         if (signedEmp.getRights() == 1) {
             saveButton.setDisable(true);
-            cancelButton.setDisable(true);
             firstnameField.setEditable(false);
             lastnameField.setEditable(false);
             dobField.setEditable(false);
@@ -107,12 +104,21 @@ public class FXMLDocumentEditView implements Initializable {
     
     @FXML
     private void saveChanges (ActionEvent event) {
-
-    }
-
-    @FXML
-    private void cancelChanges (ActionEvent event) {
-        
+        controller.attemptUpdateEmployee(firstnameField.getText(), 
+                lastnameField.getText(),
+                dobField.getText(),
+                ssnumField.getText(),
+                addressField.getText(),
+                cityField.getText(),
+                postalcodeField.getText(),
+                phonenumField.getText(),
+                emailField.getText(),
+                drinkField.getText(),
+                jobField.getText(),
+                wageField.getText(),
+                hoursField.getText(),
+                startdateField.getText(),
+                enddateField.getText());
     }
     
 }

@@ -35,10 +35,10 @@ public class MainView implements Initializable {
     /* Controller instance */
     Controller controller;
     
+    private ActionEvent tempEvent;
+    
     @FXML
     private Pane container;
-    @FXML
-    private MenuItem logoutMenuitem;
     @FXML
     private MenuItem exitMenuitem;
     @FXML
@@ -57,6 +57,9 @@ public class MainView implements Initializable {
     private Button addnewButton;
     @FXML
     private Label signedinUserLabel;
+    @FXML
+    private Button logoutButton;
+
     
     
     @Override
@@ -115,7 +118,9 @@ public class MainView implements Initializable {
         }
 
         //hide current window
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        tempEvent = event;
+        ((Node)(tempEvent.getSource())).getScene().getWindow().hide();
+        tempEvent = null;
     }
 
     @FXML
@@ -134,11 +139,19 @@ public class MainView implements Initializable {
         try {
             controller.setCurrentlySelectedEmployee(
                     namelist.getSelectionModel().getSelectedItem());
+            namelist.getItems().clear();
             container.getChildren().clear();
             container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentEdit.fxml")));
         } catch (IOException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void removeSelectedAction(ActionEvent event) {
+        
+    }
+    
+    
     
 }
