@@ -139,9 +139,13 @@ public class Model {
     }
     
     public void editEmployee(Employee employee) {
-        // Perform databse update, check thrown exceptions
-    
-        //fireModelActionResult("edit", null, (Object)employee);
+        try {
+            databaseHandler.updateEmployeeDetails(employee);
+            
+            //fireModelActionResult("edit", null, (Object)employee);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void removeEmployee(String socialSecurityNumber) {
@@ -160,6 +164,19 @@ public class Model {
         }
         
         fireModelActionResult("format_employee_search", null, 
+                employeeSearchResults);
+    }
+    
+    public void searchEmployee(int employeeId) {
+        Employee employee;
+        
+        try {
+            employee = databaseHandler.selectEmployeeById(employeeId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        fireModelActionResult("search_by_id", null, 
                 employeeSearchResults);
     }
     

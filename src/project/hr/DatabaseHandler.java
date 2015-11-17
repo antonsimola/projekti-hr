@@ -260,6 +260,37 @@ public class DatabaseHandler {
         return employeeList;
     }
     
+    public Employee selectEmployeeById(int employeeId) 
+            throws Exception {
+        
+        Employee employee;
+        
+        String selectQuery = 
+                "SELECT "
+            +       "* "
+            +   "FROM "
+            +       "EMPLOYEE "
+            +       "INNER JOIN "
+            +       "EMPLOYMENT "
+            +   "ON "
+            +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
+            +   "WHERE "
+            +       "EMPLOYEE.EMPLOYEE_ID=" + employeeId + ";";
+        
+        // May result in a database operation failure.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+        
+        try {
+            employee = generateEmployee(resultSet);
+        }
+        catch(Exception ex) {
+            employee = null;
+        }
+        
+        return employee;
+    }
+    
     /* Selects by social security number (SSN).
      * Returns an Employee instance with filled in details.
      * 
