@@ -80,6 +80,7 @@ public class Controller implements PropertyChangeListener  {
     }
     private boolean isEmpty(String[] list) {
         for (String str:list) {
+            System.out.println(str);
             if (str.isEmpty()) {
                 return true;
             }
@@ -125,7 +126,7 @@ public class Controller implements PropertyChangeListener  {
     }
 
     public void setCurrentlySelectedEmployee(Employee currentlySelectedEmployee) {
-        model.searchEmployee(currentlySelectedEmployee.getEmployeeId());
+        this.currentlySelectedEmployee = currentlySelectedEmployee;
     }
     
     
@@ -222,6 +223,10 @@ public class Controller implements PropertyChangeListener  {
         }
     };
     
+    public void attemptRemoveEmployee() {
+        model.removeEmployee(currentlySelectedEmployee.getEmployeeId());
+    }
+    
     /*listens for updates in the model*/
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -241,11 +246,13 @@ public class Controller implements PropertyChangeListener  {
             case "add":
                 for (Object view:views) {
                     if (view instanceof MainView) {
+                        MainView mv = (MainView) view;
                         Boolean b = (Boolean) evt.getNewValue();
-                        if (b.booleanValue()) {
+                        if (b) {
+                            mv.updateStatusField("Lisääminen onnistui");
                             getAllEmployees();
                         } else {
-                            //view.errorMsg() blabla
+                            mv.updateStatusField("Lisääminen epäonnistui");
                         }
                         
                     }
@@ -257,6 +264,21 @@ public class Controller implements PropertyChangeListener  {
                         FXMLDocumentEditView ev = (FXMLDocumentEditView) view;
                         ev.updateFinished((Boolean)evt.getNewValue());
                         getAllEmployees();
+                    }
+                }
+                break;
+            case "remove":
+                for (Object view:views) {
+                    if (view instanceof MainView) {
+                        MainView mv = (MainView) view;
+                        Boolean b = (Boolean) evt.getNewValue();
+                        if (b.booleanValue()) {
+                            mv.updateStatusField("Poisto onnistui");
+                            getAllEmployees();
+                        } else {
+                            mv.updateStatusField("Poisto epäonnistui");
+                        }
+                        
                     }
                 }
                 break;
@@ -282,14 +304,6 @@ public class Controller implements PropertyChangeListener  {
                     lw.logIn(isLoginSuccessful);
                 }
                 break;
-            case "search_by_id":
-                for (Object view:views) {
-                    if (view instanceof FXMLDocumentEditView) {
-                        FXMLDocumentEditView ev = (FXMLDocumentEditView) view;
-                        this.setCurrentlySelectedEmployee((Employee)evt.getNewValue());
-                        ev.updateFields((Employee)evt.getNewValue());
-                    }
-                }
             default:
                 System.out.println("default");
                 break;

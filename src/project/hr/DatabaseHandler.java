@@ -525,14 +525,11 @@ public class DatabaseHandler {
      * given).
     */
     public void updateEmployee(Employee newEmployee) throws Exception {
-        Employee oldEmployee = selectEmployeeBySSN(
-                newEmployee.getSsn());
+        Employee oldEmployee = selectEmployeeById(
+                newEmployee.getEmployeeId());
         
         // 0-element: employee id ; 1st element: employment id 
-        int[] idArray = 
-                selectEmployeeIdAndEmploymentIdBySsn(
-                        oldEmployee.getSsn());
-        
+
         connection.setAutoCommit(false);
         Statement statement = connection.createStatement();
         
@@ -610,7 +607,7 @@ public class DatabaseHandler {
             sqlInsert.append(oldEmployee.getRights()).append(" ");
         
         sqlInsert.append("WHERE EMPLOYEE_ID=");
-        sqlInsert.append(idArray[0]);
+        sqlInsert.append(oldEmployee.getEmployeeId());
         sqlInsert.append(";");
         
         statement.executeUpdate(sqlInsert.toString());
@@ -651,7 +648,7 @@ public class DatabaseHandler {
             sqlInsert.append(oldEmployee.getWeeklyHours()).append("' ");
         
         sqlInsert.append("WHERE EMPLOYMENT_ID=");
-        sqlInsert.append(idArray[1]);
+        sqlInsert.append(selectEmployeeEmploymentIdByEmployeeId(oldEmployee.getEmployeeId()));
         sqlInsert.append(";");
         
         statement.executeUpdate(sqlInsert.toString());
@@ -665,7 +662,8 @@ public class DatabaseHandler {
     public void deleteEmployeeByEmployeeId(int employeeId) 
             throws Exception {
         int employmentId = selectEmployeeEmploymentIdByEmployeeId(employeeId);
-        
+        System.out.println(employmentId+" employee id:"+employeeId);
+        connection.setAutoCommit(false);
         StringBuilder sqlDelete = new StringBuilder(
                     "DELETE FROM EMPLOYMENT "
                 +   "WHERE "
@@ -674,6 +672,9 @@ public class DatabaseHandler {
         sqlDelete.append(employmentId);
         sqlDelete.append(";");
         
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(sqlDelete.toString());
+        
         sqlDelete = new StringBuilder(
                     "DELETE FROM EMPLOYEE "
                 +   "WHERE "
@@ -681,5 +682,13 @@ public class DatabaseHandler {
         
         sqlDelete.append(employeeId);
         sqlDelete.append(";");
+        
+        statement = connection.createStatement();
+        statement.executeUpdate(sqlDelete.toString());
+        
+        statement.close();
+        connection.commit();
+        
+        connection.setAutoCommit(true);
     } 
 }

@@ -81,6 +81,7 @@ public class MainView implements Initializable {
         }
     }    
     public void updateEmployeeList(ArrayList <Employee> emplist) {
+        namelist.getItems().clear();
         for(Employee e: emplist) {
             namelist.getItems().add(e);
         }
@@ -137,11 +138,16 @@ public class MainView implements Initializable {
     private void employeeSelected(MouseEvent event) {
         
         try {
-            controller.setCurrentlySelectedEmployee(
-                    namelist.getSelectionModel().getSelectedItem());
-            namelist.getItems().clear();
-            container.getChildren().clear();
-            container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentEdit.fxml")));
+            if(namelist.getSelectionModel().getSelectedItem() != null){
+                controller.setCurrentlySelectedEmployee(
+
+                        namelist.getSelectionModel().getSelectedItem());
+                namelist.getItems().clear();
+                container.getChildren().clear();
+                container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentEdit.fxml")));
+            } else {
+                System.out.println("klikkasit tyhjää");
+            }
         } catch (IOException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,9 +155,12 @@ public class MainView implements Initializable {
 
     @FXML
     private void removeSelectedAction(ActionEvent event) {
-        
+        controller.attemptRemoveEmployee();
     }
     
+    public void updateStatusField (String s) {
+        System.out.println(s);
+    }
     
     
 }

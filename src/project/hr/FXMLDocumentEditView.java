@@ -84,6 +84,22 @@ public class FXMLDocumentEditView implements Initializable {
             startdateField.setEditable(false);
             enddateField.setEditable(false);
         }
+        Employee emp = controller.getCurrentlySelectedEmployee();
+        firstnameField.setText(emp.getFirstName());
+        lastnameField.setText(emp.getLastName());
+        dobField.setText(emp.getBirthDay());
+        ssnumField.setText(emp.getSsn());
+        addressField.setText(emp.getAddress());
+        cityField.setText(emp.getCity());
+        postalcodeField.setText(emp.getPostal());
+        phonenumField.setText(emp.getPhone());
+        emailField.setText(emp.getEmail());
+        drinkField.setText(emp.getFavoriteDrink());
+        jobField.setText(emp.getJobTitle());
+        wageField.setText(String.valueOf(emp.getJobWage()));
+        hoursField.setText(String.valueOf(emp.getWeeklyHours()));
+        startdateField.setText(emp.getStartDate());
+        enddateField.setText(emp.getEndDate());
         
         
         
@@ -104,27 +120,13 @@ public class FXMLDocumentEditView implements Initializable {
                 drinkField.getText(),
                 jobField.getText(),
                 wageField.getText(),
-                hoursField.getText(),
                 startdateField.getText(),
-                enddateField.getText());
+                enddateField.getText(),
+                hoursField.getText());
     }
     
     public void updateFields (Employee emp) {
-        firstnameField.setText(emp.getFirstName());
-        lastnameField.setText(emp.getLastName());
-        dobField.setText(emp.getBirthDay());
-        ssnumField.setText(emp.getSsn());
-        addressField.setText(emp.getAddress());
-        cityField.setText(emp.getCity());
-        postalcodeField.setText(emp.getPostal());
-        phonenumField.setText(emp.getPhone());
-        emailField.setText(emp.getEmail());
-        drinkField.setText(emp.getFavoriteDrink());
-        jobField.setText(emp.getJobTitle());
-        wageField.setText(String.valueOf(emp.getJobWage()));
-        hoursField.setText(String.valueOf(emp.getWeeklyHours()));
-        startdateField.setText(emp.getStartDate());
-        enddateField.setText(emp.getEndDate());
+ 
     }
     
     public void updateFinished (Boolean success) {
