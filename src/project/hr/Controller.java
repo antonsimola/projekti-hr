@@ -280,7 +280,7 @@ public class Controller implements PropertyChangeListener  {
                     lw.logIn(isLoginSuccessful);
                 }
                 break;
-            case "model_change_selection":
+            case "search_by_id":
                 for (Object view:views) {
                     if (view instanceof FXMLDocumentEditView) {
                         FXMLDocumentEditView ev = (FXMLDocumentEditView) view;
