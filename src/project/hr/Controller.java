@@ -256,6 +256,7 @@ public class Controller implements PropertyChangeListener  {
                     if (view instanceof FXMLDocumentEditView) {
                         FXMLDocumentEditView ev = (FXMLDocumentEditView) view;
                         ev.updateFinished((Boolean)evt.getNewValue());
+                        getAllEmployees();
                     }
                 }    
             case "sign_in":
@@ -285,7 +286,7 @@ public class Controller implements PropertyChangeListener  {
                     if (view instanceof FXMLDocumentEditView) {
                         FXMLDocumentEditView ev = (FXMLDocumentEditView) view;
                         this.setCurrentlySelectedEmployee((Employee)evt.getNewValue());
-                        ev.updateFields(evt.getNewValue());
+                        ev.updateFields((Employee)evt.getNewValue());
                     }
                 }
             default:
