@@ -500,10 +500,31 @@ public class DatabaseHandler {
         return idArray;
     }
     
+    private int selectEmployeeEmploymentIdByEmployeeId(int employeeId) 
+            throws Exception {
+        int employmentId;
+        
+        String selectQuery = 
+                "SELECT "
+            +       "EMPLOYMENT_ID_FK "
+            +   "FROM "
+            +       "EMPLOYEE "
+            +   "WHERE "
+            +       "EMPLOYEE_ID=" + employeeId + ";";
+        
+        // May result in a database operation failure.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+       
+        employmentId = resultSet.getInt("EMPLOYMENT_ID_FK");
+        
+        return employmentId;
+    }
+    
     /* UPDATE EMPLOYEE with new values (sets again old value if no new value
      * given).
     */
-    public void updateEmployeeDetails(Employee newEmployee) throws Exception {
+    public void updateEmployee(Employee newEmployee) throws Exception {
         Employee oldEmployee = selectEmployeeBySSN(
                 newEmployee.getSsn());
         
@@ -641,19 +662,16 @@ public class DatabaseHandler {
         connection.setAutoCommit(true);
     }
     
-    public void deleteEmployeeBySsn(String socialSecurityNumber) 
+    public void deleteEmployeeByEmployeeId(int employeeId) 
             throws Exception {
-        // 0-element: employee id ; 1st element: employment id 
-        int[] idArray = 
-                selectEmployeeIdAndEmploymentIdBySsn(
-                        socialSecurityNumber);
+        int employmentId = selectEmployeeEmploymentIdByEmployeeId(employeeId);
         
         StringBuilder sqlDelete = new StringBuilder(
                     "DELETE FROM EMPLOYMENT "
                 +   "WHERE "
                 +   "EMPLOYMENT_ID=");
         
-        sqlDelete.append(idArray[1]);
+        sqlDelete.append(employmentId);
         sqlDelete.append(";");
         
         sqlDelete = new StringBuilder(
@@ -661,7 +679,7 @@ public class DatabaseHandler {
                 +   "WHERE "
                 +   "EMPLOYEE_ID=");
         
-        sqlDelete.append(idArray[0]);
+        sqlDelete.append(employeeId);
         sqlDelete.append(";");
     } 
 }

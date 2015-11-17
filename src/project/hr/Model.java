@@ -121,26 +121,25 @@ public class Model {
     }
     
     public void addEmployee(Employee employee) {
-        boolean isSuccessfull = true;
-       
-        try {
-            employee.setPassword(
+        boolean isSuccessful = true;
+        employee.setPassword(
                     passwordSecurity.generateHashedSaltedPassword(
                             employee.getPassword()));
+        
+        try {
             databaseHandler.insertEmployee(employee);
-    
         } catch (Exception ex) {
             ex.printStackTrace();
-            isSuccessfull = false;
-            // Write log
+            isSuccessful = false;
         }
-        
-        fireModelActionResult("add", null, isSuccessfull);
+        finally {
+            fireModelActionResult("add", null, new Boolean(isSuccessful));
+        }
     }
     
     public void editEmployee(Employee employee) {
         try {
-            databaseHandler.updateEmployeeDetails(employee);
+            databaseHandler.updateEmployee(employee);
             
             //fireModelActionResult("edit", null, (Object)employee);
         } catch (Exception ex) {
@@ -168,16 +167,19 @@ public class Model {
     }
     
     public void searchEmployee(int employeeId) {
-        Employee employee;
+        Employee employee = null;
         
         try {
             employee = databaseHandler.selectEmployeeById(employeeId);
+            fireModelActionResult("search_by_id", null, 
+                employee);
         } catch (Exception ex) {
             ex.printStackTrace();
+            fireModelActionResult("search_by_id", null, 
+                null);
         }
         
-        fireModelActionResult("search_by_id", null, 
-                employeeSearchResults);
+        
     }
     
     // http://stackoverflow.com/questions/18441846/how-to-sort-an-arraylist-in-java
