@@ -33,7 +33,6 @@ public class Model {
     
     public Model () {
         propertyChangeSupport = new PropertyChangeSupport(this);
-        employeeSearchResults = new ArrayList();
         passwordSecurity = new PasswordSecurity();
         signedInEmployee = null;
         
@@ -70,13 +69,19 @@ public class Model {
     }
     
     public void registerEmployee(Employee employee, String password) {
+        boolean isSuccessful = true;
+        employee.setPassword(
+                   passwordSecurity.generateHashedSaltedPassword(password));
+        
         try {
-            employee.setPassword(
-                    passwordSecurity.generateHashedSaltedPassword(password));
             databaseHandler.insertEmployee(employee);
         }
         catch(Exception ex) {
             ex.printStackTrace();
+            isSuccessful = false;
+        }
+        finally {
+            fireModelActionResult("register", null, new Boolean(isSuccessful));
         }
         
         System.out.println("Registered new employee:");
@@ -93,7 +98,6 @@ public class Model {
                             emailAddress);
         } 
         catch(Exception ex) {
-            // Write loh
             ex.printStackTrace();
         }
    
@@ -102,8 +106,9 @@ public class Model {
     
     public void signIn(String emailAddress, String password) {
         Employee employee = searchEmployeeByEmail(emailAddress);
+        
         System.out.println("model signin hash "+employee.getPassword());
-        if(employee != null && passwordSecurity.isPasswordValid(password, 
+        if(passwordSecurity.isPasswordValid(password, 
                         employee.getPassword())) {
         
             signedInEmployee = employee;
@@ -122,8 +127,7 @@ public class Model {
     
     public void addEmployee(Employee employee) {
         boolean isSuccessful = true;
-        employee.setPassword(
-                    passwordSecurity.generateHashedSaltedPassword(
+        employee.setPassword(passwordSecurity.generateHashedSaltedPassword(
                             employee.getPassword()));
         
         try {
@@ -138,32 +142,49 @@ public class Model {
     }
     
     public void editEmployee(Employee employee) {
+        boolean isSuccessful = true;
+        
         try {
             databaseHandler.updateEmployee(employee);
             
             //fireModelActionResult("edit", null, (Object)employee);
         } catch (Exception ex) {
             ex.printStackTrace();
+            isSuccessful = false;
+        }
+        finally {
+            fireModelActionResult("edit", null, new Boolean(isSuccessful));
         }
     }
     
-    public void removeEmployee(String socialSecurityNumber) {
-        // Perform database delete, check thrown exceptions
+    public void removeEmployee(int employeeId) {
+        boolean isSuccessful = true;
         
-        //fireModelActionResult("delete", null, true/false);
+        try {
+            databaseHandler.deleteEmployeeByEmployeeId(employeeId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            isSuccessful = false;
+        }
+        finally {
+            fireModelActionResult("remove", null, new Boolean(isSuccessful));
+        }
     }
     
     // Should store search results in case the user wants to alter them
     // (calls alterEmployeeSearchResultFormatting on an instance variable)
     public void searchEmployee(Employee employee) {
+        employeeSearchResults = null;
+        
         try {
             employeeSearchResults = databaseHandler.selectEmployee(employee);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        fireModelActionResult("format_employee_search", null, 
+        finally {
+            fireModelActionResult("search_by_employee", null, 
                 employeeSearchResults);
+        }
     }
     
     public void searchEmployee(int employeeId) {
@@ -171,15 +192,14 @@ public class Model {
         
         try {
             employee = databaseHandler.selectEmployeeById(employeeId);
+        } 
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
             fireModelActionResult("search_by_id", null, 
                 employee);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            fireModelActionResult("search_by_id", null, 
-                null);
         }
-        
-        
     }
     
     // http://stackoverflow.com/questions/18441846/how-to-sort-an-arraylist-in-java
