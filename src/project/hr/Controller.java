@@ -23,7 +23,7 @@ public class Controller implements PropertyChangeListener  {
     private Controller() {
         model = new Model();
         model.addPropertyChangeListener(this);
-        model.registerEmployee(new Employee(
+        /*model.registerEmployee(new Employee(
                 "Jouni",
                 "Sampo",
                 "2002-21-12",
@@ -60,7 +60,7 @@ public class Controller implements PropertyChangeListener  {
                 40,
                 null,
                 1),
-                "trigonometria");
+                "trigonometria");*/
         views = new ArrayList();
     }
     
@@ -93,6 +93,15 @@ public class Controller implements PropertyChangeListener  {
         return m.matches();
     }
     
+    private boolean isValidNumber(String strnum) {
+        try {
+            Double.parseDouble(strnum);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    
     /*Call from view when attempting sign in*/
     public void attemptSignIn(String username, String pw) {
         /* View calls this as sign in was pressed -> Model method call? */
@@ -106,7 +115,6 @@ public class Controller implements PropertyChangeListener  {
     }
     
     public void getAllEmployees() {
-        System.out.println("Haetaan hlöt 1");
         model.getAllEmployees();
         
         
@@ -117,7 +125,7 @@ public class Controller implements PropertyChangeListener  {
     }
 
     public void setCurrentlySelectedEmployee(Employee currentlySelectedEmployee) {
-        this.currentlySelectedEmployee = currentlySelectedEmployee;
+        model.selectEmployeeById(currentlySelectedEmployee.getEmployeeId());
     }
     
     
@@ -140,6 +148,7 @@ public class Controller implements PropertyChangeListener  {
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
         /*return false, if not OK, else return true*/
         if (isEmpty(required) == true) {
+            System.out.println("Tyhjiä kenttiä.");
             return false;
         } else {
             Employee emp = new Employee(
@@ -165,6 +174,54 @@ public class Controller implements PropertyChangeListener  {
         }
     };
     
+    public boolean attemptUpdateEmployee(String fn,
+            String ln,
+            String bd,
+            String ssn,
+            String addr,
+            String p,
+            String c,
+            String phone,
+            String email,
+            String fav,
+            String title,
+            String wage,
+            String start,
+            String end,
+            String hours) {
+        String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
+        /*return false, if not OK, else return true*/
+        if (isEmpty(required)) {
+            System.out.println("Tyhjiä kenttiä.");
+            return false;
+        }
+        if (isValidNumber(wage) && isValidNumber(hours)) {
+            
+        }
+        else {
+            Employee emp = new Employee(
+            fn,
+            ln,
+            bd,
+            ssn,
+            addr,
+            p,
+            c,
+            phone,
+            email,
+            fav,
+            title,
+            Double.parseDouble(wage),
+            start,
+            end,
+            Double.parseDouble(hours),
+            "vakio",
+            1);
+            model.editEmployee(emp);
+            return true;
+        }
+    };
+    
     /*listens for updates in the model*/
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -184,9 +241,24 @@ public class Controller implements PropertyChangeListener  {
             case "add":
                 for (Object view:views) {
                     if (view instanceof MainView) {
-                        getAllEmployees();
+                        Boolean b = (Boolean) evt.getNewValue();
+                        if (b.booleanValue()) {
+                            getAllEmployees();
+                        } else {
+                            //view.errorMsg() blabla
+                        }
+                        
                     }
                 }
+                break;
+            case "edit":
+                for (Object view:views) {
+                    if (view instanceof FXMLDocumentEditView) {
+                        FXMLDocumentEditView ev = (FXMLDocumentEditView) view;
+                        ev.updateFinished((Boolean)evt.getNewValue());
+                        getAllEmployees();
+                    }
+                }    
             case "sign_in":
                 LoginWindow lw;
                 Object foundView = false;
@@ -197,7 +269,6 @@ public class Controller implements PropertyChangeListener  {
                         foundLoginWindows = true;
                         if(evt.getNewValue() == null) {
                             foundView = view;
-                            
                         } else {
                             foundView = view;
                             isLoginSuccessful = true;
@@ -210,6 +281,14 @@ public class Controller implements PropertyChangeListener  {
                     lw.logIn(isLoginSuccessful);
                 }
                 break;
+            case "search_by_id":
+                for (Object view:views) {
+                    if (view instanceof FXMLDocumentEditView) {
+                        FXMLDocumentEditView ev = (FXMLDocumentEditView) view;
+                        this.setCurrentlySelectedEmployee((Employee)evt.getNewValue());
+                        ev.updateFields((Employee)evt.getNewValue());
+                    }
+                }
             default:
                 System.out.println("default");
                 break;
