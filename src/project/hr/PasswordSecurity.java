@@ -11,7 +11,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Objects;
-import javax.xml.bind.DatatypeConverter;  // Base64 encoding and decoding
+import javax.xml.bind.DatatypeConverter;
 import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -30,12 +30,6 @@ public class PasswordSecurity {
      * Returns hash and salt separated by '.' (<hash>.<salt>).
     */
     public String generateHashedSaltedPassword(String password) {
-        /*
-        byte[] message = "hello world".getBytes("UTF-8");
-        String encoded = DatatypeConverter.printBase64Binary(message);
-        byte[] decoded = DatatypeConverter.parseBase64Binary(encoded);
-        */
-        
         Random random = new SecureRandom();
         byte[] salt = new byte[16];
         SecretKeyFactory secretKeyFactory = null;
@@ -66,27 +60,24 @@ public class PasswordSecurity {
     */
     public boolean isPasswordValid(String password, String passwordHashAndSalt){
         boolean isValidPassword = false;
-    
-        /*
-        byte[] message = "hello world".getBytes("UTF-8");
-        String encoded = DatatypeConverter.printBase64Binary(message);
-        byte[] decoded = DatatypeConverter.parseBase64Binary(encoded);
-        */
+
         System.out.println("validation given pw: " + passwordHashAndSalt);
+        
         String[] hashAndSaltSplitted = passwordHashAndSalt.split("\\.");
+        
         System.out.println("hash"+hashAndSaltSplitted[0]+"salt"+hashAndSaltSplitted[1]);
+        
         String givenHash = hashAndSaltSplitted[0];
         String givenSalt = hashAndSaltSplitted[1];
         
         byte[] salt = DatatypeConverter.parseBase64Binary(givenSalt);
         
-        SecretKeyFactory secretKeyFactory = null;
-        byte[] hash = null;
-        
         //random.nextBytes(salt);
         KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 65536, 
                                         128);
         
+        SecretKeyFactory secretKeyFactory = null;
+        byte[] hash = null;
         try {
             secretKeyFactory = SecretKeyFactory.getInstance(
                     "PBKDF2WithHmacSHA1");
@@ -97,8 +88,10 @@ public class PasswordSecurity {
         
         isValidPassword = Objects.equals(
                 DatatypeConverter.printBase64Binary(hash), givenHash);
+        
         System.out.println(DatatypeConverter.printBase64Binary(hash) + "." + 
                 DatatypeConverter.printBase64Binary(salt));
+        
         return isValidPassword;
     }
 }

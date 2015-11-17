@@ -23,18 +23,20 @@ public class DatabaseHandler {
     
     private Connection connection = null;
     private final String databaseName = "HR_Database.sqlite";;
+    ArrayList<Employee> employeeSearchResultsList;
     
     public DatabaseHandler() {
-        
+       
     }
     
+    // Attempt sqlite initialization and connect to database.
     public void connect() throws Exception {
-        // Attempt sqlite initialization and connect to database.
         Class.forName("org.sqlite.JDBC"); 
         connection = DriverManager.getConnection(
                     "jdbc:sqlite:" + databaseName);
     }
     
+    // Close database connection.
     public void disconnect() throws Exception {
         connection.close();
     }
@@ -43,343 +45,7 @@ public class DatabaseHandler {
         return databaseName;
     }
     
-    /* Contents of a given result set are copied into Employee instances that
-     * are placed into an ArrayList (that will be returned). This method does
-     * not look for admin information (ADMINISTRATOR table in the database).
-    */
-    private ArrayList<Employee> populateEmployeeList(
-            ResultSet resultSet) throws Exception{
-        
-        ArrayList<Employee> employeeList = new ArrayList();
-        
-        while(resultSet.next()) {
-            Employee employee = generateEmployee(resultSet);
-            
-            employeeList.add(employee);
-        }
-        
-        return employeeList;
-    }
-    
-//    private Employee generateEmployee(ResultSet resultSet) throws Exception{
-//        
-//        Employee employee = new Employee(
-//                                        resultSet.getString("FIRST_NAME"),
-//                                        resultSet.getString("SECOND_NAME"),
-//                                        resultSet.getString("BIRTHDAY"),
-//                                        resultSet.getString("SSN"),
-//                                        resultSet.getString("ADDRESS"),
-//                                        resultSet.getString("POSTAL_CODE"),
-//                                        resultSet.getString("CITY"),
-//                                        resultSet.getString("PHONE_NUMBER"),
-//                                        resultSet.getString("EMAIL_ADDRESS"),
-//                                        resultSet.getString("FAVORITE_DRINK"),
-//                                        resultSet.getString("JOB_TITLE"),
-//                                        resultSet.getDouble("HOURLY_WAGE"),
-//                                        resultSet.getString("START_DATE"),
-//                                        resultSet.getString("END_DATE"),
-//                                        resultSet.getDouble("WEEKLY_WORKHOURS")
-//                                        );
-//        
-//        return employee;
-//    }
-    
-    private Employee generateEmployee(ResultSet resultSet) 
-            throws Exception{
-        
-        Employee employee = new Employee(
-                                        resultSet.getInt("EMPLOYEE_ID"),
-                                        resultSet.getString("FIRST_NAME"),
-                                        resultSet.getString("SECOND_NAME"),
-                                        resultSet.getString("BIRTHDAY"),
-                                        resultSet.getString("SSN"),
-                                        resultSet.getString("ADDRESS"),
-                                        resultSet.getString("POSTAL_CODE"),
-                                        resultSet.getString("CITY"),
-                                        resultSet.getString("PHONE_NUMBER"),
-                                        resultSet.getString("EMAIL_ADDRESS"),
-                                        resultSet.getString("FAVORITE_DRINK"),
-                                        resultSet.getString("JOB_TITLE"),
-                                        resultSet.getDouble("HOURLY_WAGE"),
-                                        resultSet.getString("START_DATE"),
-                                        resultSet.getString("END_DATE"),
-                                        resultSet.getDouble("WEEKLY_WORKHOURS"),
-                                        resultSet.getString("PASSWORD_HASH_SALT"),
-                                        resultSet.getInt("RIGHTS")
-                                        );
-        
-        return employee;
-    }
-    
-//    /* Contents of a given result set (contains human resources employees) are
-//     * returned in an array list.
-//    */
-//    private ArrayList<Employee> populateHumanResourcesEmployeeList(
-//            ResultSet resultSet) throws Exception{
-//        
-//        ArrayList<Employee> employeeList = new ArrayList();
-//        
-//        while(resultSet.next()) {
-//            Employee employee = new Employee(
-//                                        resultSet.getString("FIRST_NAME"),
-//                                        resultSet.getString("SECOND_NAME"),
-//                                        resultSet.getString("BIRTHDAY"),
-//                                        resultSet.getString("SSN"),
-//                                        resultSet.getString("ADDRESS"),
-//                                        resultSet.getString("POSTAL_CODE"),
-//                                        resultSet.getString("CITY"),
-//                                        resultSet.getString("PHONE_NUMBER"),
-//                                        resultSet.getString("EMAIL_ADDRESS"),
-//                                        resultSet.getString("FAVORITE_DRINK"),
-//                                        resultSet.getString("JOB_TITLE"),
-//                                        resultSet.getDouble("HOURLY_WAGE"),
-//                                        resultSet.getDate("START_DATE"),
-//                                        resultSet.getDate("END_DATE"),
-//                                        resultSet.getDouble("WEEKLY_WORKHOURS"),
-//                                        resultSet.getBoolean("ACTIVE")                    
-//                                        );
-//        
-//            employeeList.add(employee);
-//        }
-//        
-//        return employeeList;
-//    }
-    
-    
-    
-    /* Variant of selectEmployee that takes in no parameters. Returns all
-     * employees in an ArrayList.
-     */
-    public ArrayList<Employee> selectAllEmployees() throws Exception{
-        ArrayList<Employee> employeeList;
-        String selectQuery = 
-                    "SELECT "
-                +       "* "
-                +   "FROM "
-                +       "EMPLOYEE "
-                +       "INNER JOIN "
-                +       "EMPLOYMENT "
-                +   "ON " +
-                        "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID;";
-        
-        // May result in a database operation failure.
-        Statement statement = connection.createStatement(); 
-        ResultSet resultSet = statement.executeQuery(selectQuery);
-        
-        try {
-            employeeList = populateEmployeeList(resultSet);
-        }
-        catch(Exception ex) {
-            ex.printStackTrace();
-            employeeList = null;
-        }
-        
-        return employeeList;
-    }
-    
-    /* Select by social security number (SSN).
-     * Returns an Employee instance with filled in details.
-     * 
-     * PARAMETRIZATION NOT IMPLEMENTED
-    */
-    public Employee selectEmployeeBySSN(String socialSecurityNumber) 
-            throws Exception{
-        
-        Employee employee;
-        String selectQuery = 
-                    "SELECT "
-                +       "* "
-                +   "FROM "
-                +       "EMPLOYEE "
-                +       "INNER JOIN "
-                +       "EMPLOYMENT "
-                +   "ON "
-                +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
-                +   "WHERE "
-                +       "SSN=" + socialSecurityNumber + ";";
-        
-        // May result in a database operation failure.
-        Statement statement = connection.createStatement(); 
-        ResultSet resultSet = statement.executeQuery(selectQuery);
-        
-        try {
-            employee = generateEmployee(resultSet);
-        }
-        catch(Exception ex) {
-            employee = null;
-        }
-        
-        return employee;
-    }
-    
-    /* Select by emailAddress.
-     *
-     * PARAMETRIZATION NOT IMPLEMENTED
-    */
-    public Employee selectEmployeeByEmailAddress(String emailAddress) 
-            throws Exception {
-        
-        Employee employee;
-        
-        String selectQuery = 
-                    "SELECT "
-                +       "* "
-                +   "FROM "
-                +       "EMPLOYEE "
-                +       "INNER JOIN "
-                +       "EMPLOYMENT "
-                +   "ON "
-                +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
-                +   "WHERE "
-                +       "EMPLOYEE.EMAIL_ADDRESS='" + emailAddress + "';";
-        
-        // May result in a database operation failure.
-        System.out.println(selectQuery);
-        Statement statement = connection.createStatement(); 
-        ResultSet resultSet = statement.executeQuery(selectQuery);
-        
-        try {
-            employee = generateEmployee(resultSet);
-        }
-        catch(Exception ex) {
-            employee = null;
-        }
-        
-        return employee;
-    }
-    
-//    /* Select by emailAddress.
-//     *
-//     * PARAMETRIZATION NOT IMPLEMENTED
-//    */
-//    public Employee selectHumanResourcesEmployeeByEmail(String emailAddress) 
-//            throws Exception {
-//        
-//        Employee employee;
-//        
-//        String selectQuery = 
-//                    "SELECT "
-//                +       "* "
-//                +   "FROM "
-//                +       "ADMINISTRATOR "
-//                +       "INNER JOIN "
-//                +       "EMPLOYEE "
-//                +   "ON "
-//                +       "EMPLOYEE.EMPLOYEE_ID=ADMINISTRATOR.EMPLOYEE_ID_FK "
-//                +       "INNER JOIN "
-//                +       "EMPLOYMENT "
-//                +   "ON "
-//                +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
-//                +   "WHERE "
-//                +       "EMPLOYEE.EMAIL_ADDRESS='" + emailAddress + "';";
-//        
-//        // May result in a database operation failure.
-//        System.out.println(selectQuery);
-//        Statement statement = connection.createStatement(); 
-//        ResultSet resultSet = statement.executeQuery(selectQuery);
-//        
-//        try {
-//            employee = generateEmployee(resultSet);
-//        }
-//        catch(Exception ex) {
-//            employee = null;
-//            ex.printStackTrace();
-//        }
-//        
-//        return employee;
-//    }
-    
-//    /* Load employees based on the instance variables of a given employee
-//     * instance. Does not yet allow search by range.
-//     * 
-//     * PARAMETRIZATION NOT IMPLEMENTED (should be done to all input?)
-//    */
-//    public ArrayList<Employee> selectEmployee(Employee employee) 
-//            throws Exception {
-//        
-//        ArrayList<Employee> employeeList;
-//        StringBuilder selectQuery = new StringBuilder(
-//                    "SELECT "
-//                +       "* "
-//                +   "FROM "
-//                +       "EMPLOYEE "
-//                +       "INNER JOIN "
-//                +       "EMPLOYMENT "
-//                +   "ON "
-//                +       "EMPLOYEE.EMPLOYMENT_ID=EMPLOYMENT.ID "
-//                +   "WHERE EMPLOYEE.ID >= 0");
-//        
-//        if(employee.getFirstName() != null) {
-//            selectQuery.append(" AND FIRST_NAME=").append(employee.getFirstName());
-//        }
-//        
-//        if(employee.getLastName() != null) {
-//            selectQuery.append(" AND LAST_NAME=").append(employee.getLastName());
-//        }
-//        
-//        if(employee.getBirthday() != null) {
-//            selectQuery.append(" AND BIRTHDAY=").append(employee.getBirthday());
-//        }
-//        
-//        if(employee.getSSN() != null) {
-//            selectQuery.append(" AND SSN=").append(employee.getSSN());
-//        }
-//        
-//        if(employee.getAddress() != null) {
-//            selectQuery.append(" AND ADDRESS=").append(employee.getAddress());
-//        }
-//        
-//        if(employee.getPostalCode() != null) {
-//            selectQuery.append(" AND POSTAL_CODE=").append(employee.getPostalCode());
-//        }
-//        
-//        if(employee.getCity() != null) {
-//            selectQuery.append(" AND CITY=").append(employee.getCity());
-//        }
-//       
-//        if(employee.getPhoneNumber() != null) {
-//            selectQuery.append(" AND PHONE_NUMBER=").append(
-//                    employee.getPhoneNumber());
-//        }
-//        
-//        if(employee.getEmailAddress() != null) {
-//            selectQuery.append(" AND EMAIL_ADDRESS=").append(
-//                    employee.getEmailAddress());
-//        }
-//        
-//        if(employee.getFavoriteDrink() != null) {
-//            selectQuery.append(" AND FAVORITE_DRINK=").append(
-//                    employee.getFavoriteDrink());
-//        }
-//        
-//        if(employee.getJobTitle() != null) {
-//            selectQuery.append(" AND JOB_TITLE=").append(
-//                    employee.getJobTitle());
-//        }
-//        
-//        if(employee.getHourlyWage() != null) {
-//            selectQuery.append(" AND HOURLY_WAGE=").append(
-//                    employee.getHourlyWage());
-//        }
-//        
-//        if(employee.getStartDate() != null) {
-//            selectQuery.append(" AND START_DATE=").append(
-//                    employee.getStartDate());
-//        }
-//        
-//        if(employee.getEndDate() != null) {
-//            selectQuery.append(" AND END_DATE=").append(
-//                    employee.getEndDate());
-//        }
-//        
-//        if(employee.getWeeklyWorkhours() != null) {
-//            selectQuery.append(" AND WEEKLY_WORKHOURS=").append(
-//                    employee.getWeeklyWorkhours());
-//        }
-//    }
-    
-    /* INSERT EMPLOYMENT and EMPLOYEE details of one employee 
-     * (Employee instance).
+    /* Inserts new employee into EMPLOYMENT and EMPLOYEE tables.
     */
     public void insertEmployee(Employee employee) throws Exception {
 
@@ -388,9 +54,9 @@ public class DatabaseHandler {
         
         // EMPLOYEMENT INSERT portion begins
         StringBuilder sqlInsert = new StringBuilder(
-                    "INSERT INTO EMPLOYMENT "
-                +   "(JOB_TITLE, HOURLY_WAGE, START_DATE, END_DATE, WEEKLY_WORKHOURS) "
-                +   "VALUES ");
+                "INSERT INTO EMPLOYMENT "
+            +   "(JOB_TITLE, HOURLY_WAGE, START_DATE, END_DATE, WEEKLY_WORKHOURS) "
+            +   "VALUES ");
         
         sqlInsert.append("(");
         
@@ -519,16 +185,306 @@ public class DatabaseHandler {
         connection.setAutoCommit(true);
     }
     
+    /* Contents of a given result set are copied into Employee instances that
+     * are placed into an ArrayList (that will be returned).
+    */
+    private ArrayList<Employee> populateEmployeeList(
+            ResultSet resultSet) throws Exception{
+        
+        ArrayList<Employee> employeeList = new ArrayList();
+        
+        while(resultSet.next()) {
+            Employee employee = generateEmployee(resultSet);
+            
+            employeeList.add(employee);
+        }
+        
+        return employeeList;
+    }
+    
+    /* Generate and return new Employee instance from ResultSet.
+    */
+    private Employee generateEmployee(ResultSet resultSet) 
+            throws Exception{
+        
+        Employee employee = new Employee(
+            resultSet.getInt("EMPLOYEE_ID"),
+            resultSet.getString("FIRST_NAME"),
+            resultSet.getString("SECOND_NAME"),
+            resultSet.getString("BIRTHDAY"),
+            resultSet.getString("SSN"),
+            resultSet.getString("ADDRESS"),
+            resultSet.getString("POSTAL_CODE"),
+            resultSet.getString("CITY"),
+            resultSet.getString("PHONE_NUMBER"),
+            resultSet.getString("EMAIL_ADDRESS"),
+            resultSet.getString("FAVORITE_DRINK"),
+            resultSet.getString("JOB_TITLE"),
+            resultSet.getDouble("HOURLY_WAGE"),
+            resultSet.getString("START_DATE"),
+            resultSet.getString("END_DATE"),
+            resultSet.getDouble("WEEKLY_WORKHOURS"),
+            resultSet.getString("PASSWORD_HASH_SALT"),
+            resultSet.getInt("RIGHTS")
+        );
+        
+        return employee;
+    }
+    
+    /* Selects without attribute limitations and returns all company employees.
+     */
+    public ArrayList<Employee> selectAllEmployees() throws Exception{
+        ArrayList<Employee> employeeList;
+        String selectQuery = 
+                "SELECT "
+            +       "* "
+            +   "FROM "
+            +       "EMPLOYEE "
+            +       "INNER JOIN "
+            +       "EMPLOYMENT "
+            +   "ON " +
+                    "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID;";
+        
+        // May result in a database operation failure.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+        
+        try {
+            employeeList = populateEmployeeList(resultSet);
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+            employeeList = null;
+        }
+        
+        return employeeList;
+    }
+    
+    /* Selects by social security number (SSN).
+     * Returns an Employee instance with filled in details.
+     * 
+     * PARAMETRIZATION NOT IMPLEMENTED
+    */
+    public Employee selectEmployeeBySSN(String socialSecurityNumber) 
+            throws Exception{
+        
+        Employee employee;
+        String selectQuery = 
+                "SELECT "
+            +       "* "
+            +   "FROM "
+            +       "EMPLOYEE "
+            +       "INNER JOIN "
+            +       "EMPLOYMENT "
+            +   "ON "
+            +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
+            +   "WHERE "
+            +       "SSN=" + socialSecurityNumber + ";";
+        
+        // May result in a database operation failure.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+        
+        try {
+            employee = generateEmployee(resultSet);
+        }
+        catch(Exception ex) {
+            employee = null;
+        }
+        
+        return employee;
+    }
+    
+    /* Selects by emailAddress.
+     *
+     * PARAMETRIZATION NOT IMPLEMENTED
+    */
+    public Employee selectEmployeeByEmailAddress(String emailAddress) 
+            throws Exception {
+        
+        Employee employee;
+        
+        String selectQuery = 
+                "SELECT "
+            +       "* "
+            +   "FROM "
+            +       "EMPLOYEE "
+            +       "INNER JOIN "
+            +       "EMPLOYMENT "
+            +   "ON "
+            +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
+            +   "WHERE "
+            +       "EMPLOYEE.EMAIL_ADDRESS='" + emailAddress + "';";
+        
+        // May result in a database operation failure.
+        System.out.println(selectQuery);
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+        
+        try {
+            employee = generateEmployee(resultSet);
+        }
+        catch(Exception ex) {
+            employee = null;
+        }
+        
+        return employee;
+    }
+    
+    /* Load employees based on the instance variables of a given Employee
+     * instance. Does not yet allow search by range.
+     * 
+     * PARAMETRIZATION NOT IMPLEMENTED (should be done to all input?)
+    */
+    public ArrayList<Employee> selectEmployee(Employee employee) 
+            throws Exception {
+        ArrayList<Employee> employeeList = new ArrayList();
+        
+        StringBuilder selectQuery = new StringBuilder(
+                    "SELECT "
+                +       "* "
+                +   "FROM "
+                +       "EMPLOYEE "
+                +       "INNER JOIN "
+                +       "EMPLOYMENT "
+                +   "ON "
+                +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
+                +   "WHERE EMPLOYEE.EMPLOYEE_ID >= 0");
+        
+        // EMPLOYEE spesific attributes begin
+        
+        if(employee.getFirstName() != null) {
+            selectQuery.append(" AND FIRST_NAME='");
+            selectQuery.append(employee.getFirstName()).append("'");
+        }
+        
+        if(employee.getLastName() != null) {
+            selectQuery.append(" AND LAST_NAME='");
+            selectQuery.append(employee.getLastName()).append("'");
+        }
+        
+        if(employee.getBirthDay() != null) {
+            selectQuery.append(" AND BIRTHDAY='");
+            selectQuery.append(employee.getBirthDay()).append("'");
+        }
+        
+        if(employee.getSsn() != null) {
+            selectQuery.append(" AND SSN='");
+            selectQuery.append(employee.getSsn()).append("'");
+        }
+        
+        if(employee.getAddress() != null) {
+            selectQuery.append(" AND ADDRESS='");
+            selectQuery.append(employee.getAddress()).append("'");
+        }
+        
+        if(employee.getPostal() != null) {
+            selectQuery.append(" AND POSTAL_CODE='");
+            selectQuery.append(employee.getPostal()).append("'");
+        }
+        
+        if(employee.getCity() != null) {
+            selectQuery.append(" AND CITY='");
+            selectQuery.append(employee.getCity()).append("'");
+        }
+       
+        if(employee.getPhone() != null) {
+            selectQuery.append(" AND PHONE_NUMBER='");
+            selectQuery.append(employee.getPhone()).append("'");
+        }
+        
+        if(employee.getEmail() != null) {
+            selectQuery.append(" AND EMAIL_ADDRESS='");
+            selectQuery.append(employee.getEmail()).append("'");
+        }
+        
+        if(employee.getFavoriteDrink() != null) {
+            selectQuery.append(" AND FAVORITE_DRINK='");
+            selectQuery.append(employee.getFavoriteDrink()).append("'");
+        }
+        
+        // EMPLOYMENT spesific attributes begin
+        
+        if(employee.getJobTitle() != null) {
+            selectQuery.append(" AND JOB_TITLE='");
+            selectQuery.append(employee.getJobTitle()).append("'");
+        }
+        
+        if(employee.getJobWage() != -1) {
+            selectQuery.append(" AND HOURLY_WAGE=");
+            selectQuery.append(employee.getJobWage());
+        }
+        
+        if(employee.getStartDate() != null) {
+            selectQuery.append(" AND START_DATE='");
+            selectQuery.append(employee.getStartDate()).append("'");
+        }
+        
+        if(employee.getEndDate() != null) {
+            selectQuery.append(" AND END_DATE='");
+            selectQuery.append(employee.getEndDate()).append("'");
+        }
+        
+        if(employee.getWeeklyHours() != -1) {
+            selectQuery.append(" AND WEEKLY_WORKHOURS=");
+            selectQuery.append(employee.getWeeklyHours());
+        }
+        
+        selectQuery.append(";");
+        
+        // May result in a database operation failure.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery.toString());
+        
+        try {
+            employeeList = populateEmployeeList(resultSet);
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+            employeeList = null;
+        }
+        
+        return employeeList;
+    }
+    
+    private int[] selectEmployeeIdAndEmploymentIdBySsn(
+            String socialSecurityNumber) throws Exception {
+        int[] idArray = new int[2];
+        
+        String selectQuery = 
+                "SELECT "
+            +       "EMPLOYEE_ID, EMPLOYMENT_ID_FK "
+            +   "FROM "
+            +       "EMPLOYEE "
+            +   "WHERE "
+            +       "SSN='" + socialSecurityNumber + "';";
+        
+        // May result in a database operation failure.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery);
+       
+        idArray[0] = resultSet.getInt("EMPLOYEE_ID");
+        idArray[1] = resultSet.getInt("EMPLOYMENT_ID_FK");
+        
+        return idArray;
+    }
+    
     /* UPDATE EMPLOYEE with new values (sets again old value if no new value
      * given).
     */
     public void updateEmployeeDetails(Employee newEmployee) throws Exception {
-        Employee oldEmployee = selectEmployeeBySSN(newEmployee.getSsn());
+        Employee oldEmployee = selectEmployeeBySSN(
+                newEmployee.getSsn());
+        
+        // 0-element: employee id ; 1st element: employment id 
+        int[] idArray = 
+                selectEmployeeIdAndEmploymentIdBySsn(
+                        oldEmployee.getSsn());
         
         connection.setAutoCommit(false);
         Statement statement = connection.createStatement();
         
-        // EMPLOYEMENT INSERT portion begins
+        // EMPLOYEE INSERT portion begins
         StringBuilder sqlInsert = new StringBuilder(
                     "UPDATE EMPLOYEE "
                 +   "SET ");
@@ -545,20 +501,136 @@ public class DatabaseHandler {
         else
             sqlInsert.append(oldEmployee.getLastName()).append("', ");
         
-        // To be continued
+        sqlInsert.append("BIRTHDAY='");
+        if(newEmployee.getBirthDay() != null)
+            sqlInsert.append(newEmployee.getBirthDay()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getBirthDay()).append("', ");
+        
+        /*
+        sqlInsert.append("SSN='");
+        if(newEmployee.getSsn() != null)
+            sqlInsert.append(newEmployee.getSsn()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getSsn()).append("', ");
+        */
+        
+        sqlInsert.append("ADDRESS='");
+        if(newEmployee.getAddress() != null)
+            sqlInsert.append(newEmployee.getAddress()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getAddress()).append("', ");
+        
+        sqlInsert.append("POSTAL_CODE='");
+        if(newEmployee.getPostal() != null)
+            sqlInsert.append(newEmployee.getPostal()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getPostal()).append("', ");
+        
+        sqlInsert.append("CITY='");
+        if(newEmployee.getCity() != null)
+            sqlInsert.append(newEmployee.getCity()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getCity()).append("', ");
+        
+        sqlInsert.append("PHONE_NUMBER='");
+        if(newEmployee.getPhone() != null)
+            sqlInsert.append(newEmployee.getPhone()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getPhone()).append("', ");
+        
+        sqlInsert.append("EMAIL_ADDRESS='");
+        if(newEmployee.getEmail() != null)
+            sqlInsert.append(newEmployee.getEmail()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getEmail()).append("', ");
+        
+        sqlInsert.append("FAVORITE_DRINK='");
+        if(newEmployee.getFavoriteDrink() != null)
+            sqlInsert.append(newEmployee.getFavoriteDrink()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getFavoriteDrink()).append("', ");
+        
+        sqlInsert.append("RIGHTS=");
+        if(newEmployee.getRights() != -1)
+            sqlInsert.append(newEmployee.getRights()).append(" ");
+        else
+            sqlInsert.append(oldEmployee.getRights()).append(" ");
+        
+        sqlInsert.append("WHERE EMPLOYEE_ID=");
+        sqlInsert.append(idArray[0]);
+        sqlInsert.append(";");
         
         statement.executeUpdate(sqlInsert.toString());
         
-        connection.commit();
-        statement.close();
+        // EMPLOYEMENT INSERT portion begins
+        sqlInsert = new StringBuilder(
+                    "UPDATE EMPLOYMENT "
+                +   "SET ");
         
+        sqlInsert.append("JOB_TITLE='");
+        if(newEmployee.getJobTitle() != null)  
+            sqlInsert.append(newEmployee.getJobTitle()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getJobTitle()).append("', ");
+        
+        sqlInsert.append("HOURLY_WAGE=");
+        if(newEmployee.getJobWage() != -1)
+            sqlInsert.append(newEmployee.getJobWage()).append(", ");
+        else
+            sqlInsert.append(oldEmployee.getJobWage()).append(", ");
+        
+        sqlInsert.append("START_DATE='");
+        if(newEmployee.getStartDate() != null)
+            sqlInsert.append(newEmployee.getStartDate()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getStartDate()).append("', ");
+        
+        sqlInsert.append("END_DATE='");
+        if(newEmployee.getEndDate() != null)  
+            sqlInsert.append(newEmployee.getEndDate()).append("', ");
+        else
+            sqlInsert.append(oldEmployee.getEndDate()).append("', ");
+        
+        sqlInsert.append("WEEKLY_WORKHOURS=");
+        if(newEmployee.getWeeklyHours() != -1)
+            sqlInsert.append(newEmployee.getWeeklyHours()).append("' ");
+        else
+            sqlInsert.append(oldEmployee.getWeeklyHours()).append("' ");
+        
+        sqlInsert.append("WHERE EMPLOYMENT_ID=");
+        sqlInsert.append(idArray[1]);
+        sqlInsert.append(";");
+        
+        statement.executeUpdate(sqlInsert.toString());
+        
+        statement.close();
+        connection.commit();
+        
+        connection.setAutoCommit(true);
     }
     
-    public void updateEmploymentDetails(Employee employee) {
-    
-    }
-    
-    public void deleteEmployee(String socialSecurityNumber) {
-    
+    public void deleteEmployeeBySsn(String socialSecurityNumber) 
+            throws Exception {
+        // 0-element: employee id ; 1st element: employment id 
+        int[] idArray = 
+                selectEmployeeIdAndEmploymentIdBySsn(
+                        socialSecurityNumber);
+        
+        StringBuilder sqlDelete = new StringBuilder(
+                    "DELETE FROM EMPLOYMENT "
+                +   "WHERE "
+                +   "EMPLOYMENT_ID=");
+        
+        sqlDelete.append(idArray[1]);
+        sqlDelete.append(";");
+        
+        sqlDelete = new StringBuilder(
+                    "DELETE FROM EMPLOYEE "
+                +   "WHERE "
+                +   "EMPLOYEE_ID=");
+        
+        sqlDelete.append(idArray[0]);
+        sqlDelete.append(";");
     } 
 }

@@ -7,11 +7,15 @@
  * http://www.oracle.com/technetwork/articles/javase/index-142890.html
  */
 
+//http://stackoverflow.com/questions/15758685/how-to-write-logs-in-text-file-when-using-java-util-logging-logger
+
 package project.hr;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +33,7 @@ public class Model {
     
     public Model () {
         propertyChangeSupport = new PropertyChangeSupport(this);
-        employeeSearchResults = null;
+        employeeSearchResults = new ArrayList();
         passwordSecurity = new PasswordSecurity();
         signedInEmployee = null;
         
@@ -134,7 +138,7 @@ public class Model {
         fireModelActionResult("add", null, isSuccessfull);
     }
     
-    public void editEmployee(String socialSecurityNumber, Employee employee) {
+    public void editEmployee(Employee employee) {
         // Perform databse update, check thrown exceptions
     
         //fireModelActionResult("edit", null, (Object)employee);
@@ -146,17 +150,54 @@ public class Model {
         //fireModelActionResult("delete", null, true/false);
     }
     
-     public void alterEmployeeSearchResultFormatting(/*Formatting options*/) {
-        // Alter returned database search results and send them forward with event propagation
-        // (employeeSearchResults)
-    }
-    
     // Should store search results in case the user wants to alter them
     // (calls alterEmployeeSearchResultFormatting on an instance variable)
-    public ArrayList<Employee> searchEmployee(Employee employee) {
-        employeeSearchResults = new ArrayList();
+    public void searchEmployee(Employee employee) {
+        try {
+            employeeSearchResults = databaseHandler.selectEmployee(employee);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         
-        return new ArrayList(); // Placeholder ()
+        fireModelActionResult("format_employee_search", null, 
+                employeeSearchResults);
+    }
+    
+    // http://stackoverflow.com/questions/18441846/how-to-sort-an-arraylist-in-java
+    public void getFormattedEmployeeSearchResults(/*Formatting options*/) {
+        // Alter returned database search results and send them forward with event propagation
+        // (employeeSearchResults)
+        Comparator comparator = null;
+        
+        if(false) {
+            comparator = new Comparator<Employee>() {
+                @Override
+                public int compare(Employee firstEmployee, 
+                        Employee secondEmployee) {
+                    return firstEmployee.getFirstName().compareTo(
+                            secondEmployee.getFirstName());
+                }
+            };  
+        }
+        else if(false) {
+            comparator = new Comparator<Employee>() {
+                @Override
+                public int compare(Employee firstEmployee, 
+                        Employee secondEmployee) {
+                    return firstEmployee.getFirstName().compareTo(
+                            secondEmployee.getFirstName());
+                }
+            };
+        }
+        
+        if(comparator != null) {
+            Collections.sort(employeeSearchResults, comparator);   
+            fireModelActionResult("format_employee_search_results", null, 
+                    employeeSearchResults);
+        }
+        else {
+            fireModelActionResult("format_employee_search_results", null, null);
+        }
     }
     
     public void getAllEmployees() {
