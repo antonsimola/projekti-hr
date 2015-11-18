@@ -104,10 +104,6 @@ public class Model {
         finally {
             fireModelActionResult("register", null, new Boolean(isSuccessful));
         }
-        
-        System.out.println("Registered new employee:");
-        System.out.println("\tUsername:\t " + employee.getEmail());
-        System.out.println("\t<hash>.<salt>:\t " + employee.getPassword());
     }
         
   
@@ -128,15 +124,13 @@ public class Model {
     public void signIn(String emailAddress, String password) {
         Employee employee = searchEmployeeByEmail(emailAddress);
         
-        System.out.println("model signin hash "+employee.getPassword());
+        
         if(passwordSecurity.isPasswordValid(password, 
                         employee.getPassword())) {
-        
             signedInEmployee = employee;
             fireModelActionResult("sign_in", null, employee);
         }
         else {
-            System.out.println("Model false");
             fireModelActionResult("sign_in", null, null);
         }
     }

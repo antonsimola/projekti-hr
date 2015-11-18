@@ -80,7 +80,6 @@ public class Controller implements PropertyChangeListener  {
     }
     private boolean isEmpty(String[] list) {
         for (String str:list) {
-            System.out.println(str);
             if (str.isEmpty()) {
                 return true;
             }
@@ -101,6 +100,58 @@ public class Controller implements PropertyChangeListener  {
         } catch (Exception ex) {
             return false;
         }
+    }
+    private Employee generateEmployee(String fn,
+            String ln,
+            String bd,
+            String ssn,
+            String addr,
+            String p,
+            String c,
+            String phone,
+            String email,
+            String fav,
+            String title,
+            String wage,
+            String start,
+            String end,
+            String hours) {
+        Employee emp = new Employee();
+        if (!fn.trim().isEmpty())
+            emp.setFirstName(fn);
+        if (!ln.trim().isEmpty())
+            emp.setLastName(ln);
+        if (!bd.trim().isEmpty())
+            emp.setBirthDay(bd);
+        if (!ssn.trim().isEmpty())
+            emp.setSsn(ssn);
+        if (!addr.trim().isEmpty())
+            emp.setAddress(addr);
+        if (!p.trim().isEmpty())
+            emp.setPostal(p);
+        if (!c.trim().isEmpty())
+            emp.setCity(c);
+        if (!phone.trim().isEmpty())
+            emp.setPhone(phone);
+        if (!email.trim().isEmpty())
+            emp.setEmail(email);
+        if (!fav.trim().isEmpty())
+            emp.setFavoriteDrink(fav);
+        if (!title.trim().isEmpty())
+            emp.setJobTitle(title);
+        if (!start.trim().isEmpty())
+            emp.setStartDate(title);
+        if (!end.trim().isEmpty())
+            emp.setEndDate(end);        
+        if (!wage.trim().isEmpty())
+            if (isValidNumber(wage))
+                emp.setJobWage(Double.parseDouble(wage));
+        if (!hours.trim().isEmpty())
+            if (isValidNumber(hours))
+                emp.setWeeklyHours(Double.parseDouble(hours));
+        emp.setPassword("vakio");
+        emp.setRights(1);
+        return emp;
     }
     
     /*Call from view when attempting sign in*/
@@ -152,7 +203,7 @@ public class Controller implements PropertyChangeListener  {
             System.out.println("Tyhjiä kenttiä.");
             return false;
         } else {
-            Employee emp = new Employee(
+            Employee emp = generateEmployee(
             fn,
             ln,
             bd,
@@ -164,12 +215,10 @@ public class Controller implements PropertyChangeListener  {
             email,
             fav,
             title,
-            Double.parseDouble(wage),
+            wage,
             start,
             end,
-            Double.parseDouble(hours),
-            "vakio",
-            1);
+            hours);
             model.addEmployee(emp);
             return true;
         }
@@ -190,17 +239,16 @@ public class Controller implements PropertyChangeListener  {
             String start,
             String end,
             String hours) {
+        System.out.println(phone);
+        System.out.println(c);
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
         /*return false, if not OK, else return true*/
         if (isEmpty(required)) {
             System.out.println("Tyhjiä kenttiä.");
             return false;
         }
-        if (!(isValidNumber(wage) && isValidNumber(hours))) {
-            return false;
-        }
         else {
-            Employee emp = new Employee(
+            Employee emp = generateEmployee(
             fn,
             ln,
             bd,
@@ -212,12 +260,10 @@ public class Controller implements PropertyChangeListener  {
             email,
             fav,
             title,
-            Double.parseDouble(wage),
+            wage,
             start,
             end,
-            Double.parseDouble(hours),
-            "vakio",
-            1);
+            hours);
             model.editEmployee(emp);
             return true;
         }
