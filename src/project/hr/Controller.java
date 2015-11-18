@@ -117,38 +117,38 @@ public class Controller implements PropertyChangeListener  {
             String end,
             String hours) {
         Employee emp = new Employee();
-        if (!fn.trim().isEmpty())
-            emp.setFirstName(fn);
-        if (!ln.trim().isEmpty())
-            emp.setLastName(ln);
-        if (!bd.trim().isEmpty())
-            emp.setBirthDay(bd);
-        if (!ssn.trim().isEmpty())
-            emp.setSsn(ssn);
-        if (!addr.trim().isEmpty())
-            emp.setAddress(addr);
-        if (!p.trim().isEmpty())
-            emp.setPostal(p);
-        if (!c.trim().isEmpty())
-            emp.setCity(c);
-        if (!phone.trim().isEmpty())
-            emp.setPhone(phone);
-        if (!email.trim().isEmpty())
-            emp.setEmail(email);
-        if (!fav.trim().isEmpty())
-            emp.setFavoriteDrink(fav);
-        if (!title.trim().isEmpty())
-            emp.setJobTitle(title);
-        if (!start.trim().isEmpty())
-            emp.setStartDate(title);
-        if (!end.trim().isEmpty())
-            emp.setEndDate(end);        
-        if (!wage.trim().isEmpty())
-            if (isValidNumber(wage))
-                emp.setJobWage(Double.parseDouble(wage));
-        if (!hours.trim().isEmpty())
-            if (isValidNumber(hours))
-                emp.setWeeklyHours(Double.parseDouble(hours));
+
+        emp.setFirstName(fn);
+
+        emp.setLastName(ln);
+
+        emp.setBirthDay(bd);
+
+        emp.setSsn(ssn);
+
+        emp.setAddress(addr);
+
+        emp.setPostal(p);
+
+        emp.setCity(c);
+
+        emp.setPhone(phone);
+
+        emp.setEmail(email);
+
+        emp.setFavoriteDrink(fav);
+
+        emp.setJobTitle(title);
+
+        emp.setStartDate(title);
+
+        emp.setEndDate(end);        
+
+        if (isValidNumber(wage))
+            emp.setJobWage(Double.parseDouble(wage));
+
+        if (isValidNumber(hours))
+            emp.setWeeklyHours(Double.parseDouble(hours));
         emp.setPassword("vakio");
         emp.setRights(1);
         return emp;
@@ -177,6 +177,8 @@ public class Controller implements PropertyChangeListener  {
     }
 
     public void setCurrentlySelectedEmployee(Employee currentlySelectedEmployee) {
+        System.out.println("city"+currentlySelectedEmployee.getCity());
+        System.out.println("phone"+currentlySelectedEmployee.getPhone());
         this.currentlySelectedEmployee = currentlySelectedEmployee;
     }
     
@@ -239,8 +241,6 @@ public class Controller implements PropertyChangeListener  {
             String start,
             String end,
             String hours) {
-        System.out.println(phone);
-        System.out.println(c);
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
         /*return false, if not OK, else return true*/
         if (isEmpty(required)) {
@@ -264,6 +264,8 @@ public class Controller implements PropertyChangeListener  {
             start,
             end,
             hours);
+            emp.setEmployeeId(currentlySelectedEmployee.getEmployeeId());
+            emp.setRights(currentlySelectedEmployee.getRights());
             model.editEmployee(emp);
             return true;
         }

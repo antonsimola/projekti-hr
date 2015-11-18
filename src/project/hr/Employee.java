@@ -62,6 +62,7 @@ public class Employee {
         address = addr;
         postal = p;
         city = c;
+        this.phone = phone;
         email = e;
         favoriteDrink = fav;
         jobTitle = title;
@@ -99,6 +100,7 @@ public class Employee {
         address = addr;
         postal = p;
         city = c;
+        this.phone = phone;
         email = e;
         favoriteDrink = fav;
         jobTitle = title;

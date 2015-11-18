@@ -142,6 +142,7 @@ public class DatabaseHandler {
         else
             sqlInsert.append("NULL, ");
         
+        System.out.println("City:"+employee.getCity());
         if(employee.getCity() != null) {
             sqlInsert.append("'");
             sqlInsert.append(employee.getCity()).append("', ");
@@ -149,7 +150,9 @@ public class DatabaseHandler {
         else
             sqlInsert.append("NULL, ");
         
+        System.out.println("phone:"+employee.getPhone());
         if(employee.getPhone() != null) {
+            System.out.println("phone:"+employee.getPhone());
             sqlInsert.append("'");
             sqlInsert.append(employee.getPhone()).append("', ");
         }
@@ -544,7 +547,7 @@ public class DatabaseHandler {
         else
             sqlInsert.append(oldEmployee.getFirstName()).append("', ");
         
-        sqlInsert.append("LAST_NAME='");
+        sqlInsert.append("SECOND_NAME='");
         if(newEmployee.getLastName() != null)
             sqlInsert.append(newEmployee.getLastName()).append("', ");
         else
@@ -575,7 +578,7 @@ public class DatabaseHandler {
             sqlInsert.append(newEmployee.getPostal()).append("', ");
         else
             sqlInsert.append(oldEmployee.getPostal()).append("', ");
-        
+
         sqlInsert.append("CITY='");
         if(newEmployee.getCity() != null)
             sqlInsert.append(newEmployee.getCity()).append("', ");
@@ -643,9 +646,9 @@ public class DatabaseHandler {
         
         sqlInsert.append("WEEKLY_WORKHOURS=");
         if(newEmployee.getWeeklyHours() != -1)
-            sqlInsert.append(newEmployee.getWeeklyHours()).append("' ");
+            sqlInsert.append(newEmployee.getWeeklyHours()).append(" ");
         else
-            sqlInsert.append(oldEmployee.getWeeklyHours()).append("' ");
+            sqlInsert.append(oldEmployee.getWeeklyHours()).append(" ");
         
         sqlInsert.append("WHERE EMPLOYMENT_ID=");
         sqlInsert.append(selectEmployeeEmploymentIdByEmployeeId(oldEmployee.getEmployeeId()));
