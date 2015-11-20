@@ -394,7 +394,7 @@ public class DatabaseHandler {
         }
         
         if(employee.getLastName() != null) {
-            selectQuery.append(" AND LAST_NAME='");
+            selectQuery.append(" AND SECOND_NAME='");
             selectQuery.append(employee.getLastName()).append("'");
         }
         
@@ -404,6 +404,7 @@ public class DatabaseHandler {
             selectQuery.append(employee.getBirthDay()).append("'");
             selectQuery.append(" AND '");
             selectQuery.append(newmployeeRangeValues.getBirthDay()).append("'");
+
         }
         else if(employee.getBirthDay() != null && 
                 newmployeeRangeValues.getBirthDay() == null) {
@@ -525,7 +526,7 @@ public class DatabaseHandler {
         }
         
         selectQuery.append(";");
-        
+        System.out.println(selectQuery.toString());
         // May result in a database operation failure.
         Statement statement = connection.createStatement(); 
         ResultSet resultSet = statement.executeQuery(selectQuery.toString());
@@ -537,7 +538,6 @@ public class DatabaseHandler {
             ex.printStackTrace();
             employeeList = null;
         }
-        
         return employeeList;
     }
     
