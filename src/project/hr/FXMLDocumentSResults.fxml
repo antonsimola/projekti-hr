@@ -133,7 +133,7 @@
                   <Button fx:id="printpdfButton" alignment="CENTER" mnemonicParsing="false" text="Tulosta pdf-raportti" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
               <columns>
                 <TableColumn fx:id="firstnameColumn" editable="false" prefWidth="75.0" text="Etunimi" />
                 <TableColumn fx:id="lastnameColumn" editable="false" prefWidth="75.0" text="Sukunimi" />

@@ -21,6 +21,7 @@ public class Controller implements PropertyChangeListener  {
     private Model model;
     private ArrayList<Object> views;
     private Employee currentlySelectedEmployee;
+    ObservableList<Employee> obsEmps = null;
     
     private Controller() {
         model = new Model();
@@ -78,6 +79,16 @@ public class Controller implements PropertyChangeListener  {
            views.add((MainView) view);
         } else if (view instanceof LoginWindow) {
             views.add((LoginWindow) view); 
+        } else if (view instanceof FXMLDocumentSResults) {
+            views.add((FXMLDocumentSResults) view); 
+        } else if (view instanceof FXMLDocumentAddView) {
+            views.add((FXMLDocumentAddView) view); 
+        } else if (view instanceof FXMLDocumentEditView) {
+            views.add((FXMLDocumentEditView) view); 
+        } else if (view instanceof FXMLDocumentSearchView) {
+            views.add((FXMLDocumentSearchView) view); 
+        } else {
+            System.out.println("Not known view!!");
         }
     }
     private boolean isEmpty(String[] list) {
@@ -178,6 +189,10 @@ public class Controller implements PropertyChangeListener  {
 
     public void setCurrentlySelectedEmployee(Employee currentlySelectedEmployee) {
         this.currentlySelectedEmployee = currentlySelectedEmployee;
+    }
+    
+    public ObservableList<Employee> getSearchResults() {
+         return obsEmps;
     }
     
     
@@ -378,7 +393,6 @@ public class Controller implements PropertyChangeListener  {
                         MainView mv = (MainView) view;
                         Boolean b = (Boolean) evt.getNewValue();
                         if (b) {
-                            //mv.removeFinished(b);
                             mv.updateStatusField("Poisto onnistui");
                             getAllEmployees();
                         } else {
@@ -413,25 +427,16 @@ public class Controller implements PropertyChangeListener  {
                 break;
             case "search_by_employee":
                 ArrayList<Employee> emps = (ArrayList<Employee>) evt.getNewValue();
-                ObservableList<Employee> obsEmps = FXCollections.observableArrayList(emps);
-                
+                System.out.println("ArrayList:"+emps.get(0).getFirstName());
+                obsEmps = FXCollections.observableArrayList(emps);
+                System.out.println("ObservableList:"+obsEmps.get(0).getFirstName());
                 for (Object view:views) {
-                    if (view instanceof MainView) {
-                        MainView mv = (MainView) view;
-                        Boolean b = (Boolean) evt.getNewValue();
-                        if (b) {
-                            //mv.removeFinished(b);
-                            mv.updateStatusField("Poisto onnistui");
-                            getAllEmployees();
-                        } else {
-                            //mv.removeFinished(b);
-                            mv.updateStatusField("Poisto epäonnistui");
-                        }
-                        
+                    if (view instanceof FXMLDocumentSResults) {
+                        System.out.println("Found Search Results view");
+                        FXMLDocumentSResults resultView = (FXMLDocumentSResults) view;
+                        resultView.fillTable(obsEmps);
                     }
                 }
-                
-                System.out.println(emps.get(0).getFirstName());
                 break;
             default:
                 System.out.println("default");

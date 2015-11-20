@@ -6,13 +6,21 @@
 
 package project.hr;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -68,15 +76,13 @@ public class FXMLDocumentSearchView implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        controller = Controller.getInstance();
+        controller.registerView(this);
     }    
 
     @FXML
     private void searchAction(ActionEvent event) {
-        controller = Controller.getInstance();
-        controller.registerView(this);
         controller.getAllEmployees();
-        
         controller.searchEmployee(firstnameField.getText(), 
                 lastnameField.getText(),
                 dobField1.getText(),
@@ -95,6 +101,14 @@ public class FXMLDocumentSearchView implements Initializable {
                 hoursField2.getText(),
                 startdateField.getText(),
                 enddateField.getText());
+                    Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("FXMLDocumentSResults.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
 }

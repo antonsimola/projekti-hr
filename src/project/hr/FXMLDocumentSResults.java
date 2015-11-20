@@ -8,11 +8,16 @@ package project.hr;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -55,7 +60,7 @@ public class FXMLDocumentSResults implements Initializable {
     @FXML
     private Button printpdfButton;
     @FXML
-    private TableColumn<?, ?> firstnameColumn;
+    private TableColumn<Employee, String> firstnameColumn;
     @FXML
     private TableColumn<?, ?> lastnameColumn;
     @FXML
@@ -84,13 +89,27 @@ public class FXMLDocumentSResults implements Initializable {
     private TableColumn<?, ?> startdateColumn;
     @FXML
     private TableColumn<?, ?> enddateColumn;
+    @FXML
+    private TableView<Employee> table;
+    
+    Controller controller = null;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Controller controller = Controller.getInstance();
+        controller.registerView(this);
+        fillTable(controller.getSearchResults());
     }    
+    
+    public void fillTable(ObservableList<Employee> employees) {
+        firstnameColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("firstName")
+        );
+        table.setItems(employees);
+        
+    }
     
 }
