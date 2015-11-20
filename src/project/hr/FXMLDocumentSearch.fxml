@@ -104,12 +104,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="dobField1" prefHeight="32.0" prefWidth="160.0">
+                  <TextField fx:id="dobField1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="dobField2" prefHeight="32.0" prefWidth="224.0" GridPane.columnIndex="2">
+                  <TextField fx:id="dobField2" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin></TextField>
@@ -379,12 +379,12 @@
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="7">
                <children>
-                  <TextField fx:id="startdateField" prefHeight="32.0" prefWidth="191.0">
+                  <TextField fx:id="startdateField">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="enddateField" prefHeight="32.0" prefWidth="160.0" GridPane.columnIndex="1">
+                  <TextField fx:id="enddateField" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>

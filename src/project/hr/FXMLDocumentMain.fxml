@@ -54,14 +54,16 @@
                         <GridPane>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="152.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="98.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="showallButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAllButtonPressed" prefHeight="30.0" prefWidth="91.0" text="Palauta" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button fx:id="showallButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAllButtonPressed" prefHeight="30.0" prefWidth="91.0" text="Palauta" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                               <TextField fx:id="namesearchField" promptText="Nimihaku" GridPane.halignment="CENTER" />
+                              <Button fx:id="showallButton1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAllButtonPressed" prefHeight="30.0" prefWidth="91.0" text="Hae" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <ListView fx:id="namelist" onMouseClicked="#employeeSelected" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
@@ -76,7 +78,7 @@
                           </rowConstraints>
                            <children>
                               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#showSearchContent" text="Hae" GridPane.halignment="CENTER" />
-                              <Button fx:id="removeselectedButton" mnemonicParsing="false" onAction="#removeSelectedAction" text="Poista valitut" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <Button fx:id="removeselectedButton" mnemonicParsing="false" onAction="#removeSelectedAction" text="Poista valittu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                               <Button fx:id="addnewButton" mnemonicParsing="false" onAction="#showAddContent" text="Lisää uusi" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
