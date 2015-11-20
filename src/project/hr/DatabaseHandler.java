@@ -501,11 +501,11 @@ public class DatabaseHandler {
             selectQuery.append(" AND '12.12.9999'");
         }
         else if(employee.getStartDate() == null && 
-                newmployeeRangeValues.getEndDate() != null)
+                newmployeeRangeValues.getEndDate() != null) {
             selectQuery.append(" AND END_DATE BETWEEN ");
             selectQuery.append("'01.01.0000'");
             selectQuery.append(newmployeeRangeValues.getEndDate()).append("'");
-        
+        }
         if(employee.getWeeklyHours() != -1 && 
                 newmployeeRangeValues.getWeeklyHours() != -1) {
             selectQuery.append(" AND WEEKLY_WORKHOURS BETWEEN ");
