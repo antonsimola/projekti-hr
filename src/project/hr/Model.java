@@ -13,10 +13,11 @@ package project.hr;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,6 +30,7 @@ public class Model {
     private DatabaseHandler databaseHandler;
     private FileIOHandler fileIOHandler;
     private LogHandler logHandler;
+    private Logger logger;
     
     private Employee signedInEmployee;
     private ArrayList<Employee> employeeSearchResults;
@@ -42,6 +44,7 @@ public class Model {
         try {
             fileIOHandler = FileIOHandler.getInstance();
             logHandler = LogHandler.getInstance();
+            logger = logHandler.getLogger();
             //fileIOHandler.writeUserLog("testikäyttäjä", "update", "lisätieto");
             databaseHandler = new DatabaseHandler();
             databaseHandler.connect();
@@ -53,6 +56,18 @@ public class Model {
 
     public Employee getSignedInEmployee() {
         return signedInEmployee;
+    }
+    
+    public enum Sort {
+        FIRSTNAME,
+        SECOND_NAME,
+        CITY,
+        JOB_TITLE,
+        HOURLY_WAGE,
+        START_DATE,
+        END_DATE,
+        WEEKLY_WORKHOURS
+        
     }
     
     public void addPropertyChangeListener(PropertyChangeListener 
@@ -83,7 +98,7 @@ public class Model {
             databaseHandler.insertEmployee(employee);
         }
         catch(Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.getMessage());
             isSuccessful = false;
         }
         finally {
@@ -100,7 +115,7 @@ public class Model {
                             emailAddress);
         } 
         catch(Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.getMessage());
         }
    
         return employee;
@@ -133,8 +148,8 @@ public class Model {
         try {
             databaseHandler.insertEmployee(employee);
         } catch (Exception ex) {
-            ex.printStackTrace();
             isSuccessful = false;
+            logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("add", null, new Boolean(isSuccessful));
@@ -149,8 +164,8 @@ public class Model {
             
             //fireModelActionResult("edit", null, (Object)employee);
         } catch (Exception ex) {
-            ex.printStackTrace();
             isSuccessful = false;
+            logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("edit", null, new Boolean(isSuccessful));
@@ -163,8 +178,8 @@ public class Model {
         try {
             databaseHandler.deleteEmployeeByEmployeeId(employeeId);
         } catch (Exception ex) {
-            ex.printStackTrace();
             isSuccessful = false;
+            logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("remove", null, new Boolean(isSuccessful));
@@ -179,7 +194,7 @@ public class Model {
         try {
             employeeSearchResults = databaseHandler.selectEmployee(employee, employeeRangevalues);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("search_by_employee", null, 
@@ -194,7 +209,7 @@ public class Model {
             employee = databaseHandler.selectEmployeeById(employeeId);
         } 
         catch (Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("search_by_id", null, 
@@ -244,9 +259,8 @@ public class Model {
         
         try {
             employeeList = databaseHandler.selectAllEmployees();
-        } catch(Exception e) {
-            e.printStackTrace();
-            // Write log
+        } catch(Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage());
         }
 
         fireModelActionResult("all_employees", null, employeeList);

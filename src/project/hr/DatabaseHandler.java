@@ -400,10 +400,22 @@ public class DatabaseHandler {
         
         if(employee.getBirthDay() != null && 
                 newmployeeRangeValues.getBirthDay() != null) {
-            selectQuery.append(" AND BIRTHDAY BETWEEN ('");
+            selectQuery.append(" AND BIRTHDAY BETWEEN '");
             selectQuery.append(employee.getBirthDay()).append("'");
             selectQuery.append(" AND '");
-            selectQuery.append(employee.getBirthDay()).append("')");
+            selectQuery.append(newmployeeRangeValues.getBirthDay()).append("'");
+        }
+        else if(employee.getBirthDay() != null && 
+                newmployeeRangeValues.getBirthDay() == null) {
+            selectQuery.append(" AND BIRTHDAY BETWEEN '");
+            selectQuery.append(employee.getBirthDay()).append("'");
+            selectQuery.append(" AND '12.12.9999'");
+        }
+        else if(employee.getBirthDay() == null && 
+                newmployeeRangeValues.getBirthDay() != null) {
+            selectQuery.append(" AND BIRTHDAY BETWEEN ");
+            selectQuery.append("'01.01.0000' AND '");
+            selectQuery.append(newmployeeRangeValues.getBirthDay()).append("'");
         }
         
         if(employee.getSsn() != null) {
@@ -448,24 +460,68 @@ public class DatabaseHandler {
             selectQuery.append(employee.getJobTitle()).append("'");
         }
         
-        if(employee.getJobWage() != -1) {
-            selectQuery.append(" AND HOURLY_WAGE=");
+        if(employee.getJobWage() != -1 && 
+                newmployeeRangeValues.getJobWage() != -1) {
+            selectQuery.append(" AND HOURLY_WAGE BETWEEN ");
             selectQuery.append(employee.getJobWage());
+            selectQuery.append(" AND ");
+            selectQuery.append(newmployeeRangeValues.getJobWage());
+        }
+        else if(employee.getJobWage() != -1 && 
+                newmployeeRangeValues.getJobWage() == -1) {
+            selectQuery.append(" AND HOURLY_WAGE >= ");
+            selectQuery.append(employee.getJobWage());
+        
+        }
+        else if(employee.getJobWage() == -1 && 
+                newmployeeRangeValues.getJobWage() != -1) {
+            selectQuery.append(" AND HOURLY_WAGE <= ");
+            selectQuery.append(newmployeeRangeValues.getJobWage());
         }
         
-        if(employee.getStartDate() != null) {
-            selectQuery.append(" AND START_DATE='");
+        if(employee.getStartDate() != null && 
+                newmployeeRangeValues.getEndDate() != null) {
+            selectQuery.append(" AND START_DATE BETWEEN '");
             selectQuery.append(employee.getStartDate()).append("'");
+            selectQuery.append(" AND '");
+            selectQuery.append(newmployeeRangeValues.getEndDate()).append("'");
+            
+            selectQuery.append(" AND");
+            
+            selectQuery.append(" AND END_DATE BETWEEN '");
+            selectQuery.append(employee.getStartDate());
+            selectQuery.append(" AND '");
+            selectQuery.append(newmployeeRangeValues.getEndDate()).append("'");
         }
-        
-        if(employee.getEndDate() != null) {
-            selectQuery.append(" AND END_DATE='");
-            selectQuery.append(employee.getEndDate()).append("'");
+        else if(employee.getStartDate() != null && 
+                newmployeeRangeValues.getEndDate() == null) {
+            selectQuery.append(" AND START_DATE BETWEEN '");
+            selectQuery.append(employee.getStartDate()).append("'");
+            selectQuery.append(" AND '12.12.9999'");
         }
+        else if(employee.getStartDate() == null && 
+                newmployeeRangeValues.getEndDate() != null)
+            selectQuery.append(" AND END_DATE BETWEEN ");
+            selectQuery.append("'01.01.0000'");
+            selectQuery.append(newmployeeRangeValues.getEndDate()).append("'");
         
-        if(employee.getWeeklyHours() != -1) {
-            selectQuery.append(" AND WEEKLY_WORKHOURS=");
+        if(employee.getWeeklyHours() != -1 && 
+                newmployeeRangeValues.getWeeklyHours() != -1) {
+            selectQuery.append(" AND WEEKLY_WORKHOURS BETWEEN ");
             selectQuery.append(employee.getWeeklyHours());
+            selectQuery.append(" AND ");
+            selectQuery.append(newmployeeRangeValues.getWeeklyHours());
+        }
+        else if(employee.getWeeklyHours() != -1 && 
+                newmployeeRangeValues.getWeeklyHours() == -1) {
+            selectQuery.append(" AND WEEKLY_WORKHOURS >= ");
+            selectQuery.append(employee.getWeeklyHours());
+        
+        }
+        else if(employee.getWeeklyHours() == -1 && 
+                newmployeeRangeValues.getWeeklyHours() != -1) {
+            selectQuery.append(" AND WEEKLY_WORKHOURS <= ");
+            selectQuery.append(newmployeeRangeValues.getWeeklyHours());
         }
         
         selectQuery.append(";");
