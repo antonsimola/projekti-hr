@@ -58,15 +58,15 @@ public class Model {
         return signedInEmployee;
     }
     
-    public enum Sort {
-        FIRSTNAME,
-        SECOND_NAME,
-        CITY,
-        JOB_TITLE,
-        HOURLY_WAGE,
-        START_DATE,
-        END_DATE,
-        WEEKLY_WORKHOURS
+    public static enum Sort {
+        FIRST_NAME_DESC,
+        LAST_NAME_DESC,
+        CITY_DESC,
+        JOB_TITLE_DESC,
+        HOURLY_WAGE_DESC,
+        START_DATE_DESC,
+        END_DATE_DESC,
+        WEEKLY_WORKHOURS_DESC
         
     }
     
@@ -218,12 +218,12 @@ public class Model {
     }
     
     // http://stackoverflow.com/questions/18441846/how-to-sort-an-arraylist-in-java
-    public void getFormattedEmployeeSearchResults(/*Formatting options*/) {
+    public void getSortedEmployeeSearchResults(Sort action) {
         // Alter returned database search results and send them forward with event propagation
         // (employeeSearchResults)
         Comparator comparator = null;
         
-        if(false) {
+        if(action == Sort.FIRST_NAME_DESC) {
             comparator = new Comparator<Employee>() {
                 @Override
                 public int compare(Employee firstEmployee, 
@@ -233,24 +233,27 @@ public class Model {
                 }
             };  
         }
-        else if(false) {
+        else if(action == Sort.LAST_NAME_DESC) {
             comparator = new Comparator<Employee>() {
                 @Override
                 public int compare(Employee firstEmployee, 
                         Employee secondEmployee) {
-                    return firstEmployee.getFirstName().compareTo(
-                            secondEmployee.getFirstName());
+                    return firstEmployee.getLastName().compareTo(
+                            secondEmployee.getLastName());
                 }
             };
+        }
+        else if(action == Sort.HOURLY_WAGE_DESC) {
+        
         }
         
         if(comparator != null) {
             Collections.sort(employeeSearchResults, comparator);   
-            fireModelActionResult("format_employee_search_results", null, 
+            fireModelActionResult("sort_employee_search_results", null, 
                     employeeSearchResults);
         }
         else {
-            fireModelActionResult("format_employee_search_results", null, null);
+            fireModelActionResult("sort_employee_search_results", null, null);
         }
     }
     

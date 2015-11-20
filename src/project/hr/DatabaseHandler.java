@@ -404,18 +404,17 @@ public class DatabaseHandler {
             selectQuery.append(employee.getBirthDay()).append("'");
             selectQuery.append(" AND '");
             selectQuery.append(newmployeeRangeValues.getBirthDay()).append("'");
-
         }
         else if(employee.getBirthDay() != null && 
                 newmployeeRangeValues.getBirthDay() == null) {
             selectQuery.append(" AND BIRTHDAY BETWEEN '");
             selectQuery.append(employee.getBirthDay()).append("'");
-            selectQuery.append(" AND '12.12.9999'");
+            selectQuery.append(" AND '9999-12-12'");
         }
         else if(employee.getBirthDay() == null && 
                 newmployeeRangeValues.getBirthDay() != null) {
             selectQuery.append(" AND BIRTHDAY BETWEEN ");
-            selectQuery.append("'01.01.0000' AND '");
+            selectQuery.append("'0000-01-01' AND '");
             selectQuery.append(newmployeeRangeValues.getBirthDay()).append("'");
         }
         
@@ -498,12 +497,12 @@ public class DatabaseHandler {
                 newmployeeRangeValues.getEndDate() == null) {
             selectQuery.append(" AND START_DATE BETWEEN '");
             selectQuery.append(employee.getStartDate()).append("'");
-            selectQuery.append(" AND '12.12.9999'");
+            selectQuery.append(" AND '9999-12-12'");
         }
         else if(employee.getStartDate() == null && 
                 newmployeeRangeValues.getEndDate() != null)
             selectQuery.append(" AND END_DATE BETWEEN ");
-            selectQuery.append("'01.01.0000'");
+            selectQuery.append("'0000-01-01'");
             selectQuery.append(newmployeeRangeValues.getEndDate()).append("'");
         
         if(employee.getWeeklyHours() != -1 && 
