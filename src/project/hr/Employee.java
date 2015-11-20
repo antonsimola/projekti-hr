@@ -10,26 +10,26 @@ package project.hr;
  * @author Anton
  */
 public class Employee {
-    private int employeeId;
-    private String firstName;
-    private String lastName;
-    private String birthDay;
-    private String ssn;
-    private String address;
-    private String postal;
-    private String city;
-    private String phone;
-    private String email;
-    private String favoriteDrink;
-    private String jobTitle;
-    private double jobWage;
+    private int employeeId = -1;
+    private String firstName = null;
+    private String lastName = null;
+    private String birthDay = null;
+    private String ssn = null;
+    private String address = null;
+    private String postal = null;
+    private String city = null;
+    private String phone = null;
+    private String email = null;
+    private String favoriteDrink = null;
+    private String jobTitle = null;
+    private double jobWage = -1;
     /*private Date startDate;
     private Date endDate;*/
-    private String startDate;
-    private String endDate;
-    private double weeklyHours;
-    private String password;
-    private int rights;
+    private String startDate = null;
+    private String endDate = null;
+    private double weeklyHours = -1;
+    private String password ="vakio";
+    private int rights = 1;
     private boolean loggedIn = false;
     
     public Employee () {
