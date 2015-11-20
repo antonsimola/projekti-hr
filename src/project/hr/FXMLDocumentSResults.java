@@ -8,7 +8,6 @@ package project.hr;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +17,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -56,8 +54,6 @@ public class FXMLDocumentSResults implements Initializable {
     private CheckBox drinkBox;
     @FXML
     private CheckBox enddateBox;
-    @FXML
-    private Button filterButton;
     @FXML
     private Button printpdfButton;
     @FXML
@@ -171,8 +167,140 @@ public class FXMLDocumentSResults implements Initializable {
         
     }
 
+
     @FXML
-    private void filterAction(ActionEvent event) {
+    private void firstnameFilter(ActionEvent event) {
+        if(firstnameBox.isSelected()) {
+            firstnameColumn.setVisible(true);
+        } else {
+            firstnameColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void cityFilter(ActionEvent event) {
+        if(cityBox.isSelected()) {
+            cityColumn.setVisible(true);
+        } else {
+            cityColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void lastnameFilter(ActionEvent event) {
+        if(lastnameBox.isSelected()) {
+            lastnameColumn.setVisible(true);
+        } else {
+            lastnameColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void jobFilter(ActionEvent event) {
+        if(jobBox.isSelected()) {
+            jobColumn.setVisible(true);
+        } else {
+            jobColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void postalcodeFilter(ActionEvent event) {
+        if(postalcodeBox.isSelected()) {
+            postalcodeColumn.setVisible(true);
+        } else {
+            postalcodeColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void wageFilter(ActionEvent event) {
+        if(wageBox.isSelected()) {
+            wageColumn.setVisible(true);
+        } else {
+            wageColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void dobFilter(ActionEvent event) {
+        if(dobBox.isSelected()) {
+            dobColumn.setVisible(true);
+        } else {
+            dobColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void phonenumFilter(ActionEvent event) {
+        if(phonenumBox.isSelected()) {
+            phonenumColumn.setVisible(true);
+        } else {
+            phonenumColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void hoursFilter(ActionEvent event) {
+        if(hoursBox.isSelected()) {
+            hoursColumn.setVisible(true);
+        } else {
+            hoursColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void ssnumFilter(ActionEvent event) {
+        if(ssnumBox.isSelected()) {
+            ssnumColumn.setVisible(true);
+        } else {
+            ssnumColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void emailFilter(ActionEvent event) {
+        if(emailBox.isSelected()) {
+            emailColumn.setVisible(true);
+        } else {
+            emailColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void startdateFilter(ActionEvent event) {
+        if(startdateBox.isSelected()) {
+            startdateColumn.setVisible(true);
+        } else {
+            startdateColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void addressFilter(ActionEvent event) {
+        if(addressBox.isSelected()) {
+            addressColumn.setVisible(true);
+        } else {
+            addressColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void drinkFilter(ActionEvent event) {
+        if(drinkBox.isSelected()) {
+            drinkColumn.setVisible(true);
+        } else {
+            drinkColumn.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void enddateFilter(ActionEvent event) {
+        if(enddateBox.isSelected()) {
+            enddateColumn.setVisible(true);
+        } else {
+            enddateColumn.setVisible(false);
+        }
     }
     
 }

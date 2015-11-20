@@ -38,77 +38,77 @@
                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
               </rowConstraints>
                <children>
-                  <CheckBox fx:id="firstnameBox" mnemonicParsing="false" text="Etunimi" GridPane.rowIndex="1">
+                  <CheckBox fx:id="firstnameBox" mnemonicParsing="false" onAction="#firstnameFilter" selected="true" text="Etunimi" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="cityBox" mnemonicParsing="false" text="Kaupunki" GridPane.rowIndex="2">
+                  <CheckBox fx:id="cityBox" mnemonicParsing="false" onAction="#cityFilter" selected="true" text="Kaupunki" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="lastnameBox" mnemonicParsing="false" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <CheckBox fx:id="lastnameBox" mnemonicParsing="false" onAction="#lastnameFilter" selected="true" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="jobBox" mnemonicParsing="false" text="Tehtävänimike" GridPane.rowIndex="4">
+                  <CheckBox fx:id="jobBox" mnemonicParsing="false" onAction="#jobFilter" selected="true" text="Tehtävänimike" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="postalcodeBox" mnemonicParsing="false" text="Postinumero" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <CheckBox fx:id="postalcodeBox" mnemonicParsing="false" onAction="#postalcodeFilter" selected="true" text="Postinumero" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="wageBox" mnemonicParsing="false" text="Tuntipalkka" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <CheckBox fx:id="wageBox" mnemonicParsing="false" onAction="#wageFilter" selected="true" text="Tuntipalkka" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="dobBox" mnemonicParsing="false" text="Syntymäaika" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <CheckBox fx:id="dobBox" mnemonicParsing="false" onAction="#dobFilter" selected="true" text="Syntymäaika" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="phonenumBox" mnemonicParsing="false" text="Puhelinnumero" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <CheckBox fx:id="phonenumBox" mnemonicParsing="false" onAction="#phonenumFilter" selected="true" text="Puhelinnumero" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="hoursBox" mnemonicParsing="false" text="Työtunnit/vko" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <CheckBox fx:id="hoursBox" mnemonicParsing="false" onAction="#hoursFilter" selected="true" text="Työtunnit/vko" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="ssnumBox" mnemonicParsing="false" text="HETU" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <CheckBox fx:id="ssnumBox" mnemonicParsing="false" onAction="#ssnumFilter" selected="true" text="HETU" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="emailBox" mnemonicParsing="false" text="Sähköpostiosoite" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <CheckBox fx:id="emailBox" mnemonicParsing="false" onAction="#emailFilter" selected="true" text="Sähköpostiosoite" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="startdateBox" mnemonicParsing="false" text="Aloituspäivämäärä" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <CheckBox fx:id="startdateBox" mnemonicParsing="false" onAction="#startdateFilter" selected="true" text="Aloituspäivämäärä" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="addressBox" mnemonicParsing="false" text="Katuosoite" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <CheckBox fx:id="addressBox" mnemonicParsing="false" onAction="#addressFilter" selected="true" text="Katuosoite" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="drinkBox" mnemonicParsing="false" text="Lempijuoma" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                  <CheckBox fx:id="drinkBox" mnemonicParsing="false" onAction="#drinkFilter" selected="true" text="Lempijuoma" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="enddateBox" mnemonicParsing="false" text="Lopetuspäivämäärä" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                  <CheckBox fx:id="enddateBox" mnemonicParsing="false" onAction="#enddateFilter" selected="true" text="Lopetuspäivämäärä" GridPane.columnIndex="4" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -129,7 +129,6 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="filterButton" alignment="CENTER" mnemonicParsing="false" onAction="#filterAction" text="Rajaa hakua" GridPane.columnIndex="5" GridPane.rowIndex="1" />
                   <Button fx:id="printpdfButton" alignment="CENTER" mnemonicParsing="false" text="Tulosta pdf-raportti" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                </children>
             </GridPane>
