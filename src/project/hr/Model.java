@@ -173,11 +173,11 @@ public class Model {
     
     // Should store search results in case the user wants to alter them
     // (call could be placed to alterEmployeeSearchResultFormatting)
-    public void searchEmployee(Employee employee) {
+    public void searchEmployee(Employee employee, Employee employeeRangevalues) {
         employeeSearchResults = null;
         
         try {
-            employeeSearchResults = databaseHandler.selectEmployee(employee);
+            employeeSearchResults = databaseHandler.selectEmployee(employee, employeeRangevalues);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
