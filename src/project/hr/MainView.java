@@ -131,7 +131,15 @@ public class MainView implements Initializable {
 
     @FXML
     private void helpAction(ActionEvent event) {
-        // OPEN HELP WINDOW
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("FXMLDocumentHelp.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -145,8 +153,10 @@ public class MainView implements Initializable {
                 namelist.getItems().clear();
                 container.getChildren().clear();
                 container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentEdit.fxml")));
+                removeselectedButton.setDisable(false);
             } else {
                 System.out.println("klikkasit tyhjää");
+                removeselectedButton.setDisable(true);
             }
         } catch (IOException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);

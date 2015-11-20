@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="401.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.hr.HelpWindow">
+   <stylesheets>
+      <URL value="@style.css" />
+   </stylesheets>
+   <children>
+      <Accordion AnchorPane.bottomAnchor="265.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <panes>
+          <TitledPane animated="false" text="Henkilön lisääminen">
+               <content>
+                  <Label fx:id="label1" alignment="TOP_LEFT" text="Uusi henkilö lisätään painamalla 'Lisää uusi' -nappia. Vaaditut tiedot on merkitty tähdellä (*), muut kentät voi jättää täyttämättä. Uusi henkilö tallennetaan tietokantaan 'Tallenna'-napilla." />
+               </content>
+            </TitledPane>
+          <TitledPane animated="false" text="Tietojen muokkaaminen">
+               <content>
+                  <Label fx:id="label2" text="Tietoja voidaan muokata valitsemalla ensin henkilö listasta. Tiedot syötetään avautuneessa näkymässä, tähdellä (*) merkittyjä kenttiä ei saa poistaa. Tiedot tallennetaan tietokantaan 'Tallenna'-napilla." />
+               </content></TitledPane>
+            <TitledPane animated="false" text="Henkilöiden haku">
+               <content>
+                  <Label fx:id="label3" text="Label" />
+               </content></TitledPane>
+            <TitledPane animated="false" text="Henkilöiden poistaminen">
+               <content>
+                  <Label fx:id="label4" text="Label" />
+               </content></TitledPane>
+        </panes>
+      </Accordion>
+   </children>
+</AnchorPane>
