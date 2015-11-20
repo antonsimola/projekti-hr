@@ -292,7 +292,7 @@ public class Controller implements PropertyChangeListener  {
     
     public void searchEmployee(String fn,
             String ln,
-            String  startBd,
+            String startBd,
             String endBd,
             String ssn,
             String addr,
