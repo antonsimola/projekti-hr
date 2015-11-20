@@ -17,10 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -28,42 +24,31 @@ import java.util.logging.SimpleFormatter;
  */
 public class Model {
     private PropertyChangeSupport propertyChangeSupport;
+    
     private PasswordSecurity passwordSecurity;
     private DatabaseHandler databaseHandler;
-    private Employee signedInEmployee;
-    private static final Logger logger = Logger.getLogger("hr_log");
+    private FileIOHandler fileIOHandler;
+    private LogHandler logHandler;
     
+    private Employee signedInEmployee;
     private ArrayList<Employee> employeeSearchResults;
     
     public Model () {
         propertyChangeSupport = new PropertyChangeSupport(this);
         passwordSecurity = new PasswordSecurity();
+        
         signedInEmployee = null;
         
-        // http://stackoverflow.com/questions/15758685/how-to-write-logs-in-text-file-when-using-java-util-logging-logger
-        FileHandler fileHandler = null; 
         try {
-            fileHandler = new FileHandler("hr_log");
-        } catch (IOException ex) {
-            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        logger.addHandler(fileHandler);
-        
-        SimpleFormatter simpleFormatter = new SimpleFormatter();
-        fileHandler.setFormatter(simpleFormatter);
-        
-        logger.setUseParentHandlers(false);
-        
-        try {
+            fileIOHandler = FileIOHandler.getInstance();
+            logHandler = LogHandler.getInstance();
+            //fileIOHandler.writeUserLog("testikäyttäjä", "update", "lisätieto");
             databaseHandler = new DatabaseHandler();
             databaseHandler.connect();
         }
-        catch(Exception e) {
-            // Log error, send quit/error event
-        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }   
     }
 
     public Employee getSignedInEmployee() {
@@ -187,7 +172,7 @@ public class Model {
     }
     
     // Should store search results in case the user wants to alter them
-    // (calls alterEmployeeSearchResultFormatting on an instance variable)
+    // (call could be placed to alterEmployeeSearchResultFormatting)
     public void searchEmployee(Employee employee) {
         employeeSearchResults = null;
         

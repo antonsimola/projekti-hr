@@ -1,4 +1,5 @@
 /* DatabaseHandler.java - Handler class for all database operations
+ *
  * Samuli Siitonen
  *
  * Sources:
