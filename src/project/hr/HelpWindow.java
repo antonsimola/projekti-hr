@@ -26,6 +26,10 @@ public class HelpWindow implements Initializable {
     private Label label3;
     @FXML
     private Label label4;
+    @FXML
+    private Label label5;
+    @FXML
+    private Label label6;
 
     /**
      * Initializes the controller class.
@@ -36,6 +40,8 @@ public class HelpWindow implements Initializable {
         label2.setWrapText(true);
         label3.setWrapText(true);
         label4.setWrapText(true);
+        label5.setWrapText(true);
+        label6.setWrapText(true);
     }    
     
 }
