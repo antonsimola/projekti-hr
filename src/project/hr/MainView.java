@@ -79,6 +79,7 @@ public class MainView implements Initializable {
             signedinUserLabel.setText("Kirjautuneena: " + 
                     signedEmp.getFirstName() + " " + signedEmp.getLastName());
         }
+        removeselectedButton.setDisable(true);
     }    
     public void updateEmployeeList(ArrayList <Employee> emplist) {
         namelist.getItems().clear();
