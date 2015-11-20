@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -62,33 +63,33 @@ public class FXMLDocumentSResults implements Initializable {
     @FXML
     private TableColumn<Employee, String> firstnameColumn;
     @FXML
-    private TableColumn<?, ?> lastnameColumn;
+    private TableColumn<Employee, String> lastnameColumn;
     @FXML
-    private TableColumn<?, ?> dobColumn;
+    private TableColumn<Employee, String> dobColumn;
     @FXML
-    private TableColumn<?, ?> ssnumColumn;
+    private TableColumn<Employee, String> ssnumColumn;
     @FXML
-    private TableColumn<?, ?> addressColumn;
+    private TableColumn<Employee, String> addressColumn;
     @FXML
-    private TableColumn<?, ?> cityColumn;
+    private TableColumn<Employee, String> cityColumn;
     @FXML
-    private TableColumn<?, ?> postalcodeColumn;
+    private TableColumn<Employee, String> postalcodeColumn;
     @FXML
-    private TableColumn<?, ?> phonenumColumn;
+    private TableColumn<Employee, String> phonenumColumn;
     @FXML
-    private TableColumn<?, ?> emailColumn;
+    private TableColumn<Employee, String> emailColumn;
     @FXML
-    private TableColumn<?, ?> drinkColumn;
+    private TableColumn<Employee, String> drinkColumn;
     @FXML
-    private TableColumn<?, ?> jobColumn;
+    private TableColumn<Employee, String> jobColumn;
     @FXML
-    private TableColumn<?, ?> wageColumn;
+    private TableColumn<Employee, String> wageColumn;
     @FXML
-    private TableColumn<?, ?> hoursColumn;
+    private TableColumn<Employee, String> hoursColumn;
     @FXML
-    private TableColumn<?, ?> startdateColumn;
+    private TableColumn<Employee, String> startdateColumn;
     @FXML
-    private TableColumn<?, ?> enddateColumn;
+    private TableColumn<Employee, String> enddateColumn;
     @FXML
     private TableView<Employee> table;
     
@@ -108,8 +109,70 @@ public class FXMLDocumentSResults implements Initializable {
         firstnameColumn.setCellValueFactory(
             new PropertyValueFactory<Employee,String>("firstName")
         );
+        
+        lastnameColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("lastName")
+        );
+        
+        dobColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("birthDay")
+        );
+        
+        ssnumColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("ssn")
+        );
+        
+        addressColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("address")
+        );
+        
+        cityColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("city")
+        );
+        
+        postalcodeColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("postal")
+        );
+        
+        phonenumColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("phone")
+        );
+        
+        emailColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("email")
+        );
+        
+        drinkColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("favoriteDrink")
+        );
+        
+        jobColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("jobTitle")
+        );
+        
+        wageColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("jobWage")
+        );
+        
+        hoursColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("weeklyHours")
+        );
+        
+        startdateColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("startDate")
+        );
+        
+        enddateColumn.setCellValueFactory(
+            new PropertyValueFactory<Employee,String>("endDate")
+        );
+        
+        
         table.setItems(employees);
         
+    }
+
+    @FXML
+    private void filterAction(ActionEvent event) {
     }
     
 }
