@@ -371,8 +371,8 @@ public class DatabaseHandler {
      * 
      * PARAMETRIZATION NOT IMPLEMENTED (should be done to all input?)
     */
-    public ArrayList<Employee> selectEmployee(Employee employee) 
-            throws Exception {
+    public ArrayList<Employee> selectEmployee(Employee employee, 
+            Employee newmployeeRangeValues) throws Exception {
         ArrayList<Employee> employeeList = new ArrayList();
         
         StringBuilder selectQuery = new StringBuilder(
@@ -398,9 +398,12 @@ public class DatabaseHandler {
             selectQuery.append(employee.getLastName()).append("'");
         }
         
-        if(employee.getBirthDay() != null) {
-            selectQuery.append(" AND BIRTHDAY='");
+        if(employee.getBirthDay() != null && 
+                newmployeeRangeValues.getBirthDay() != null) {
+            selectQuery.append(" AND BIRTHDAY BETWEEN ('");
             selectQuery.append(employee.getBirthDay()).append("'");
+            selectQuery.append(" AND '");
+            selectQuery.append(employee.getBirthDay()).append("')");
         }
         
         if(employee.getSsn() != null) {
