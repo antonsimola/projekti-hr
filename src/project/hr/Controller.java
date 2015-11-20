@@ -9,6 +9,8 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -19,6 +21,7 @@ public class Controller implements PropertyChangeListener  {
     private Model model;
     private ArrayList<Object> views;
     private Employee currentlySelectedEmployee;
+    ObservableList<Employee> obsEmps = null;
     
     private Controller() {
         model = new Model();
@@ -76,6 +79,16 @@ public class Controller implements PropertyChangeListener  {
            views.add((MainView) view);
         } else if (view instanceof LoginWindow) {
             views.add((LoginWindow) view); 
+        } else if (view instanceof FXMLDocumentSResults) {
+            views.add((FXMLDocumentSResults) view); 
+        } else if (view instanceof FXMLDocumentAddView) {
+            views.add((FXMLDocumentAddView) view); 
+        } else if (view instanceof FXMLDocumentEditView) {
+            views.add((FXMLDocumentEditView) view); 
+        } else if (view instanceof FXMLDocumentSearchView) {
+            views.add((FXMLDocumentSearchView) view); 
+        } else {
+            System.out.println("Not known view!!");
         }
     }
     private boolean isEmpty(String[] list) {
@@ -117,40 +130,38 @@ public class Controller implements PropertyChangeListener  {
             String end,
             String hours) {
         Employee emp = new Employee();
-
-        emp.setFirstName(fn);
-
-        emp.setLastName(ln);
-
-        emp.setBirthDay(bd);
-
-        emp.setSsn(ssn);
-
-        emp.setAddress(addr);
-
-        emp.setPostal(p);
-
-        emp.setCity(c);
-
-        emp.setPhone(phone);
-
-        emp.setEmail(email);
-
-        emp.setFavoriteDrink(fav);
-
-        emp.setJobTitle(title);
-
-        emp.setStartDate(title);
-
-        emp.setEndDate(end);        
+        if (!fn.isEmpty())
+            emp.setFirstName(fn);
+        if (!ln.isEmpty())
+            emp.setLastName(ln);
+        if (!bd.isEmpty())
+            emp.setBirthDay(bd);
+        if (!ssn.isEmpty())
+            emp.setSsn(ssn);
+        if (!addr.isEmpty())
+            emp.setAddress(addr);
+        if (!p.isEmpty())
+            emp.setPostal(p);
+        if (!c.isEmpty())
+            emp.setCity(c);
+        if (!phone.isEmpty())
+            emp.setPhone(phone);
+        if (!email.isEmpty())
+            emp.setEmail(email);
+        if (!fav.isEmpty())
+            emp.setFavoriteDrink(fav);
+        if (!title.isEmpty()) 
+            emp.setJobTitle(title);
+        if (!start.isEmpty())
+            emp.setStartDate(start);
+        if (!end.isEmpty())
+            emp.setEndDate(end);        
 
         if (isValidNumber(wage))
             emp.setJobWage(Double.parseDouble(wage));
 
         if (isValidNumber(hours))
             emp.setWeeklyHours(Double.parseDouble(hours));
-        emp.setPassword("vakio");
-        emp.setRights(1);
         return emp;
     }
     
@@ -177,9 +188,11 @@ public class Controller implements PropertyChangeListener  {
     }
 
     public void setCurrentlySelectedEmployee(Employee currentlySelectedEmployee) {
-        System.out.println("city"+currentlySelectedEmployee.getCity());
-        System.out.println("phone"+currentlySelectedEmployee.getPhone());
         this.currentlySelectedEmployee = currentlySelectedEmployee;
+    }
+    
+    public ObservableList<Employee> getSearchResults() {
+         return obsEmps;
     }
     
     
@@ -202,7 +215,7 @@ public class Controller implements PropertyChangeListener  {
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
         /*return false, if not OK, else return true*/
         if (isEmpty(required) == true) {
-            System.out.println("Tyhjiä kenttiä.");
+            
             return false;
         } else {
             Employee emp = generateEmployee(
@@ -221,6 +234,8 @@ public class Controller implements PropertyChangeListener  {
             start,
             end,
             hours);
+            emp.setPassword("vakio");
+            emp.setRights(1);
             model.addEmployee(emp);
             return true;
         }
@@ -231,8 +246,8 @@ public class Controller implements PropertyChangeListener  {
             String bd,
             String ssn,
             String addr,
-            String p,
-            String c,
+            String postal,
+            String city,
             String phone,
             String email,
             String fav,
@@ -254,8 +269,8 @@ public class Controller implements PropertyChangeListener  {
             bd,
             ssn,
             addr,
-            p,
-            c,
+            postal,
+            city,
             phone,
             email,
             fav,
@@ -273,6 +288,63 @@ public class Controller implements PropertyChangeListener  {
     
     public void attemptRemoveEmployee() {
         model.removeEmployee(currentlySelectedEmployee.getEmployeeId());
+    }
+    
+    public void searchEmployee(String fn,
+            String ln,
+            String  startBd,
+            String endBd,
+            String ssn,
+            String addr,
+            String city,
+            String postal,
+            String phone,
+            String email,
+            String fav,
+            String title,
+            String startWage,
+            String endWage,
+            String startHours,
+            String endHours,
+            String startDate,
+            String endDate) {
+        System.out.println(fn);
+        System.out.println(startBd);
+        Employee startEmp = generateEmployee(
+            fn,
+            ln,
+            startBd,
+            ssn, //SSN
+            addr,
+            postal,
+            city,
+            phone,
+            email,
+            fav,
+            title,
+            startWage,
+            startDate,
+            "",
+            startHours);
+        Employee endEmp = generateEmployee(
+            "",
+            "",
+            endBd,
+            "", //SSN
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            endWage,
+            "",
+            endDate,
+            endHours);
+        System.out.println("Startemp"+startEmp.getFirstName()+""+startEmp.getBirthDay());
+        model.searchEmployee(startEmp, endEmp);
+        
     }
     
     /*listens for updates in the model*/
@@ -320,10 +392,11 @@ public class Controller implements PropertyChangeListener  {
                     if (view instanceof MainView) {
                         MainView mv = (MainView) view;
                         Boolean b = (Boolean) evt.getNewValue();
-                        if (b.booleanValue()) {
+                        if (b) {
                             mv.updateStatusField("Poisto onnistui");
                             getAllEmployees();
                         } else {
+                            //mv.removeFinished(b);
                             mv.updateStatusField("Poisto epäonnistui");
                         }
                         
@@ -350,6 +423,19 @@ public class Controller implements PropertyChangeListener  {
                 if(foundLoginWindows) {
                     lw = (LoginWindow) foundView;
                     lw.logIn(isLoginSuccessful);
+                }
+                break;
+            case "search_by_employee":
+                ArrayList<Employee> emps = (ArrayList<Employee>) evt.getNewValue();
+                System.out.println("ArrayList:"+emps.get(0).getFirstName());
+                obsEmps = FXCollections.observableArrayList(emps);
+                System.out.println("ObservableList:"+obsEmps.get(0).getFirstName());
+                for (Object view:views) {
+                    if (view instanceof FXMLDocumentSResults) {
+                        System.out.println("Found Search Results view");
+                        FXMLDocumentSResults resultView = (FXMLDocumentSResults) view;
+                        resultView.fillTable(obsEmps);
+                    }
                 }
                 break;
             default:
