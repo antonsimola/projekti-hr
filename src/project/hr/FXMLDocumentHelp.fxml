@@ -28,20 +28,25 @@
                </content></TitledPane>
             <TitledPane animated="false" text="Henkilöiden haku">
                <content>
-                  <Label fx:id="label3" text="Label" />
+                  <Label fx:id="label3" text="Hakunäkymä avataan 'Hae'-painikkeella. Näkymään voi täyttää haluamansa hakukriteerit, tai kaikki kentät voi jättää tyhjäksi, jolloin kaikki tietokannan henkilöt noudetaan. Syntymäaika, tuntipalkka ja työtunnit annetaan välinä syöttämällä ala- ja/tai ylärajan." />
                </content></TitledPane>
             <TitledPane animated="false" text="Hakutulosten rajaus">
                <content>
-                  <Label fx:id="label4" text="Label" />
+                  <Label fx:id="label4" text="Hakutulokset avautuvat uuteen ikkunaan. Yläreunassa olevien valintaruutujen avulla voi valita haluamansa tiedot näytettäväksi haetuista henkilöistä." />
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" text="PDF-raportin tulostus">
+               <content>
+                  <Label fx:id="label5" text="Label" />
                </content>
             </TitledPane>
             <TitledPane animated="false" text="Henkilöiden poistaminen">
                <content>
-                  <Label fx:id="label5" text="Listalta valittu henkilö voidaan poistaa 'Poista valittu'-näppäimellä." />
+                  <Label fx:id="label6" text="Listalta valittu henkilö voidaan poistaa 'Poista valittu'-näppäimellä." />
                </content></TitledPane>
             <TitledPane animated="false" text="Käyttäjien oikeudet">
                <content>
-                  <Label fx:id="label6" text="Käyttäjät, joilla ei ole muokkausoikeuksia, voivat vain tarkastella tietokannassa olevia henkilöitä. Oikeuksien muuttaminen onnistuu vain suoraan tietokannassa." />
+                  <Label fx:id="label7" text="Käyttäjät, joilla ei ole muokkausoikeuksia, voivat vain tarkastella tietokannassa olevia henkilöitä. Oikeuksien muuttaminen onnistuu vain suoraan tietokannassa." />
                </content>
             </TitledPane>
         </panes>

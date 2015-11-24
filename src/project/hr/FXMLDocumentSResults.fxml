@@ -78,12 +78,12 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="hoursBox" mnemonicParsing="false" onAction="#hoursFilter" selected="true" text="Työtunnit/vko" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <CheckBox fx:id="hoursBox" mnemonicParsing="false" onAction="#hoursFilter" text="Työtunnit/vko" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="ssnumBox" mnemonicParsing="false" onAction="#ssnumFilter" selected="true" text="HETU" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <CheckBox fx:id="ssnumBox" mnemonicParsing="false" onAction="#ssnumFilter" text="HETU" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -93,7 +93,7 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="startdateBox" mnemonicParsing="false" onAction="#startdateFilter" selected="true" text="Aloituspäivämäärä" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <CheckBox fx:id="startdateBox" mnemonicParsing="false" onAction="#startdateFilter" text="Aloituspäivämäärä" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -103,12 +103,12 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="drinkBox" mnemonicParsing="false" onAction="#drinkFilter" selected="true" text="Lempijuoma" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                  <CheckBox fx:id="drinkBox" mnemonicParsing="false" onAction="#drinkFilter" text="Lempijuoma" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="enddateBox" mnemonicParsing="false" onAction="#enddateFilter" selected="true" text="Lopetuspäivämäärä" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                  <CheckBox fx:id="enddateBox" mnemonicParsing="false" onAction="#enddateFilter" text="Lopetuspäivämäärä" GridPane.columnIndex="4" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -137,18 +137,18 @@
                 <TableColumn fx:id="firstnameColumn" editable="false" prefWidth="75.0" text="Etunimi" />
                 <TableColumn fx:id="lastnameColumn" editable="false" prefWidth="75.0" text="Sukunimi" />
                   <TableColumn fx:id="dobColumn" editable="false" prefWidth="75.0" text="Synt.aika" />
-                  <TableColumn fx:id="ssnumColumn" editable="false" prefWidth="75.0" text="HETU" />
+                  <TableColumn fx:id="ssnumColumn" editable="false" prefWidth="75.0" text="HETU" visible="false" />
                   <TableColumn fx:id="addressColumn" editable="false" prefWidth="75.0" text="Osoite" />
                   <TableColumn fx:id="cityColumn" editable="false" prefWidth="75.0" text="Kaupunki" />
-                  <TableColumn fx:id="postalcodeColumn" editable="false" prefWidth="75.0" text="Postiosoite" />
+                  <TableColumn fx:id="postalcodeColumn" editable="false" prefWidth="75.0" text="Postinumero" />
                   <TableColumn fx:id="phonenumColumn" editable="false" prefWidth="75.0" text="Puh.num." />
                   <TableColumn fx:id="emailColumn" editable="false" prefWidth="75.0" text="S-posti" />
-                  <TableColumn fx:id="drinkColumn" editable="false" prefWidth="75.0" text="Lempijuoma" />
+                  <TableColumn fx:id="drinkColumn" editable="false" prefWidth="75.0" text="Lempijuoma" visible="false" />
                   <TableColumn fx:id="jobColumn" editable="false" prefWidth="75.0" text="Tehtävä" />
                   <TableColumn fx:id="wageColumn" editable="false" prefWidth="75.0" text="Palkka" />
-                  <TableColumn fx:id="hoursColumn" editable="false" prefWidth="75.0" text="Tunnit/vko" />
-                  <TableColumn fx:id="startdateColumn" editable="false" prefWidth="75.0" text="Aloituspvm" />
-                  <TableColumn fx:id="enddateColumn" editable="false" prefWidth="75.0" text="Lopetuspvm" />
+                  <TableColumn fx:id="hoursColumn" editable="false" prefWidth="75.0" text="Tunnit/vko" visible="false" />
+                  <TableColumn fx:id="startdateColumn" editable="false" prefWidth="75.0" text="Aloituspvm" visible="false" />
+                  <TableColumn fx:id="enddateColumn" editable="false" prefWidth="75.0" text="Lopetuspvm" visible="false" />
               </columns>
             </TableView>
          </children>
