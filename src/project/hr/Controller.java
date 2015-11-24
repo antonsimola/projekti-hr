@@ -7,6 +7,7 @@ package project.hr;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
@@ -344,6 +345,10 @@ public class Controller implements PropertyChangeListener  {
             endHours);
         System.out.println("Startemp"+startEmp.getFirstName()+""+startEmp.getBirthDay());
         model.searchEmployee(startEmp, endEmp);
+        
+    }
+    
+    public void createPDF(ObservableList <Employee> emps, HashMap selectedColumns) {
         
     }
     
