@@ -16,8 +16,10 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -62,7 +64,11 @@ public class Model {
         fireModelActionResult("user_log", null, fileIOHandler.readUserLog());
     }
     
-    public void writeSearchResultsPDF(ObservableList<Employee> employees, HashMap<String, boolean> limits) {
+    public void createSearchResultsPDF(ObservableList<Employee> employees, 
+            HashMap<String, Boolean> limits) {
+        
+        fileIOHandler.writePDF(employees, limits);
+        fireModelActionResult("create_pdf", null, new Boolean(true));
     
     }
     
