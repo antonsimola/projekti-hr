@@ -51,11 +51,19 @@ public class Model {
         }
         catch(Exception ex) {
             ex.printStackTrace();
-        }   
+        }
     }
 
     public Employee getSignedInEmployee() {
         return signedInEmployee;
+    }
+    
+    public void getUserLog() {
+        fireModelActionResult("user_log", null, fileIOHandler.readUserLog());
+    }
+    
+    public void writeSearchResultsPDF(ObservableList<Employee> employees, HashMap<String, boolean> limits) {
+    
     }
     
     public static enum Sort {
@@ -129,9 +137,22 @@ public class Model {
                         employee.getPassword())) {
             signedInEmployee = employee;
             fireModelActionResult("sign_in", null, employee);
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_SIGN_IN, 
+                    fileIOHandler.ACTION_SUCCESS, 
+                    signedInEmployee.getEmployeeId(),
+                    signedInEmployee.toString(),
+                    signedInEmployee.getSsn());
+            
         }
         else {
             fireModelActionResult("sign_in", null, null);
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_SIGN_IN, 
+                    fileIOHandler.ACTION_FAILURE, 
+                    signedInEmployee.getEmployeeId(),
+                    signedInEmployee.toString(),
+                    signedInEmployee.getSsn());
         }
     }
     
@@ -142,6 +163,7 @@ public class Model {
     
     public void addEmployee(Employee employee) {
         boolean isSuccessful = true;
+        String successString = fileIOHandler.ACTION_SUCCESS;
         employee.setPassword(passwordSecurity.generateHashedSaltedPassword(
                             employee.getPassword()));
         
@@ -149,15 +171,25 @@ public class Model {
             databaseHandler.insertEmployee(employee);
         } catch (Exception ex) {
             isSuccessful = false;
+            successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("add", null, new Boolean(isSuccessful));
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_ADD, 
+                    successString, 
+                    employee.getEmployeeId(),
+                    employee.toString(),
+                    employee.getSsn());
         }
+        
+        
     }
     
     public void editEmployee(Employee employee) {
         boolean isSuccessful = true;
+        String successString = fileIOHandler.ACTION_SUCCESS;
         
         try {
             databaseHandler.updateEmployee(employee);
@@ -165,55 +197,87 @@ public class Model {
             //fireModelActionResult("edit", null, (Object)employee);
         } catch (Exception ex) {
             isSuccessful = false;
+            successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("edit", null, new Boolean(isSuccessful));
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_EDIT, 
+                    successString, 
+                    employee.getEmployeeId(),
+                    employee.toString(),
+                    employee.getSsn());
         }
     }
     
     public void removeEmployee(int employeeId) {
         boolean isSuccessful = true;
+        String successString = fileIOHandler.ACTION_SUCCESS;
         
         try {
             databaseHandler.deleteEmployeeByEmployeeId(employeeId);
         } catch (Exception ex) {
             isSuccessful = false;
+            successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("remove", null, new Boolean(isSuccessful));
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_REMOVE, 
+                    successString, 
+                    employeeId,
+                    fileIOHandler.EMPTY,
+                    fileIOHandler.EMPTY);
         }
     }
     
     // Should store search results in case the user wants to alter them
     // (call could be placed to alterEmployeeSearchResultFormatting)
-    public void searchEmployee(Employee employee, Employee employeeRangevalues) {
+    public void searchEmployee(Employee employee, Employee employeeRangevalues){
         employeeSearchResults = null;
+        String successString = fileIOHandler.ACTION_SUCCESS;
         
         try {
-            employeeSearchResults = databaseHandler.selectEmployee(employee, employeeRangevalues);
+            employeeSearchResults = databaseHandler.selectEmployee(employee, 
+                    employeeRangevalues);
         } catch (Exception ex) {
+            successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("search_by_employee", null, 
                 employeeSearchResults);
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_SEARCH, 
+                    successString, 
+                    employee.getEmployeeId(),
+                    employee.toString(),
+                    employee.getSsn());
         }
     }
     
     public void searchEmployee(int employeeId) {
         Employee employee = null;
+        String successString = fileIOHandler.ACTION_SUCCESS;
         
         try {
             employee = databaseHandler.selectEmployeeById(employeeId);
         } 
         catch (Exception ex) {
+            successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
             fireModelActionResult("search_by_id", null, 
                 employee);
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_SEARCH, 
+                    successString, 
+                    employeeId,
+                    fileIOHandler.EMPTY,
+                    fileIOHandler.EMPTY);
         }
     }
     
@@ -259,13 +323,22 @@ public class Model {
     
     public void getAllEmployees() {
         ArrayList<Employee> employeeList = null;
+        String successString = fileIOHandler.ACTION_SUCCESS;
         
         try {
             employeeList = databaseHandler.selectAllEmployees();
         } catch(Exception ex) {
+            successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());
         }
-
-        fireModelActionResult("all_employees", null, employeeList);
+        finally {
+            fireModelActionResult("all_employees", null, employeeList);
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_SEARCH, 
+                    successString, 
+                    fileIOHandler.EMPTY_ID,
+                    fileIOHandler.TARGET_ALL,
+                    fileIOHandler.TARGET_ALL);
+        }      
     }
 }

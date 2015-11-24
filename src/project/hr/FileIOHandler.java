@@ -20,6 +20,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,6 +31,21 @@ public class FileIOHandler {
     private static FileIOHandler instance = null;
     private String userLogFilename;
     private DateFormat dateFormat;
+    
+    public static final int EMPTY_ID = -1;
+    public static final String TARGET_MULTIPLE = "<multiple>";
+    public static final String TARGET_ALL = "<all>";
+    
+    public static final String ACTION_SIGN_IN = "sign_in";
+    public static final String ACTION_ADD = "add";
+    public static final String ACTION_REMOVE = "remove";
+    public static final String ACTION_EDIT = "change";
+    public static final String ACTION_SEARCH = "search";
+    
+    public static final String ACTION_SUCCESS = "success";
+    public static final String ACTION_FAILURE = "failure";
+    
+    public static final String EMPTY = "<empty>";
     
     private FileIOHandler() {
        userLogFilename = "HR_user_log.txt";
@@ -44,41 +61,61 @@ public class FileIOHandler {
     
     // Write log unbuffered
     public void writeUserLog(String username, String action, 
-            String additionalInfo) throws Exception {
+            String actionSuccess, int targetID, String targetName, String targetSSN) {
         
         File file = new File(userLogFilename);
-        PrintWriter printWriter = new PrintWriter(new FileOutputStream(
-                file, true));
+        PrintWriter printWriter;
+        try {
+            printWriter = new PrintWriter(new FileOutputStream(
+                    file, true));
         
-        Date date = new Date();
-        
-        String output = dateFormat.format(date) +
-                        "|" +
-                        username +
-                        "|" +
-                        action +
-                        "|" +
-                        additionalInfo +
-                        "\n";
-                                   
-        printWriter.write(output);
-        
-        printWriter.close();
+            Date date = new Date();
+
+            String output = username +
+                            "|" +
+                            action +
+                            "|" +
+                            actionSuccess +
+                            "|" +
+                            Integer.toString(targetID) +
+                            "|" +
+                            targetName +
+                            "|" +
+                            targetSSN +
+                            "|" +
+                            dateFormat.format(date) +
+                            "\n";
+
+            printWriter.write(output);
+
+            printWriter.close();
+            
+        } catch (FileNotFoundException ex) {
+            
+        }
     }
     
     // Read log buffered
-    public ArrayList<String[]> readUserLog() throws FileNotFoundException, 
-            IOException {
+    public ArrayList<String[]> readUserLog() {
         ArrayList<String[]> lineList = new ArrayList();
         
         File file = new File(userLogFilename);
 
-        FileReader fileReader = new FileReader(file);
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(file);
+        } catch (FileNotFoundException ex) {
+           
+        }
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         
         String readLine;
-        while((readLine = bufferedReader.readLine()) != null) {
-            lineList.add(readLine.split("|"));
+        try {
+            while((readLine = bufferedReader.readLine()) != null) {
+                lineList.add(readLine.split("|"));
+            }
+        } catch (IOException ex) {
+            
         }
         
         return lineList;
