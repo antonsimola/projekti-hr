@@ -158,8 +158,74 @@ public class FileIOHandler {
                     tableCell = new PdfPCell(new Paragraph(employee.getFirstName()));
                     table.addCell(tableCell);
                 }
+                
                 if(limits.get("lastName").booleanValue()) {
                     tableCell = new PdfPCell(new Paragraph(employee.getLastName()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("birthday").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getBirthDay()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("ssn").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getSsn()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("address").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getAddress()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("city").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getCity()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("postal").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getPostal()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("phone").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getPhone()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("email").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getEmail()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("favoriteDrink").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getFavoriteDrink()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("jobTitle").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getJobTitle()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("jobWage").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(Double.toString(employee.getJobWage())));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("weeklyHours").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(Double.toString(employee.getWeeklyHours())));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("startDate").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getStartDate()));
+                    table.addCell(tableCell);
+                }
+                
+                if(limits.get("endDate").booleanValue()) {
+                    tableCell = new PdfPCell(new Paragraph(employee.getEndDate()));
                     table.addCell(tableCell);
                 }
             }
@@ -167,6 +233,7 @@ public class FileIOHandler {
             document.add(table);
 
             document.close();
+            
         } catch(Exception e){
 
         }
