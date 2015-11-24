@@ -222,7 +222,11 @@ public class Model {
         String successString = fileIOHandler.ACTION_SUCCESS;
         
         try {
-            databaseHandler.deleteEmployeeByEmployeeId(employeeId);
+            if (employeeId != signedInEmployee.getEmployeeId())
+                databaseHandler.deleteEmployeeByEmployeeId(employeeId);
+            else {
+                isSuccessful = false;
+            }
         } catch (Exception ex) {
             isSuccessful = false;
             successString = fileIOHandler.ACTION_FAILURE;
@@ -248,6 +252,8 @@ public class Model {
         try {
             employeeSearchResults = databaseHandler.selectEmployee(employee, 
                     employeeRangevalues);
+            if (!(employeeSearchResults.size()> 0))
+                employeeSearchResults = null;
         } catch (Exception ex) {
             successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());

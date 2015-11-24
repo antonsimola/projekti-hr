@@ -1,4 +1,0 @@
-marras 20, 2015 2:23:47 IP. project.hr.Model searchEmployee
-SEVERE: [SQLITE_ERROR] SQL error or missing database (near "null": syntax error)
-marras 20, 2015 2:27:18 IP. project.hr.Model searchEmployee
-SEVERE: [SQLITE_ERROR] SQL error or missing database (near "null": syntax error)

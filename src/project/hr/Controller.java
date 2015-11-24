@@ -27,8 +27,9 @@ public class Controller implements PropertyChangeListener  {
     private Controller() {
         model = new Model();
         model.addPropertyChangeListener(this);
-        /*model.registerEmployee(new Employee(
-                "Jouni",
+        /*for (int i = 0;i<1001;i++) {
+            model.registerEmployee(new Employee(
+                "Jouni"+i,
                 "Sampo",
                 "2002-21-12",
                 "12213123-2213",
@@ -64,7 +65,8 @@ public class Controller implements PropertyChangeListener  {
                 40,
                 null,
                 1),
-                "trigonometria");*/
+                "trigonometria");
+        }*/
         views = new ArrayList();
     }
     
@@ -273,7 +275,6 @@ public class Controller implements PropertyChangeListener  {
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
         /*return false, if not OK, else return true*/
         if (isEmpty(required)) {
-            System.out.println("Tyhjiä kenttiä.");
             return false;
         }
         else {
@@ -301,6 +302,7 @@ public class Controller implements PropertyChangeListener  {
     };
     
     public void attemptRemoveEmployee() {
+        
         model.removeEmployee(currentlySelectedEmployee.getEmployeeId());
     }
     
@@ -322,8 +324,6 @@ public class Controller implements PropertyChangeListener  {
             String endHours,
             String startDate,
             String endDate) {
-        System.out.println(fn);
-        System.out.println(startBd);
         Employee startEmp = generateEmployee(
             fn,
             ln,
@@ -356,7 +356,6 @@ public class Controller implements PropertyChangeListener  {
             "",
             endDate,
             endHours);
-        System.out.println("Startemp"+startEmp.getFirstName()+""+startEmp.getBirthDay());
         model.searchEmployee(startEmp, endEmp);
         
     }
@@ -444,15 +443,22 @@ public class Controller implements PropertyChangeListener  {
                 }
                 break;
             case "search_by_employee":
-                ArrayList<Employee> emps = (ArrayList<Employee>) evt.getNewValue();
-                System.out.println("ArrayList:"+emps.get(0).getFirstName());
-                obsEmps = FXCollections.observableArrayList(emps);
-                System.out.println("ObservableList:"+obsEmps.get(0).getFirstName());
-                for (Object view:views) {
-                    if (view instanceof FXMLDocumentSResults) {
-                        System.out.println("Found Search Results view");
-                        FXMLDocumentSResults resultView = (FXMLDocumentSResults) view;
-                        resultView.fillTable(obsEmps);
+                if (evt.getNewValue() == null) {
+                    for (Object view:views) {
+                        if (view instanceof MainView) {
+                            System.out.println("Ei löytynyt kettään");
+                            MainView mv = (MainView) view;
+                            mv.updateStatusField("Haku ei tuottanut yhtään tulosta.");
+                        }
+                    }
+                } else {
+                    ArrayList<Employee> emps = (ArrayList<Employee>) evt.getNewValue();
+                    obsEmps = FXCollections.observableArrayList(emps);
+                    for (Object view:views) {
+                        if (view instanceof FXMLDocumentSResults) {
+                            FXMLDocumentSResults resultView = (FXMLDocumentSResults) view;
+                            resultView.fillTable(obsEmps);
+                        }
                     }
                 }
                 break;

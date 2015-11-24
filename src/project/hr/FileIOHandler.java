@@ -164,7 +164,7 @@ public class FileIOHandler {
                     table.addCell(tableCell);
                 }
                 
-                if(limits.get("birthday").booleanValue()) {
+                if(limits.get("birthDay").booleanValue()) {
                     tableCell = new PdfPCell(new Paragraph(employee.getBirthDay()));
                     table.addCell(tableCell);
                 }
@@ -235,7 +235,7 @@ public class FileIOHandler {
             document.close();
             
         } catch(Exception e){
-
+            System.out.println("PDF write error!");
         }
     }
 }

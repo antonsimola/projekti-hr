@@ -97,7 +97,7 @@ public class FXMLDocumentSResults implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Controller controller = Controller.getInstance();
+        controller = Controller.getInstance();
         controller.registerView(this);
         fillTable(controller.getSearchResults());
     }    
@@ -306,23 +306,28 @@ public class FXMLDocumentSResults implements Initializable {
 
     @FXML
     private void printpdfAction(ActionEvent event) {
-        HashMap selectedColumns = new HashMap<String, Boolean>();
-        selectedColumns.put("firstname", firstnameBox.isSelected());
-        selectedColumns.put("lastname", lastnameBox.isSelected());
-        selectedColumns.put("birthDay", dobBox.isSelected());
-        selectedColumns.put("ssn", ssnumBox.isSelected());
-        selectedColumns.put("address", addressBox.isSelected());
-        selectedColumns.put("city", cityBox.isSelected());
-        selectedColumns.put("postal", postalcodeBox.isSelected());
-        selectedColumns.put("phone", phonenumBox.isSelected());
-        selectedColumns.put("email", emailBox.isSelected());
-        selectedColumns.put("favoriteDrink", drinkBox.isSelected());
-        selectedColumns.put("jobTitle", jobBox.isSelected());
-        selectedColumns.put("jobWage", wageBox.isSelected());
-        selectedColumns.put("weeklyHours", hoursBox.isSelected());
-        selectedColumns.put("startDate", startdateBox.isSelected());
-        selectedColumns.put("endDate", enddateBox.isSelected());
-
+        HashMap<String, Boolean> selectedColumns = new HashMap<>();
+        System.out.println(firstnameBox.isSelected());
+        selectedColumns.put("firstName", (Boolean)firstnameBox.isSelected());
+        selectedColumns.put("lastName", (Boolean) lastnameBox.isSelected());
+        selectedColumns.put("birthDay", (Boolean) dobBox.isSelected());
+        selectedColumns.put("ssn", (Boolean) ssnumBox.isSelected());
+        selectedColumns.put("address", (Boolean) addressBox.isSelected());
+        selectedColumns.put("city", (Boolean) cityBox.isSelected());
+        selectedColumns.put("postal", (Boolean) postalcodeBox.isSelected());
+        selectedColumns.put("phone", (Boolean) phonenumBox.isSelected());
+        selectedColumns.put("email", (Boolean) emailBox.isSelected());
+        selectedColumns.put("favoriteDrink", (Boolean) drinkBox.isSelected());
+        selectedColumns.put("jobTitle", (Boolean) jobBox.isSelected());
+        selectedColumns.put("jobWage", (Boolean) wageBox.isSelected());
+        selectedColumns.put("weeklyHours", (Boolean) hoursBox.isSelected());
+        selectedColumns.put("startDate", (Boolean) startdateBox.isSelected());
+        selectedColumns.put("endDate", (Boolean) enddateBox.isSelected());
+        System.out.println(table.getItems().get(0).getFirstName());
+        System.out.println(selectedColumns.get("firstName"));
+        if(controller == null) {
+            System.out.println("getItems null");
+        }
         controller.createPDF(table.getItems(), selectedColumns);
     }
     
