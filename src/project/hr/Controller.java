@@ -102,7 +102,7 @@ public class Controller implements PropertyChangeListener  {
     }
     
     private boolean isValidEmail(String email) {
-        Pattern p = Pattern.compile(".+\\@.+\\..+");
+        Pattern p = Pattern.compile(".+@.+");
         Matcher m  = p.matcher(email);
         return m.matches();
     }
@@ -213,10 +213,23 @@ public class Controller implements PropertyChangeListener  {
             String start,
             String end,
             String hours) {
-        String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
+        String[] required = {fn,ln,bd,ssn,title,start,hours,wage,email};
         /*return false, if not OK, else return true*/
         if (isEmpty(required) == true) {
-            
+            for (Object view:views) {
+                if (view instanceof MainView) {
+                    MainView mv = (MainView) view;
+                    mv.updateStatusField("Täytä pakolliset kentät!");
+                }
+            }
+            return false;
+        } else if (!isValidEmail(email)) {
+            for (Object view:views) {
+                if (view instanceof MainView) {
+                    MainView mv = (MainView) view;
+                    mv.updateStatusField("Email on väärin kirjoitettu!");
+                }
+            }
             return false;
         } else {
             Employee emp = generateEmployee(
@@ -348,8 +361,8 @@ public class Controller implements PropertyChangeListener  {
         
     }
     
-    public void createPDF(ObservableList <Employee> emps, HashMap selectedColumns) {
-        
+    public void createPDF(ObservableList<Employee> emps, HashMap<String, Boolean> selectedColumns) {
+        model.createSearchResultsPDF(emps,selectedColumns);
     }
     
     /*listens for updates in the model*/
@@ -442,6 +455,8 @@ public class Controller implements PropertyChangeListener  {
                         resultView.fillTable(obsEmps);
                     }
                 }
+                break;
+            case "create_pdf":
                 break;
             default:
                 System.out.println("default");

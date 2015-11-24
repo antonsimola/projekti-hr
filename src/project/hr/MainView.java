@@ -59,6 +59,10 @@ public class MainView implements Initializable {
     private Label signedinUserLabel;
     @FXML
     private Button logoutButton;
+    @FXML
+    private Button showallButton1;
+    @FXML
+    private Label errorText;
 
     
     
@@ -170,7 +174,7 @@ public class MainView implements Initializable {
     }
     
     public void updateStatusField (String s) {
-        System.out.println(s);
+        errorText.setText(s);
     }
     
     

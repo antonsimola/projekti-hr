@@ -84,8 +84,10 @@
                         </GridPane>
                      </children>
                   </GridPane>
-                  <Label text="Versio 0.9999999" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                  </Label>
+                  <Label fx:id="errorText" prefHeight="15.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin></Label>
                   <Label fx:id="signedinUserLabel" text="Kirjautuneena:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   </Label>
                   <Pane fx:id="container" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
