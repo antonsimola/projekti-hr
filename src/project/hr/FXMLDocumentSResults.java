@@ -7,6 +7,7 @@
 package project.hr;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -301,6 +302,28 @@ public class FXMLDocumentSResults implements Initializable {
         } else {
             enddateColumn.setVisible(false);
         }
+    }
+
+    @FXML
+    private void printpdfAction(ActionEvent event) {
+        HashMap selectedColumns = new HashMap<String, Boolean>();
+        selectedColumns.put("firstname", firstnameBox.isSelected());
+        selectedColumns.put("lastname", lastnameBox.isSelected());
+        selectedColumns.put("birthDay", dobBox.isSelected());
+        selectedColumns.put("ssn", ssnumBox.isSelected());
+        selectedColumns.put("address", addressBox.isSelected());
+        selectedColumns.put("city", cityBox.isSelected());
+        selectedColumns.put("postal", postalcodeBox.isSelected());
+        selectedColumns.put("phone", phonenumBox.isSelected());
+        selectedColumns.put("email", emailBox.isSelected());
+        selectedColumns.put("favoriteDrink", drinkBox.isSelected());
+        selectedColumns.put("jobTitle", jobBox.isSelected());
+        selectedColumns.put("jobWage", wageBox.isSelected());
+        selectedColumns.put("weeklyHours", hoursBox.isSelected());
+        selectedColumns.put("startDate", startdateBox.isSelected());
+        selectedColumns.put("endDate", enddateBox.isSelected());
+
+        controller.createPDF(table.getItems(), selectedColumns);
     }
     
 }
