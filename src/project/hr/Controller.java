@@ -93,6 +93,8 @@ public class Controller implements PropertyChangeListener  {
             views.add((FXMLDocumentEditView) view); 
         } else if (view instanceof FXMLDocumentSearchView) {
             views.add((FXMLDocumentSearchView) view); 
+        } else if (view instanceof LogWindow) {
+            views.add((LogWindow) view); 
         } else {
             System.out.println("Not known view!!");
         }
@@ -215,7 +217,20 @@ public class Controller implements PropertyChangeListener  {
     
     public void getAllEmployees() {
         model.getAllEmployees();
-        
+    }
+    
+    public void nameSearch(String fname, String lname) {
+        if(fname.equals("")) {
+            fname = null;
+        }        
+        if(lname.equals("")) {
+            lname = null;
+        }
+        Employee emp = new Employee();
+        emp.setFirstName(fname);
+        emp.setLastName(lname);
+        model.searchEmployee(emp);
+ 
         
     }
 
@@ -407,6 +422,10 @@ public class Controller implements PropertyChangeListener  {
         model.createSearchResultsPDF(emps,selectedColumns);
     }
     
+    public void getLog() {
+        model.getUserLog();
+    }
+    
     /*listens for updates in the model*/
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -506,8 +525,37 @@ public class Controller implements PropertyChangeListener  {
                     }
                 }
                 break;
+            case "search_names":
+                Object o = evt.getNewValue();
+                if (o == null) {
+                    for (Object view:views) {
+                        if (view instanceof MainView) {
+                            MainView mv = (MainView) view;
+                            mv.updateEmployeeList(new ArrayList<Employee>()) ;
+                            mv.updateStatusField("Nimihaku ei tuottanut tuloksia!");
+                        }
+                    }
+                    break;
+                }
+                for (Object view:views) {
+                    if (view instanceof MainView) {
+                        MainView mv = (MainView) view;
+                        ArrayList<Employee> array = (ArrayList<Employee>) o;
+                        mv.updateEmployeeList(array);
+                        mv.updateStatusField("");
+                    }
+                }
+                break;
             case "create_pdf":
                 break;
+            case "user_log":
+                ArrayList<String[]> list = (ArrayList<String[]>) evt.getNewValue();
+                for (Object view: views) {
+                    if (view instanceof LogWindow) {
+                        LogWindow logwindow = (LogWindow) view;
+                        logwindow.updateList(list);
+                    }
+                }
             default:
                 System.out.println("default");
                 break;

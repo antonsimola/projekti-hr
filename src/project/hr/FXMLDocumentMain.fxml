@@ -47,24 +47,26 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" vgrow="NEVER" />
-                      <RowConstraints maxHeight="499.0" minHeight="10.0" prefHeight="486.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="68.0" minHeight="68.0" prefHeight="68.0" vgrow="NEVER" />
+                      <RowConstraints maxHeight="499.0" minHeight="10.0" prefHeight="458.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="77.0" minHeight="77.0" prefHeight="77.0" vgrow="NEVER" />
                     </rowConstraints>
                      <children>
                         <GridPane>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="128.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="84.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="98.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="150.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="140.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="showallButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAllButtonPressed" prefHeight="30.0" prefWidth="91.0" text="Palauta" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                              <Button fx:id="showallButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAllButtonPressed" prefHeight="30.0" prefWidth="91.0" text="Palauta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                               <TextField fx:id="namesearchField" promptText="Nimihaku" GridPane.halignment="CENTER" />
-                              <Button fx:id="showallButton1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAllButtonPressed" prefHeight="30.0" prefWidth="91.0" text="Hae" GridPane.columnIndex="1" />
+                              <Button fx:id="nameSearchButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#nameSearchButtonpressed" prefHeight="30.0" prefWidth="91.0" text="Hae" GridPane.rowIndex="1" />
+                              <TextField fx:id="firstNameField" promptText="Etunimi" />
+                              <TextField fx:id="lastNameField" promptText="Sukunimi" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <ListView fx:id="namelist" onMouseClicked="#employeeSelected" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
@@ -85,7 +87,7 @@
                         </GridPane>
                      </children>
                   </GridPane>
-                  <Label fx:id="errorText" prefHeight="15.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label fx:id="errorText" prefHeight="15.0" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></Label>

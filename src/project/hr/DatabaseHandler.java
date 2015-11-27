@@ -370,7 +370,7 @@ public class DatabaseHandler {
      * instance. Does not yet allow search by range.
      * 
      * PARAMETRIZATION NOT IMPLEMENTED (should be done to all input?)
-    */
+    */ 
     public ArrayList<Employee> selectEmployee(Employee employee, 
             Employee newmployeeRangeValues) throws Exception {
         ArrayList<Employee> employeeList = new ArrayList();
@@ -523,6 +523,49 @@ public class DatabaseHandler {
             selectQuery.append(" AND WEEKLY_WORKHOURS <= ");
             selectQuery.append(newmployeeRangeValues.getWeeklyHours());
         }
+        
+        selectQuery.append(";");
+        System.out.println(selectQuery.toString());
+        // May result in a database operation failure.
+        Statement statement = connection.createStatement(); 
+        ResultSet resultSet = statement.executeQuery(selectQuery.toString());
+        
+        try {
+            employeeList = populateEmployeeList(resultSet);
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+            employeeList = null;
+        }
+        return employeeList;
+    }
+    
+    public ArrayList<Employee> selectEmployeeByName(Employee employee) throws Exception {
+        ArrayList<Employee> employeeList = new ArrayList();
+        
+        StringBuilder selectQuery = new StringBuilder(
+                    "SELECT "
+                +       "* "
+                +   "FROM "
+                +       "EMPLOYEE "
+                +       "INNER JOIN "
+                +       "EMPLOYMENT "
+                +   "ON "
+                +       "EMPLOYEE.EMPLOYMENT_ID_FK=EMPLOYMENT.EMPLOYMENT_ID "
+                +   "WHERE EMPLOYEE.EMPLOYEE_ID >= 0");
+        
+        // EMPLOYEE spesific attributes begin
+        
+        if(employee.getFirstName() != null) {
+            selectQuery.append(" AND FIRST_NAME='");
+            selectQuery.append(employee.getFirstName()).append("'");
+        }
+        
+        if(employee.getLastName() != null) {
+            selectQuery.append(" AND SECOND_NAME='");
+            selectQuery.append(employee.getLastName()).append("'");
+        }
+        
         
         selectQuery.append(";");
         System.out.println(selectQuery.toString());

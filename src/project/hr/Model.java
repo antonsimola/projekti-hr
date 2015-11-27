@@ -293,6 +293,30 @@ public class Model {
         }
     }
     
+    public void searchEmployee(Employee emp){
+        employeeSearchResults = null;
+        String successString = fileIOHandler.ACTION_SUCCESS;
+        
+        try {
+            employeeSearchResults = databaseHandler.selectEmployeeByName(emp);
+            if (!(employeeSearchResults.size()> 0))
+                employeeSearchResults = null;
+        } catch (Exception ex) {
+            successString = fileIOHandler.ACTION_FAILURE;
+            logger.log(Level.SEVERE, ex.getMessage());
+        }
+        finally {
+            fireModelActionResult("search_names", null, 
+                employeeSearchResults);
+            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+                    fileIOHandler.ACTION_SEARCH, 
+                    fileIOHandler.EMPTY, 
+                    fileIOHandler.EMPTY_ID,
+                    fileIOHandler.EMPTY,
+                    fileIOHandler.EMPTY);
+        }
+    }
+    
     // http://stackoverflow.com/questions/18441846/how-to-sort-an-arraylist-in-java
     public void getSortedEmployeeSearchResults(Sort action) {
         // Alter returned database search results and send them forward with event propagation

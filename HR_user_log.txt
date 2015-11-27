@@ -193,3 +193,96 @@ jouni@sampo|sign_in|failure|-1|<empty>|<empty>|27.11.2015 11:51:10
 jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 11:51:19
 jouni@sampo|sign_in|success|1|Jouni Sampo|12213123-2213|27.11.2015 11:51:19
 a@s|sign_in|failure|-1|<empty>|<empty>|27.11.2015 11:57:36
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:09:46
+jouni@sampo|sign_in|success|1|Jouni Sampo|12213123-2213|27.11.2015 12:09:47
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:10:39
+jouni@sampo|sign_in|success|1|Jouni Sampo|12213123-2213|27.11.2015 12:10:39
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:13:31
+jouni@sampo|sign_in|success|1|Jouni Sampo|12213123-2213|27.11.2015 12:13:31
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:15:08
+jouni@sampo|sign_in|success|1|Jouni Sampo|12213123-2213|27.11.2015 12:15:08
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:19:07
+jouni@sampo|sign_in|success|1|Jouni Sampo|12213123-2213|27.11.2015 12:19:07
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:19:43
+jouni@sampo|sign_in|success|1|Jouni Sampo|12213123-2213|27.11.2015 12:19:43
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:21:35
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:21:36
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:21:36
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:22:21
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:28:36
+jouni@sampo|sign_in|success|1|Jouni Sampo|12213123-2213|27.11.2015 12:28:36
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:28:46
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:28:48
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:28:49
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:28:50
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:28:51
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:28:51
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:28:52
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:01
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:06
+jouni@sampo|change|success|1|Samop Sampo|12213123-2213|27.11.2015 12:29:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:07
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:12
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:22
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:24
+jouni@sampo|remove|success|16|<empty>|<empty>|27.11.2015 12:29:24
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:28
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:29:29
+jouni@sampo|remove|success|14|<empty>|<empty>|27.11.2015 12:29:29
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:30:29
+jouni@sampo|add|success|-1|asd asd|12332|27.11.2015 12:30:29
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:30:38
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:30:44
+jouni@sampo|search|success|-1|Matti null|null|27.11.2015 12:30:44
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 12:50:08
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 12:50:08
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:02:48
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:02:48
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:07:43
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:07:43
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:08:55
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:09:42
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:09:42
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:09:52
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:09:58
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:10:11
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:10:26
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:10:58
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:11:00
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:13:22
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:13:22
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:13:23
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:13:25
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:13:30
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:13:46
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:13:48
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:13:49
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:13:49
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:15:31
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:15:31
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:15:34
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:15:38
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:15:40
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:15:41
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:15:41
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:15:41
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:15:41
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:17:16
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:17:16
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:17:19
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:17:27
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:17:31
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:18:25
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:18:25
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:18:38
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:18:38
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:19:43
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:19:43
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:19:46

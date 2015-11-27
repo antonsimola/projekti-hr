@@ -58,13 +58,17 @@ public class MainView implements Initializable {
     @FXML
     private Button logoutButton;
     @FXML
-    private Button showallButton1;
-    @FXML
     private Label errorText;
     @FXML
     private MenuItem logMenuitem;
     @FXML
     private MenuItem exitMenuitem1;
+    @FXML
+    private Button nameSearchButton;
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
 
     
     
@@ -108,7 +112,7 @@ public class MainView implements Initializable {
 
     @FXML
     private void showAllButtonPressed(ActionEvent event) {
-        
+        controller.getAllEmployees();
     }
 
     @FXML
@@ -190,6 +194,11 @@ public class MainView implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void nameSearchButtonpressed(ActionEvent event) {
+        controller.nameSearch(firstNameField.getText(),lastNameField.getText());
     }
     
     

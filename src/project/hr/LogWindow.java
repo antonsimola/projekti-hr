@@ -7,6 +7,8 @@
 package project.hr;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,8 +32,16 @@ public class LogWindow implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         controller = Controller.getInstance();
         controller.registerView(this);
-        
-        
+        controller.getLog();
     }    
+    
+    public void updateList(ArrayList<String[]> list) {
+        for(String[] item: list){
+            StringBuilder builder = new StringBuilder();
+            for(String s : item) {
+                builder.append(s);
+            }
+            logList.getItems().add(builder.toString());
+    }   }
     
 }
