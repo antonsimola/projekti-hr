@@ -139,7 +139,7 @@ public class Model {
         Employee employee = searchEmployeeByEmail(emailAddress);
         
         
-        if(passwordSecurity.isPasswordValid(password, 
+        if(employee != null && passwordSecurity.isPasswordValid(password, 
                         employee.getPassword())) {
             signedInEmployee = employee;
             fireModelActionResult("sign_in", null, employee);
@@ -202,12 +202,13 @@ public class Model {
             
             //fireModelActionResult("edit", null, (Object)employee);
         } catch (Exception ex) {
+            ex.printStackTrace();
             isSuccessful = false;
             successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());
         }
         finally {
-            fireModelActionResult("edit", null, new Boolean(isSuccessful));
+            fireModelActionResult("edit", null, isSuccessful);
             fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
                     fileIOHandler.ACTION_EDIT, 
                     successString, 
@@ -228,6 +229,7 @@ public class Model {
                 isSuccessful = false;
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             isSuccessful = false;
             successString = fileIOHandler.ACTION_FAILURE;
             logger.log(Level.SEVERE, ex.getMessage());
