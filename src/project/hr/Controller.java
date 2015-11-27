@@ -6,6 +6,9 @@
 package project.hr;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -109,6 +112,26 @@ public class Controller implements PropertyChangeListener  {
         return m.matches();
     }
     
+
+
+    private boolean isValidDate(String[] dates) {
+    //http://stackoverflow.com/questions/4528047/checking-the-validity-of-a-date        
+    String DATE_FORMAT = "yyyy-MM-dd";
+        try {
+            for (String date: dates) {
+                if (date == null || date.equals("")) {
+                    continue;
+                }
+                DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+                df.setLenient(false);
+                df.parse(date);
+            }
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+}
+    
     private boolean isValidNumber(String strnum) {
         try {
             Double.parseDouble(strnum);
@@ -172,7 +195,17 @@ public class Controller implements PropertyChangeListener  {
     public void attemptSignIn(String username, String pw) {
         /* View calls this as sign in was pressed -> Model method call? */
         /*some input validation goes here first, then call model's method*/
-        model.signIn(username,pw);
+        String[] strs = {username,pw};
+        if (!isEmpty(strs) && isValidEmail(username))
+            model.signIn(username,pw);
+        else {
+            for (Object view:views) {
+                if (view instanceof LoginWindow) {
+                    LoginWindow lw = (LoginWindow) view;
+                    lw.logIn(false);
+                }
+            }
+        }
         /* after this we need to catch event in listener below*/
     }
     
@@ -216,6 +249,7 @@ public class Controller implements PropertyChangeListener  {
             String end,
             String hours) {
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage,email};
+        String[] dates = {start,end,bd};
         /*return false, if not OK, else return true*/
         if (isEmpty(required) == true) {
             for (Object view:views) {
@@ -233,7 +267,16 @@ public class Controller implements PropertyChangeListener  {
                 }
             }
             return false;
-        } else {
+        } 
+        else if (!isValidDate(dates)) {
+            for (Object view:views) {
+                if (view instanceof MainView) {
+                    MainView mv = (MainView) view;
+                    mv.updateStatusField("PVM väärin kirjoitettu!");
+                }
+            }
+            return false;
+        }else {
             Employee emp = generateEmployee(
             fn,
             ln,
@@ -444,6 +487,7 @@ public class Controller implements PropertyChangeListener  {
                 break;
             case "search_by_employee":
                 if (evt.getNewValue() == null) {
+                    obsEmps = null;
                     for (Object view:views) {
                         if (view instanceof MainView) {
                             System.out.println("Ei löytynyt kettään");

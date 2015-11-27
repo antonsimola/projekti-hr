@@ -153,12 +153,12 @@ public class Model {
         }
         else {
             fireModelActionResult("sign_in", null, null);
-            fileIOHandler.writeUserLog(signedInEmployee.getEmail(), 
+            fileIOHandler.writeUserLog(emailAddress, 
                     fileIOHandler.ACTION_SIGN_IN, 
                     fileIOHandler.ACTION_FAILURE, 
-                    signedInEmployee.getEmployeeId(),
-                    signedInEmployee.toString(),
-                    signedInEmployee.getSsn());
+                    fileIOHandler.EMPTY_ID,
+                    fileIOHandler.EMPTY,
+                    fileIOHandler.EMPTY);
         }
     }
     
