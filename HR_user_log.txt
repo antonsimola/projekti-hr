@@ -286,3 +286,13 @@ jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:18:38
 jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:19:43
 jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:19:43
 jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:19:46
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:26:26
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:26:26
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:26:27
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:35:06
+jouni@sampo|sign_in|success|1|Samop Sampo|12213123-2213|27.11.2015 13:35:06
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|27.11.2015 13:35:13
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:35:14
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:35:17
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:35:29
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 13:35:35

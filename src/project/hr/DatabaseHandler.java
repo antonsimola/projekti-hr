@@ -80,7 +80,6 @@ public class DatabaseHandler {
         
         sqlInsert.append(");");
 
-        System.out.println(sqlInsert);
         
         statement.executeUpdate(sqlInsert.toString());
         
@@ -143,7 +142,6 @@ public class DatabaseHandler {
         else
             sqlInsert.append("NULL, ");
         
-        System.out.println("City:"+employee.getCity());
         if(employee.getCity() != null) {
             sqlInsert.append("'");
             sqlInsert.append(employee.getCity()).append("', ");
@@ -151,9 +149,7 @@ public class DatabaseHandler {
         else
             sqlInsert.append("NULL, ");
         
-        System.out.println("phone:"+employee.getPhone());
         if(employee.getPhone() != null) {
-            System.out.println("phone:"+employee.getPhone());
             sqlInsert.append("'");
             sqlInsert.append(employee.getPhone()).append("', ");
         }
@@ -176,7 +172,6 @@ public class DatabaseHandler {
         
         sqlInsert.append(");");
 
-        System.out.println(sqlInsert);
         
         statement.executeUpdate(sqlInsert.toString());
           
@@ -352,7 +347,6 @@ public class DatabaseHandler {
             +       "EMPLOYEE.EMAIL_ADDRESS='" + emailAddress + "';";
         
         // May result in a database operation failure.
-        System.out.println(selectQuery);
         Statement statement = connection.createStatement(); 
         ResultSet resultSet = statement.executeQuery(selectQuery);
         
@@ -525,7 +519,6 @@ public class DatabaseHandler {
         }
         
         selectQuery.append(";");
-        System.out.println(selectQuery.toString());
         // May result in a database operation failure.
         Statement statement = connection.createStatement(); 
         ResultSet resultSet = statement.executeQuery(selectQuery.toString());
@@ -568,7 +561,6 @@ public class DatabaseHandler {
         
         
         selectQuery.append(";");
-        System.out.println(selectQuery.toString());
         // May result in a database operation failure.
         Statement statement = connection.createStatement(); 
         ResultSet resultSet = statement.executeQuery(selectQuery.toString());
@@ -767,7 +759,6 @@ public class DatabaseHandler {
     public void deleteEmployeeByEmployeeId(int employeeId) 
             throws Exception {
         int employmentId = selectEmployeeEmploymentIdByEmployeeId(employeeId);
-        System.out.println(employmentId+" employee id:"+employeeId);
         connection.setAutoCommit(false);
         StringBuilder sqlDelete = new StringBuilder(
                     "DELETE FROM EMPLOYMENT "

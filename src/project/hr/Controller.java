@@ -96,7 +96,6 @@ public class Controller implements PropertyChangeListener  {
         } else if (view instanceof LogWindow) {
             views.add((LogWindow) view); 
         } else {
-            System.out.println("Not known view!!");
         }
     }
     private boolean isEmpty(String[] list) {
@@ -509,7 +508,6 @@ public class Controller implements PropertyChangeListener  {
                     obsEmps = null;
                     for (Object view:views) {
                         if (view instanceof MainView) {
-                            System.out.println("Ei löytynyt kettään");
                             MainView mv = (MainView) view;
                             mv.updateStatusField("Haku ei tuottanut yhtään tulosta.");
                         }
@@ -557,7 +555,6 @@ public class Controller implements PropertyChangeListener  {
                     }
                 }
             default:
-                System.out.println("default");
                 break;
         }
     }

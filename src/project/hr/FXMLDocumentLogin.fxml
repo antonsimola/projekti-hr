@@ -29,8 +29,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="usernameField" maxWidth="-Infinity" promptText="Käyttäjätunnus" text="jouni@sampo" GridPane.halignment="CENTER" />
-                  <PasswordField fx:id="passwordField" maxWidth="-Infinity" promptText="Salasana" text="trigonometria" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <TextField fx:id="usernameField" maxWidth="-Infinity" promptText="Käyttäjätunnus" GridPane.halignment="CENTER" />
+                  <PasswordField fx:id="passwordField" maxWidth="-Infinity" promptText="Salasana" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
             <GridPane GridPane.rowIndex="1">

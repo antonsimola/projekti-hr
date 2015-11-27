@@ -166,7 +166,6 @@ public class MainView implements Initializable {
                 container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentEdit.fxml")));
                 removeselectedButton.setDisable(false);
             } else {
-                System.out.println("klikkasit tyhjää");
                 removeselectedButton.setDisable(true);
             }
         } catch (IOException ex) {
