@@ -165,7 +165,7 @@ public class Controller implements PropertyChangeListener  {
             emp.setBirthDay(bd);
         if (!ssn.isEmpty())
             emp.setSsn(ssn);
-        if (!addr.isEmpty())
+        if (addr.length()>0)
             emp.setAddress(addr);
         if (!p.isEmpty())
             emp.setPostal(p);
@@ -460,10 +460,25 @@ public class Controller implements PropertyChangeListener  {
                 for (Object view:views) {
                     if (view instanceof FXMLDocumentEditView) {
                         FXMLDocumentEditView ev = (FXMLDocumentEditView) view;
-                        ev.updateFinished((Boolean)evt.getNewValue());
-                        getAllEmployees();
+                        if((Boolean)evt.getNewValue()){
+                            for (Object o:views) {
+                                if (o instanceof MainView) {
+                                    MainView mv = (MainView) o;
+                                        mv.updateStatusField("Muokkaus onnistui");
+                                }
+                            }
+                        }
+                        else {
+                            for (Object o:views) {
+                                if (o instanceof MainView) {
+                                    MainView mv = (MainView) o;
+                                        mv.updateStatusField("Muokkaus epäonnistui");
+                                }
+                            }
+                        }
                     }
                 }
+                getAllEmployees();
                 break;
             case "remove":
                 for (Object view:views) {
