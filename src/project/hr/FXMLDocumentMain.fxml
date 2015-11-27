@@ -18,7 +18,8 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Tiedosto">
                   <items>
-                        <MenuItem fx:id="exitMenuitem" mnemonicParsing="false" onAction="#exitAction" text="Poistu" />
+                        <MenuItem fx:id="logMenuitem" mnemonicParsing="false" onAction="#openLogAction" text="Avaa loki" />
+                        <MenuItem fx:id="exitMenuitem1" mnemonicParsing="false" onAction="#exitAction" text="Poistu" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Ohje">
