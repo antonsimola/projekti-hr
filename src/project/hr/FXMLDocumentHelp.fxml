@@ -37,7 +37,7 @@
             </TitledPane>
             <TitledPane animated="false" text="PDF-raportin tulostus">
                <content>
-                  <Label fx:id="label5" text="Label" />
+                  <Label fx:id="label5" text="Haun tulokset tallennetaan pdf-tiedostoon 'Tulosta pdf-raportti' -painikkeella." />
                </content>
             </TitledPane>
             <TitledPane animated="false" text="Henkilöiden poistaminen">

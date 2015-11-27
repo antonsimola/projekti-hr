@@ -40,8 +40,6 @@ public class MainView implements Initializable {
     @FXML
     private Pane container;
     @FXML
-    private MenuItem exitMenuitem;
-    @FXML
     private MenuItem helpMenuitem;
     @FXML
     private Button showallButton;
@@ -63,6 +61,10 @@ public class MainView implements Initializable {
     private Button showallButton1;
     @FXML
     private Label errorText;
+    @FXML
+    private MenuItem logMenuitem;
+    @FXML
+    private MenuItem exitMenuitem1;
 
     
     
@@ -154,7 +156,7 @@ public class MainView implements Initializable {
             if(namelist.getSelectionModel().getSelectedItem() != null){
                 controller.setCurrentlySelectedEmployee(
 
-                        namelist.getSelectionModel().getSelectedItem());
+                namelist.getSelectionModel().getSelectedItem());
                 namelist.getItems().clear();
                 container.getChildren().clear();
                 container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentEdit.fxml")));
@@ -175,6 +177,19 @@ public class MainView implements Initializable {
     
     public void updateStatusField (String s) {
         errorText.setText(s);
+    }
+
+    @FXML
+    private void openLogAction(ActionEvent event) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("FXMLDocumentLog.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
