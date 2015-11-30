@@ -1,2 +1,48 @@
 marras 27, 2015 1:02:55 IP. project.hr.Model searchEmployee
 SEVERE: null
+marraskuuta 30, 2015 11:30:21 IP. project.hr.Model searchEmployee
+SEVERE: -1
+marraskuuta 30, 2015 11:30:23 IP. project.hr.Model searchEmployee
+SEVERE: -1
+marraskuuta 30, 2015 11:30:30 IP. project.hr.Model searchEmployee
+SEVERE: -1
+marraskuuta 30, 2015 11:33:50 IP. project.hr.Model searchEmployee
+SEVERE: -1
+marraskuuta 30, 2015 11:36:49 IP. project.hr.Model searchEmployee
+SEVERE: 1
+marraskuuta 30, 2015 11:38:01 IP. project.hr.Model searchEmployee
+SEVERE: Values not bound to statement
+marraskuuta 30, 2015 11:39:58 IP. project.hr.Model searchEmployee
+SEVERE: Values not bound to statement
+marraskuuta 30, 2015 11:48:44 IP. project.hr.Model searchEmployee
+SEVERE: 2
+marraskuuta 30, 2015 11:48:46 IP. project.hr.Model searchEmployee
+SEVERE: 2
+marraskuuta 30, 2015 11:48:47 IP. project.hr.Model searchEmployee
+SEVERE: 2
+marraskuuta 30, 2015 11:48:48 IP. project.hr.Model searchEmployee
+SEVERE: 2
+marraskuuta 30, 2015 11:48:52 IP. project.hr.Model searchEmployee
+SEVERE: 0
+marraskuuta 30, 2015 11:49:31 IP. project.hr.Model searchEmployee
+SEVERE: 2
+marraskuuta 30, 2015 11:49:32 IP. project.hr.Model searchEmployee
+SEVERE: 2
+marraskuuta 30, 2015 11:52:21 IP. project.hr.Model searchEmployee
+SEVERE: -1
+marraskuuta 30, 2015 11:53:05 IP. project.hr.Model searchEmployee
+SEVERE: -1
+marraskuuta 30, 2015 11:53:14 IP. project.hr.Model searchEmployee
+SEVERE: -1
+marraskuuta 30, 2015 11:56:28 IP. project.hr.Model searchEmployee
+SEVERE: -1
+marraskuuta 30, 2015 11:58:05 IP. project.hr.Model searchEmployee
+SEVERE: Values not bound to statement
+joulukuuta 01, 2015 1:12:23 AP. project.hr.Model searchEmployee
+SEVERE: [SQLITE_ERROR] SQL error or missing database (near "%": syntax error)
+joulukuuta 01, 2015 1:12:32 AP. project.hr.Model searchEmployee
+SEVERE: [SQLITE_ERROR] SQL error or missing database (near "%": syntax error)
+joulukuuta 01, 2015 1:12:36 AP. project.hr.Model searchEmployee
+SEVERE: [SQLITE_ERROR] SQL error or missing database (near "%": syntax error)
+joulukuuta 01, 2015 1:30:35 AP. project.hr.Model searchEmployee
+SEVERE: [SQLITE_ERROR] SQL error or missing database (near "AND": syntax error)

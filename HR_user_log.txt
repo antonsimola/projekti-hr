@@ -585,3 +585,289 @@ jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:48:58
 jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:49:24
 jouni@sampo|add|success|-1|moi moimomio|1000-01-01|27.11.2015 15:49:24
 jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:49:26
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:52:56
+jouni@sampo|sign_in|success|1|Erkki Mikkonen2|12213123-2213|27.11.2015 15:52:56
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:52:57
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:53:00
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:53:00
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:53:01
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:53:04
+jouni@sampo|change|success|4|Jouni1 Sampo|12213123-2213|27.11.2015 15:53:04
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:53:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:53:06
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:53:07
+jouni@sampo|search|success|-1|<all>|<all>|27.11.2015 15:53:13
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:10
+jouni@sampo|sign_in|success|1|Erkki Mikkonen2|12213123-2213|30.11.2015 23:26:10
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:15
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:19
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:21
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:31
+jouni@sampo|change|success|1|Erkki Mikkonen2|12213123-2213|30.11.2015 23:26:31
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:34
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:35
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:37
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:46
+jouni@sampo|change|success|6|Jouni2 Sampo|12213123-2213|30.11.2015 23:26:46
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:52
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:52
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:53
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:26:57
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:04
+jouni@sampo|change|success|3|Matti Sampo|12213123-2213|30.11.2015 23:27:04
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:05
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:07
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:12
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:18
+jouni@sampo|change|success|1|Erkki Mikkonen2|12213123-2213|30.11.2015 23:27:18
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:19
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:20
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:34
+jouni@sampo|change|success|1|Erkki Mikkonen2|12213123-2213|30.11.2015 23:27:34
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:35
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:36
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:50
+jouni@sampo|change|success|1|Erkki Mikkonen2|12213123-2213|30.11.2015 23:27:50
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:51
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:27:52
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:00
+jouni@sampo|change|success|1|Erkki Mikkonen2|12213123-2213|30.11.2015 23:28:00
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:01
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:02
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:08
+jouni@sampo|change|success|1|Erkki Mikkonen2|12213123-2213|30.11.2015 23:28:08
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:09
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:09
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:15
+jouni@sampo|change|success|1|Erkki Mikkonen2|12213123-2213|30.11.2015 23:28:15
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:16
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:17
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:18
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:18
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:19
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:23
+jouni@sampo|change|success|1|Erkki Mikkonen22|12213123-2213|30.11.2015 23:28:23
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:24
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:25
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:29
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-2213|30.11.2015 23:28:29
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:30
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:30
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:39
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-2213|30.11.2015 23:28:39
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:39
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:40
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:41
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:57
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-2213|30.11.2015 23:28:57
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:58
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:28:58
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:00
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:01
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:04
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-2213|30.11.2015 23:29:04
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:05
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:06
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:11
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-2213|30.11.2015 23:29:11
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:12
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:13
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:25
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-1113|30.11.2015 23:29:25
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:26
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:26
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:35
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-00|30.11.2015 23:29:35
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:36
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:37
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:49
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:54
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-2213|30.11.2015 23:29:54
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:55
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:55
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:29:59
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|12213123-2213|30.11.2015 23:29:59
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:30:00
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:30:01
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:30:10
+jouni@sampo|change|success|1|Erkki1 Mikkonen22|00|30.11.2015 23:30:10
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:30:10
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:30:11
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:30:21
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:30:23
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:30:25
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:30:30
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:32:44
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:32:45
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:33:50
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:36:45
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:36:45
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:36:49
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:37:57
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:37:57
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:38:01
+jouni@sampo|sign_in|failure|-1|<empty>|<empty>|30.11.2015 23:39:45
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:39:53
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:39:53
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:39:58
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:41:51
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:41:51
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:41:55
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:42:06
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:42:13
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:42:21
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:44:23
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:44:23
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:44:27
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:48:05
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:48:05
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:48:07
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:48:11
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:48:22
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:48:39
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:48:44
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:48:46
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:48:47
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:48:48
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:48:48
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:48:52
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:48:53
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:49:30
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:49:31
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:49:32
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:52:17
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:52:17
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:52:21
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:52:21
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:53:05
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:53:14
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:56:24
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:56:25
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:56:28
+jouni@sampo|search|success|-1|<all>|<all>|30.11.2015 23:58:01
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|30.11.2015 23:58:01
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|30.11.2015 23:58:05
+jouni@sampo|sign_in|failure|-1|<empty>|<empty>|30.11.2015 23:59:58
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:00:08
+jouni@sampo|sign_in|success|2|Jouni0_1 Sampo|12213123-2213|01.12.2015 00:00:08
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|01.12.2015 00:00:12
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|01.12.2015 00:00:28
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|01.12.2015 00:00:35
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|01.12.2015 00:00:36
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:00:37
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:00:39
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|01.12.2015 00:00:39
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|01.12.2015 00:00:49
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:02:20
+jouni@sampo|search|success|-1|Jouni1 null|null|01.12.2015 00:02:20
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:02:26
+jouni@sampo|search|success|-1|Jouni null|null|01.12.2015 00:02:26
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:02:33
+jouni@sampo|search|success|-1|null Sampo|null|01.12.2015 00:02:33
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:02:44
+jouni@sampo|search|success|-1|null null|null|01.12.2015 00:02:44
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:02:47
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:02:48
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:02:57
+jouni@sampo|search|success|-1|null null|null|01.12.2015 00:02:57
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:03:46
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:03:56
+jouni@sampo|search|success|-1|null null|null|01.12.2015 00:03:56
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:04:03
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:04:11
+jouni@sampo|search|success|-1|null null|null|01.12.2015 00:04:11
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:04:29
+jouni@sampo|search|success|-1|null null|null|01.12.2015 00:04:29
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:04:35
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:04:47
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:05:01
+jouni@sampo|search|success|-1|null null|null|01.12.2015 00:05:01
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:05:46
+jouni@sampo|search|success|-1|null null|null|01.12.2015 00:05:46
+jouni@sampo|search|<empty>|-1|<empty>|<empty>|01.12.2015 00:06:03
+jouni@sampo|search|success|-1|<all>|<all>|01.12.2015 00:06:06
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 00:26:33
+jouni@sampo;sign_in;success;2;Jouni0_1 Sampo;12213123-2213;01.12.2015 00:26:33
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 00:26:42
+jouni@sampo;search;success;-1;Matti null;null;01.12.2015 00:26:42
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:03:26
+jouni@sampo;sign_in;success;2;Jouni0_1 Sampo;12213123-2213;01.12.2015 01:03:26
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:03:30
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:03:33
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:03:57
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:03:58
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:04:24
+jouni@sampo;search;success;-1;Jouni null;null;01.12.2015 01:04:24
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:04:34
+jouni@sampo;search;success;-1;Matti null;null;01.12.2015 01:04:34
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:04:43
+jouni@sampo;search;success;-1;Jouni1 null;null;01.12.2015 01:04:43
+jouni@sampo;search;<empty>;-1;<empty>;<empty>;01.12.2015 01:04:50
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:12:19
+jouni@sampo;sign_in;success;2;Jouni0_1 Sampo;12213123-2213;01.12.2015 01:12:19
+jouni@sampo;search;<empty>;-1;<empty>;<empty>;01.12.2015 01:12:23
+jouni@sampo;search;<empty>;-1;<empty>;<empty>;01.12.2015 01:12:32
+jouni@sampo;search;<empty>;-1;<empty>;<empty>;01.12.2015 01:12:36
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:14:29
+jouni@sampo;sign_in;success;2;Jouni0_1 Sampo;12213123-2213;01.12.2015 01:14:29
+jouni@sampo;search;<empty>;-1;<empty>;<empty>;01.12.2015 01:14:33
+jouni@sampo;search;<empty>;-1;<empty>;<empty>;01.12.2015 01:14:38
+jouni@sampo;search;<empty>;-1;<empty>;<empty>;01.12.2015 01:14:41
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:14:45
+jouni@sampo;search;<empty>;-1;<empty>;<empty>;01.12.2015 01:14:48
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:14:49
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:22:43
+jouni@sampo;sign_in;success;2;Jouni0_1 Sampo;12213123-2213;01.12.2015 01:22:44
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:22:45
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:22:50
+jouni@sampo;search;success;-1;Jo null;null;01.12.2015 01:22:50
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:22:59
+jouni@sampo;search;success;-1;null null;null;01.12.2015 01:22:59
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:23:05
+jouni@sampo;search;success;-1;null null;null;01.12.2015 01:23:05
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:23:49
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:23:55
+jouni@sampo;search;success;-1;null null;null;01.12.2015 01:23:55
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:24:05
+jouni@sampo;search;success;-1;null null;null;01.12.2015 01:24:05
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:24:15
+jouni@sampo;search;success;-1;null null;null;01.12.2015 01:24:15
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:24:29
+jouni@sampo;search;success;-1;Jouni27 null;null;01.12.2015 01:24:29
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:24:46
+jouni@sampo;search;success;-1;Jouni27 null;null;01.12.2015 01:24:46
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:24:58
+jouni@sampo;search;success;-1;Jouni27 null;null;01.12.2015 01:24:58
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:04
+jouni@sampo;search;success;-1;Jouni27 null;null;01.12.2015 01:25:04
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:13
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:14
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:14
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:15
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:16
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:21
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:22
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:40
+jouni@sampo;search;success;-1;null S;null;01.12.2015 01:25:40
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:47
+jouni@sampo;search;success;-1;null Si;null;01.12.2015 01:25:47
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:25:55
+jouni@sampo;search;success;-1;A Si;null;01.12.2015 01:25:55
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:26:16
+jouni@sampo;search;success;-1;A null;null;01.12.2015 01:26:16
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:28:51
+jouni@sampo;sign_in;success;2;Jouni0_1 Sampo;12213123-2213;01.12.2015 01:28:51
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:29:34
+jouni@sampo;sign_in;success;2;Jouni0_1 Sampo;12213123-2213;01.12.2015 01:29:34
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:29:41
+jouni@sampo;search;success;-1;a a;null;01.12.2015 01:29:41
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:29:53
+jouni@sampo;search;success;-1;null null;null;01.12.2015 01:29:53
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:29:59
+jouni@sampo;search;success;-1;null null;null;01.12.2015 01:29:59
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:30:08
+jouni@sampo;search;success;-1;null null;364;01.12.2015 01:30:08
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:30:15
+jouni@sampo;search;success;-1;dsf dfs;364;01.12.2015 01:30:15
+jouni@sampo;search;success;-1;<all>;<all>;01.12.2015 01:30:35
+jouni@sampo;search;failure;-1;dsf dfs;364;01.12.2015 01:30:35
