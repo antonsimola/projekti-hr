@@ -165,7 +165,7 @@ public class Controller implements PropertyChangeListener  {
             emp.setBirthDay(bd);
         if (!ssn.isEmpty())
             emp.setSsn(ssn);
-        if (addr.length()>0)
+        if (!addr.isEmpty())
             emp.setAddress(addr);
         if (!p.isEmpty())
             emp.setPostal(p);
