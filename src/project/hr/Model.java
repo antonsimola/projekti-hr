@@ -14,6 +14,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class Model {
         
         passwordSecurity = new PasswordSecurity();
         signedInEmployee = null;
-        
+
         try {
             fileIOHandler = FileIOHandler.getInstance();
             
@@ -52,8 +53,9 @@ public class Model {
             databaseHandler = new DatabaseHandler();
             databaseHandler.connect();
         }
-        catch(Exception ex) {
+        catch(SQLException | ClassNotFoundException ex) {
             ex.printStackTrace(); // Remove
+            fireModelActionResult("connect_fail", null, null);
         }
     }
 

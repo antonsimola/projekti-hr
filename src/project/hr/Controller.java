@@ -30,27 +30,27 @@ public class Controller implements PropertyChangeListener  {
     private Controller() {
         model = new Model();
         model.addPropertyChangeListener(this);
-        /*for (int i = 0;i<1001;i++) {
-            model.registerEmployee(new Employee(
-                "Jouni"+i,
-                "Sampo",
-                "2002-21-12",
-                "12213123-2213",
-                "funktiokatu",
-                "12312",
-                "LPR",
-                "040314123123",
-                "jouni@sampo",
-                "ES",
-                "matikkagod",
-                12,
-                "1000-12-12",
-                "1001-12-12",
-                40,
+        /*for (int i = 0;i<1001;i++) {*/
+            /*model.registerEmployee(new Employee(
+                "root",
+                "root",
+                "0001-01-01",
+                "010101-000A",
+                "root",
+                "00000",
+                "root",
+                "000-0000000",
+                "root@root",
+                "root",
+                "root",
+                0,
+                "0001-01-01",
+                "0001-01-02",
+                0,
                 null,
-                1),
-                "trigonometria");
-                model.registerEmployee(new Employee(
+                2),
+                "root");
+                /*model.registerEmployee(new Employee(
                 "Matti",
                 "Sampo",
                 "2002-21-12",
@@ -68,8 +68,8 @@ public class Controller implements PropertyChangeListener  {
                 40,
                 null,
                 1),
-                "trigonometria");
-        }*/
+                "trigonometria");*/
+       /* }*/
         views = new ArrayList();
     }
     
@@ -203,7 +203,7 @@ public class Controller implements PropertyChangeListener  {
             for (Object view:views) {
                 if (view instanceof LoginWindow) {
                     LoginWindow lw = (LoginWindow) view;
-                    lw.logIn(false);
+                    lw.logIn("email vääränmuotoinen");
                 }
             }
         }
@@ -429,6 +429,7 @@ public class Controller implements PropertyChangeListener  {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         Employee emp;
+        LoginWindow lw;
         switch (evt.getPropertyName()) {
 
             case "all_employees":
@@ -497,7 +498,6 @@ public class Controller implements PropertyChangeListener  {
                 }
                 break;
             case "sign_in":
-                LoginWindow lw;
                 Object foundView = false;
                 boolean isLoginSuccessful = false;
                 boolean foundLoginWindows = false;
@@ -515,8 +515,25 @@ public class Controller implements PropertyChangeListener  {
                 }
                 if(foundLoginWindows) {
                     lw = (LoginWindow) foundView;
-                    lw.logIn(isLoginSuccessful);
+                    if (isLoginSuccessful){
+                        lw.logIn("OK");
+                        lw.loginAction();
+                    }
+                    else
+                        lw.logIn("Väärä tunnus tai salasana");
                 }
+                break;
+            case "connect_fail":
+
+                for (Object view:views) {
+                    if (view instanceof LoginWindow) {
+                        lw = (LoginWindow) view;
+                        System.out.println("connectfail");
+                        lw.logIn("connect fail");
+                      
+                    }
+                }
+
                 break;
             case "search_by_employee":
                 if (evt.getNewValue() == null) {

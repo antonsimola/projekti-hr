@@ -28,7 +28,7 @@ public class DatabaseHandler {
     public DatabaseHandler() {}
     
     // Attempt sqlite initialization and connect to database.
-    public void connect() throws ClassNotFoundException, SQLException {
+    public void connect() throws ClassNotFoundException, SQLException  {
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection(
                     "jdbc:sqlite:" + databaseName);

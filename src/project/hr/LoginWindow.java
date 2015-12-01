@@ -49,17 +49,14 @@ public class LoginWindow implements Initializable {
         controller.registerView(this);
     }    
     
-    public void logIn(Boolean success) {
-        if (success == true) {
-            loginAction();
-        }
-        else {
-            loginerrorLabel.setText("Käyttäjätunnus ja salasana on virheellinen!");
-        }
+    public void logIn(String s) {
+
+        loginerrorLabel.setText(s);
+        
     }
 
     
-    private void loginAction() {
+    public void loginAction() {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("FXMLDocumentMain.fxml"));
