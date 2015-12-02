@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -113,25 +114,32 @@ public class Controller implements PropertyChangeListener  {
         return m.matches();
     }
     
-
-
-    private boolean isValidDate(String[] dates) {
-    //http://stackoverflow.com/questions/4528047/checking-the-validity-of-a-date        
-    String DATE_FORMAT = "yyyy-MM-dd";
+    private boolean compareDates(String[] dates) {
+        
+        String DATE_FORMAT = "yyyy-MM-dd";
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+        df.setLenient(false);
+        Date d1;
+        Date d2;
+        
+        
+            
         try {
-            for (String date: dates) {
-                if (date == null || date.equals("")) {
-                    continue;
-                }
-                DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-                df.setLenient(false);
-                df.parse(date);
+            d1 = df.parse(dates[0]);
+            if (dates[1] == null) {
+                d2 = new Date();
+            } else {
+                if (dates[1].isEmpty())
+                    d2 = new Date(9999,11,11);
+                else
+                    d2 = df.parse(dates[1]);
             }
-            return true;
+            return d2.after(d1);
+            
         } catch (ParseException e) {
             return false;
         }
-}
+    }
     
     private boolean isValidNumber(String strnum) {
         try {
@@ -264,6 +272,9 @@ public class Controller implements PropertyChangeListener  {
             String hours) {
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage,email};
         String[] dates = {start,end,bd};
+        String[] bdlist = {bd,null};
+
+        String[] startend = {start,end};
         /*return false, if not OK, else return true*/
         if (isEmpty(required) == true) {
             for (Object view:views) {
@@ -282,7 +293,7 @@ public class Controller implements PropertyChangeListener  {
             }
             return false;
         } 
-        else if (!isValidDate(dates)) {
+        else if (!(compareDates(bdlist) && compareDates(startend))) {
             for (Object view:views) {
                 if (view instanceof MainView) {
                     MainView mv = (MainView) view;
@@ -330,8 +341,29 @@ public class Controller implements PropertyChangeListener  {
             String end,
             String hours) {
         String[] required = {fn,ln,bd,ssn,title,start,hours,wage};
-        /*return false, if not OK, else return true*/
+        String[] dates = {bd,start,end};
+        String[] bd_list = {bd,null};
+        String[] startend = {start,end};
         if (isEmpty(required)) {
+            return false;
+        }
+        else if (!isValidEmail(email)) {
+            for (Object view:views) {
+                if (view instanceof MainView) {
+                    MainView mv = (MainView) view;
+                    mv.updateStatusField("Email on väärin kirjoitettu!");
+                }
+            }
+            return false;
+        }
+        
+        else if (!(compareDates(bd_list) && compareDates(startend))) {
+            for (Object view:views) {
+                if (view instanceof MainView) {
+                    MainView mv = (MainView) view;
+                    mv.updateStatusField("PVM väärin kirjoitettu!");
+                }
+            }
             return false;
         }
         else {
