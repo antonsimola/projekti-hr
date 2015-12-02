@@ -71,13 +71,22 @@ public class FXMLDocumentAddView implements Initializable {
 
     @FXML
     private void saveEmployeeAction(ActionEvent event) {
-        controller.attemptAddEmployee(firstnameField.getText(),
-            lastnameField.getText(), dobField.getText(), ssnumField.getText(),
-            addressField.getText(), postalcodeField.getText(),
-            cityField.getText(), phonenumField.getText(), emailField.getText(),
-            drinkField.getText(), jobField.getText(),  wageField.getText(), 
-            startdateField.getText(), enddateField.getText(), 
-            hoursField.getText());
+        controller.attemptAddEmployee(
+                firstnameField.getText(),
+                lastnameField.getText(), 
+                dobField.getText(), 
+                ssnumField.getText(),
+                addressField.getText(), 
+                postalcodeField.getText(),
+                cityField.getText(), 
+                phonenumField.getText(), 
+                emailField.getText(),
+                drinkField.getText(), 
+                jobField.getText(),  
+                wageField.getText(), 
+                startdateField.getText(), 
+                enddateField.getText(), 
+                hoursField.getText());
     }
     
 

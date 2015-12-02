@@ -92,8 +92,6 @@ public class FileIOHandler {
                         ";" +
                         actionSuccess +
                         ";" +
-                        Integer.toString(targetID) +
-                        ";" +
                         targetName +
                         ";" +
                         targetSSN +

@@ -69,7 +69,7 @@ public class DatabaseHandler {
         statement.setString(3, employee.getStartDate());
         
         if(employee.getEndDate() != null)
-            statement.setString(4, employee.getJobTitle());
+            statement.setString(4, employee.getEndDate());
         else
             statement.setString(4, "NULL");
         
@@ -998,6 +998,7 @@ public class DatabaseHandler {
                 +   "SET "
                 +   "FIRST_NAME = ?, "
                 +   "SECOND_NAME = ?, "
+                +   "SSN = ?, "
                 +   "BIRTHDAY = ?, "
                 +   "ADDRESS = ?, "
                 +   "POSTAL_CODE = ?, "
@@ -1039,7 +1040,8 @@ public class DatabaseHandler {
        
         //sqlInsert.append("BIRTHDAY='");
         //if(newEmployee.getBirthDay() != null)
-            statement.setString(3, newEmployee.getBirthDay());
+            statement.setString(3, newEmployee.getSsn());
+            statement.setString(4, newEmployee.getBirthDay());
             //sqlInsert.append(newEmployee.getBirthDay()).append("', ");
         //else
           // statement.setString(3, null);
@@ -1055,7 +1057,7 @@ public class DatabaseHandler {
         
         //sqlInsert.append("ADDRESS='");
         //if(newEmployee.getAddress() != null)
-            statement.setString(4, newEmployee.getAddress());
+            statement.setString(5, newEmployee.getAddress());
             //sqlInsert.append(newEmployee.getAddress()).append("', ");
         //else
           // statement.setString(4, "");
@@ -1063,7 +1065,7 @@ public class DatabaseHandler {
         
         //sqlInsert.append("POSTAL_CODE='");
         //if(newEmployee.getPostal() != null)
-            statement.setString(5, newEmployee.getPostal());
+            statement.setString(6, newEmployee.getPostal());
             //sqlInsert.append(newEmployee.getPostal()).append("', ");
         //else
          //   statement.setString(5, oldEmployee.getPostal());
@@ -1071,7 +1073,7 @@ public class DatabaseHandler {
 
         //sqlInsert.append("CITY='");
         //if(newEmployee.getCity() != null)
-            statement.setString(6, newEmployee.getCity());
+            statement.setString(7, newEmployee.getCity());
             //sqlInsert.append(newEmployee.getCity()).append("', ");
        // else
            // statement.setString(6, oldEmployee.getCity());
@@ -1079,7 +1081,7 @@ public class DatabaseHandler {
         
         //sqlInsert.append("PHONE_NUMBER='");
        // if(newEmployee.getPhone() != null)
-            statement.setString(7, newEmployee.getPhone());
+            statement.setString(8, newEmployee.getPhone());
             //sqlInsert.append(newEmployee.getPhone()).append("', ");
        // else
            // statement.setString(7, oldEmployee.getPhone());
@@ -1087,7 +1089,7 @@ public class DatabaseHandler {
         
         //sqlInsert.append("EMAIL_ADDRESS='");
        // if(newEmployee.getEmail() != null)
-            statement.setString(8, newEmployee.getEmail());
+            statement.setString(9, newEmployee.getEmail());
             //sqlInsert.append(newEmployee.getEmail()).append("', ");
        // else
            // statement.setString(8, oldEmployee.getEmail());
@@ -1095,7 +1097,7 @@ public class DatabaseHandler {
         
         //sqlInsert.append("FAVORITE_DRINK='");
        // if(newEmployee.getFavoriteDrink() != null)
-            statement.setString(9, newEmployee.getFavoriteDrink());
+            statement.setString(10, newEmployee.getFavoriteDrink());
             //sqlInsert.append(newEmployee.getFavoriteDrink()).append("', ");
        // else
             //statement.setString(9, oldEmployee.getFavoriteDrink());
@@ -1103,14 +1105,14 @@ public class DatabaseHandler {
         
         //sqlInsert.append("RIGHTS=");
        //if(newEmployee.getRights() != -1)
-            statement.setInt(10, newEmployee.getRights());
+            statement.setInt(11, newEmployee.getRights());
             //sqlInsert.append(newEmployee.getRights()).append(" ");
         //else
           //  statement.setInt(10, oldEmployee.getRights());
             //sqlInsert.append(oldEmployee.getRights()).append(" ");
         
         // Query end: WHERE EMPLOYEE_ID = ?
-        statement.setInt(11, newEmployee.getEmployeeId());
+        statement.setInt(12, newEmployee.getEmployeeId());
         /*
         sqlInsert.append("WHERE EMPLOYEE_ID=");
         sqlInsert.append(oldEmployee.getEmployeeId());

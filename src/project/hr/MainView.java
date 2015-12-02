@@ -159,9 +159,9 @@ public class MainView implements Initializable {
         try {
             if(namelist.getSelectionModel().getSelectedItem() != null){
                 controller.setCurrentlySelectedEmployee(
-
                 namelist.getSelectionModel().getSelectedItem());
-                namelist.getItems().clear();
+                
+                //namelist.getItems().clear();
                 container.getChildren().clear();
                 container.getChildren().add((Node)FXMLLoader.load(getClass().getResource("FXMLDocumentEdit.fxml")));
                 removeselectedButton.setDisable(false);
